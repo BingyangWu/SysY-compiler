@@ -3,6 +3,7 @@
     #include <cstdio>
     #include <cstdlib>
     #include <string>
+    #include "Expr.h"
 %}
 
 letter              [a-zA-Z]
@@ -43,13 +44,13 @@ comment             "//".*|"/*"[^*]*"*"+([^*/][^*]*"*"+)*"/"
 "<="                                { ECHO; return LEQ; }
 ">="                                { ECHO; return GEQ; }
 
-{integer}                           { ECHO; yyval = (int)strol(yytext, nullptr, 0); return IMM; }
+{integer}                           { ECHO; yyval = Imm(kInt, (int)strol(yytext, nullptr, 0)); return IMM; }
 
 "int"                               { ECHO; return INT; }
 "const"                             { ECHO; return CONST; }
 "void"                              { ECHO; return VOID; }
 
-{identifier}                        { ECHO; yyval = string(yytext); return ID; }
+{identifier}                        { ECHO; yyval = Var(kInt, string(yytext)); return ID; }
 
 {comment}                           {  }
 {whitespace}                        { ECHO; }

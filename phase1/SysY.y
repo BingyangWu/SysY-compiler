@@ -1,6 +1,8 @@
 %{
     #include <cstdio>
-
+    #include "globals.h"
+    #include "stmt.h"
+    #include "expr.h"
 %}
 %token IF ELSE WHILE BREAK CONTINUE RET
 
@@ -12,127 +14,126 @@
 
 %%
 
-Program         :CompUnit                               {  }
+Program         :CompUnit                               { TreeRoot = $1; }
 ;
-CompUnit        :CompUnit Decl                          {  }
-                |CompUnit FuncDef                       {  }
-                |Decl                                   {  }
-                |FuncDef                                {  }
+CompUnit        :CompUnit Decl                          { $$ = AppendStmt($1, $2); }
+                |CompUnit FuncDef                       { $$ = AppendStmt($1, $2); }
+                |Decl                                   { $$ = SeqStmt($1); }
+                |FuncDef                                { $$ = SeqStmt($1); }
 ;
-Decl            :ConstDecl                              {  }
-                |VarDecl                                {  }
+Decl            :ConstDecl                              { $$ = $1; }
+                |VarDecl                                { $$ = $1; }
 ;
-ConstDecl       :CONST INT ConstDefSeq ';'              {  }
+ConstDecl       :CONST INT ConstDefSeq ';'              { $$ = $3; }
 ;
-ConstDefSeq     :ConstDefSeq ',' ConstDef               {  }
-                |ConstDef                               {  }
+ConstDefSeq     :ConstDefSeq ',' ConstDef               { $$ = AppendStmt($1, $3); }
+                |ConstDef                               { $$ = SeqStmt($1); }
 ;
-ConstDef        :Ident '=' ConstInitVal                 {  }
+ConstDef        :Ident '=' ConstInitVal                 { $$ = Allocate($1, $3); }
 ;
-ConstInitVal    :ConstExp                               {  }
-                |'{' ConstInitValSeq '}'                {  }
-                |'{' '}'                                {  }
+ConstInitVal    :ConstExp                               { $$ = Evaluate($1); }
+                |'{' ConstInitValSeq '}'                { $$ = List($2); }
+                |'{' '}'                                { $$ = EmptyList(); // problematic }
 ;
-ConstInitValSeq :ConstInitValSeq ',' ConstInitVal       {  }
-                |ConstInitVal                           {  }
+ConstInitValSeq :ConstInitValSeq ',' ConstInitVal       { $$ = AppendList($1, $3); }
+                |ConstInitVal                           { $$ = List($1); }
 ;
-VarDecl         :INT VarDefSeq ';'                     {  }
+VarDecl         :INT VarDefSeq ';'                     { $$ = $2; }
 ;
-VarDefSeq       :VarDefSeq ',' VarDef                   {  }
-                |VarDef                                 {  }
+VarDefSeq       :VarDefSeq ',' VarDef                   { $$ = AppendStmt($1, $3); }
+                |VarDef                                 { $$ = Stmt($1); }
 ;
-VarDef          :Ident                                  {  }
-                |Ident '=' InitVal                      {  } 
+VarDef          :Ident                                  { $$ = Allocate($1); }
+                |Ident '=' InitVal                      { $$ = Allocate($1, $3); } 
 ;
-InitVal         :Exp                                    {  }
-                |'{' InitValSeq '}'                     {  }
-                |'{' '}'                                {  }
+InitVal         :Exp                                    { $$ = Evaluate($1); }
+                |'{' InitValSeq '}'                     { $$ = List($2); }
+                |'{' '}'                                { $$ = EmptyList(); }
 ;
-InitValSeq      :InitValSeq ',' InitVal                 {  }
-                |InitVal                                {  }
+InitValSeq      :InitValSeq ',' InitVal                 { $$ = AppendList($1, $3); }
+                |InitVal                                { $$ = List($1); }
 ;
-FuncDef         :VOID ID '(' FuncFParams ')' Block  {  }
-                |VOID ID '(' ')' Block              {  }
-                |INT ID '(' FuncFParams ')' Block  {  }
-                |INT ID '(' ')' Block              {  }
+FuncDef         :VOID ID '(' FuncFParams ')' Block  { $$ = Func(kVoid, $2, $4, $6); }
+                |VOID ID '(' ')' Block              { $$ = Func(kVoid, $2, $6); }
+                |INT ID '(' FuncFParams ')' Block  { $$ = Func(kVoid, $2, $4, $6); }
+                |INT ID '(' ')' Block              { $$ = Func(kVoid, $2, $6); }
 ;
-FuncFParams     :FuncFParams ',' FuncParam              {  }
-                |FuncParam                              {  }
+FuncFParams     :FuncFParams ',' FuncParam              { $$ = AppendStmt($1, $3); }
+                |FuncParam                              { $$ = SeqStmt($1); }
 ;
-FuncParam       :INT FuncIdent                         {  }
+FuncParam       :INT FuncIdent                         { $$ = $2; }
 ;
-FuncIdent       :ID '[' ']' BrackertsSeq                {  }
-                |ID BrackertsSeq                        {  }
-                |ID '[' ']'                             {  }
-                |ID                                     {  }
+FuncIdent       :ID '[' ']' BrackertsSeq                { $$ = Array($1, $3, true); }
+                |ID BrackertsSeq                        { $$ = Array($1, $2, false); }
+                |ID '[' ']'                             { $$ = Array($1, false); }
+                |ID                                     { $$ = $1; }
 ;
-Ident           :ID BrackertsSeq                        {  }
-                |ID                                     {  }
+Ident           :ID BrackertsSeq                        { $$ = Array($1, $2, false); }
+                |ID                                     { $$ = $1; }
 ;
-BrackertsSeq    :BrackertsSeq '[' Exp ']'               {  }
-                |'[' Exp ']'                            {  }
+BrackertsSeq    :BrackertsSeq '[' Exp ']'               { $$ = AppendList($1, $3); }
+                |'[' Exp ']'                            { $$ = List($2); }
 ;
-Block           :'{' BlockItemSeq '}'                   {  }
+Block           :'{' BlockItemSeq '}'                   { $$ = SeqStmt($2); // problematic }
 ;
-BlockItemSeq    :BlockItemSeq BlockItem                 {  }
-                |BlockItem                              {  }
+BlockItemSeq    :BlockItemSeq BlockItem                 { $$ = AppendStmt($1, $2); }
+                |BlockItem                              { $$ = SeqStmt($1); }
 ;
-BlockItem       :Decl                                   {  }
-                |Stmt                                   {  }
+BlockItem       :Decl                                   { $$ = $1; }
+                |Stmt                                   { $$ = $1; }
 ;
-Stmt            :Ident '=' Exp ';'                      {  }
-                |Exp ';'                                {  }
-                |';'                                    {  }
-                |Block                                  {  }
-                |IF '(' Cond ')' Stmt                   {  }
-                |IF '(' Cond ')' Stmt ELSE Stmt         {  }
-                |WHILE '(' Cond ')' Stmt                {  }
-                |BREAK ';'                              {  }
-                |CONTINUE ';'                           {  }
-                |RET Exp ';'                            {  }
-                |RET ';'                                {  }
+Stmt            :Ident '=' Exp ';'                      { $$ = Store($1, $3); }
+                |Exp ';'                                { $$ = Evaluate($1); }
+                |';'                                    { $$ = Stmt(); }
+                |Block                                  { $$ = $1; }
+                |IF '(' Cond ')' Stmt                   { $$ = IfThenElse($3, $5); }
+                |IF '(' Cond ')' Stmt ELSE Stmt         { $$ = IfThenElse($3, $5, $7); }
+                |WHILE '(' Cond ')' Stmt                { $$ = While($3, $5); }
+                |BREAK ';'                              { $$ = Goto("next"); }
+                |CONTINUE ';'                           { $$ = Goto("begin"); }
+                |RET Exp ';'                            { $$ = Ret($2); }
+                |RET ';'                                { $$ = Ret(Var()); }
 ;
-ConstExp        :Exp                                    {  }
+ConstExp        :Exp                                    { $$ = $1; }
 ;
-Exp             :Exp '+' Term                           {  }
-                |Exp '-' Term                           {  }
-                |Term                                   {  }
+Exp             :Exp '+' Term                           { $$ = BinaryOp($1, kAdd, $3); }
+                |Exp '-' Term                           { $$ = BinaryOp($1, kSub, $3); }
+                |Term                                   { $$ = $1; }
 ;
-Term            :Term '*' Factor                        {  }
-                |Term '/' Factor                        {  }
-                |Term '%' Factor                        {  }
-                |Factor                                 {  }
+Term            :Term '*' Factor                        { $$ = BinaryOp($1, kMul, $3); }
+                |Term '/' Factor                        { $$ = BinaryOp($1, kDiv, $3); }
+                |Term '%' Factor                        { $$ = BinaryOp($1, kMod, $3); }
+                |Factor                                 { $$ = $1; }
 ;
-Factor          :'(' Exp ')'                            {  }
-                |Ident                                  {  }
-                |IMM                                    {  }
-                |ID '(' FuncRParams ')'                 {  }
-                |ID '(' ')'                             {  }
-                |UnaryOp Factor                         {  }
+Factor          :'(' Exp ')'                            { $$ = $2; }
+                |Ident                                  { $$ = $1; //problematic }
+                |IMM                                    { $$ = $1; }
+                |ID '(' FuncRParams ')'                 { $$ = Call($1, $3); }
+                |ID '(' ')'                             { $$ = Call($1, EmptyList()); }
+                |'+' Factor                             { $$ = $2; }
+                |'-' Factor                             { $$ = BinaryOp(Imm(kInt, 0), $2); }
+                |'!' Factor                             { $$ = Not($2); }
 ;
-FuncRParams     :FuncFParams ',' Exp                    {  }
-                |Exp                                    {  }
+FuncRParams     :FuncFParams ',' Exp                    { $$ = AppendList($1, $3); }
+                |Exp                                    { $$ = List($1); }
 ;
-UnaryOp         :'+'                                    {  }
-                |'-'                                    {  }
-                |'!'                                    {  }
+
+Cond            :LorOp                                  { $$ = $1; }
 ;
-Cond            :LorOp                                  {  }
+LorOp           :LorOp OR LandOp                        { $$ = BinaryOp($1, kOr, $3); }
+                |LandOp                                 { $$ = $1; }
 ;
-LorOp           :LorOp OR LandOp                        {  }
-                |LandOp                                 {  }
+LandOp          :LandOp AND EqOp                        { $$ = BinaryOp($1, kAnd, $3); }
+                |EqOp                                   { $$ = $1; }
 ;
-LandOp          :LandOp AND EqOp                        {  }
-                |EqOp                                   {  }
+EqOp            :EqOp EQ RelOp                          { $$ = BinaryOp($1, kEQ, $3); }
+                |EqOp NEQ RelOp                         { $$ = BinaryOp($1, kNEQ, $3); }
+                |RelOp                                  { $$ = $1; }
 ;
-EqOp            :EqOp EQ RelOp                          {  }
-                |EqOp NEQ RelOp                         {  }
-                |RelOp                                  {  }
-;
-RelOp           :RelOp '<' Exp                          {  }
-                |RelOp '>' Exp                          {  }
-                |RelOp LEQ Exp                          {  }
-                |RelOp GEQ Exp                          {  }
-                |Exp                                    {  }
+RelOp           :RelOp '<' Exp                          { $$ = BinaryOp($1, kLT, $3); }
+                |RelOp '>' Exp                          { $$ = BinaryOp($1, kGT, $3); }
+                |RelOp LEQ Exp                          { $$ = BinaryOp($1, kLEQ, $3); }
+                |RelOp GEQ Exp                          { $$ = BinaryOp($1, kGEQ, $3); }
+                |Exp                                    { $$ = $1; }
 ;
 %%

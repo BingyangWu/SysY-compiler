@@ -50,14 +50,14 @@ public:
 class FuncNode: public StmtNode {
 public:
     DataType ret_type;
-    std::string name;
+    Var name;
     List<Var> params;
     Stmt body;
 };
 
 class Func: public Stmt {
 public:
-    Func(DataType ret_type, std::string, List<Var> params, Stmt body);
+    Func(DataType ret_type, Var name, List<Var> params, SeqStmt body);
     DEFINE_OBJECT_REF_METHODS(Func, Stmt, FuncNode);
 };
 
@@ -69,6 +69,7 @@ public:
 class SeqStmt: public Stmt {
 public:
     SeqStmt(std::vector<Stmt> seq);
+    SeqStmt(Stmt stmt);
     DEFINE_OBJECT_REF_METHODS(SeqStmt, Stmt, SeqStmtNode);
 };
 
@@ -81,7 +82,7 @@ public:
 
 class IfThenElse: public Stmt {
 public:
-    IfThenElse(Expr condition, Stmt then_case, Stmt else_case = Stmt());
+    IfThenElse(Expr condition, Stmt then_case, Stmt else_case);
     DEFINE_OBJECT_REF_METHODS(IfThenElse, Stmt, IfThenElseNode);
 };
 
@@ -96,5 +97,29 @@ public:
     While(Expr condition, Stmt body);
     DEFINE_OBJECT_REF_METHODS(While, Stmt, WhileNode);
 };
+
+class GotoNode: public StmtNode {
+public:
+    std::string location;
+};
+
+class Goto: public Stmt {
+public:
+    Goto(std::string location);
+    DEFINE_OBJECT_REF_METHODS(Goto, Stmt, GotoNode);
+};
+
+class RetNode: public StmtNode {
+public:
+    Var ret_val;
+};
+
+class Ret: public Stmt {
+public:
+    Ret(Var ret_val);
+    DEFINE_OBJECT_REF_METHODS(Ret, Stmt, RetNode);
+};
+
+SeqStmt AppendStmt(SeqStmt a, SeqStmt b);
 
 #endif // _STMT_H_

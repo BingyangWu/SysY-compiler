@@ -34,7 +34,7 @@ public:
 
 class BinaryOp: public Expr {
 public:
-    BinaryOp(Expr a, BinaryOp dtype, Expr b);
+    BinaryOp(Expr a, BinaryOpType dtype, Expr b);
     DEFINE_OBJECT_REF_METHODS(BinaryOp, Expr, BinaryOpNode);
 };
 
@@ -79,7 +79,7 @@ public:
 
 class Array: public Var {
 public:
-    Array(Var data, List<Expr> args);
+    Array(Var id, List<Expr> args, bool unknown_dim=false);
     DEFINE_OBJECT_REF_METHODS(Array, Var, ArrayNode);
 };
 
@@ -93,7 +93,11 @@ template<typename T>
 class List: public Expr {
 public:
     List(std::vector<T> args);
+    List(T arg);
     DEFINE_OBJECT_REF_METHODS(List<T>, Expr, ListNode<T>);
 };
+
+template<typename T>
+List<T> AppendList(List<T> a, List<T> b);
 
 #endif // _EXPR_H_

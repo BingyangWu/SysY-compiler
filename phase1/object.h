@@ -37,7 +37,8 @@ protected:
     explicit ClassName(Object* ptr): ParentClass(ptr) {}                        \
     ClassName(const ClassName& other) = default;                                \
     ClassName& operator=(const ClassName& other) = default;                     \
+    ObjectName* operator->() const { return static_cast<ObjectName*>(data_); }  \
     const ObjectName* get() const { return static_cast<ObjectName*>(data_); }   \
-    const ObjectName* operator->() const { return get(); }                      \
+    using ContainerType = ObjectName;
 
 #endif // _OBJECT_H_

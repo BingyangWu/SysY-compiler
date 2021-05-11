@@ -3,13 +3,15 @@
 
 #include <string>
 
+enum DataTypeCode {
+    kInt = 0,
+    kConst,
+    kVoid
+};
+
 class DataType {
 public:
-    enum TypeCode {
-        kInt = 0,
-        kConst,
-        kVoid
-    };
+    DataType(DataTypeCode code=kInt): data_(code) {}
 
     operator std::string() const {
         switch (code()) {
@@ -21,29 +23,32 @@ public:
 
     int code() const { return static_cast<int>(data_); }
 
-    bool is_int() { return code() == DataType::kInt; }
+    bool is_int() { return code() == kInt; }
 
 private:
-    TypeCode data_;
+    DataTypeCode data_;
+};
+
+enum BinaryOpTypeCode {
+    kAdd = 0,
+    kSub,
+    kMul,
+    kDiv,
+    kMod,
+    kEQ,
+    kNEQ,
+    kLT,
+    kGT,
+    kLEQ,
+    kGEQ,
+    kAnd,
+    kOr
 };
 
 class BinaryOpType {
 public:
-    enum TypeCode {
-        kAdd = 0,
-        kSub,
-        kMul,
-        kDiv,
-        kMod,
-        kEQ,
-        kNEQ,
-        kLT,
-        kGT,
-        kLEQ,
-        kGEQ,
-        kAnd,
-        kOr
-    };
+    BinaryOpType() {}
+    BinaryOpType(BinaryOpTypeCode code): data_(code) {}
 
     operator std::string() const {
         switch (code()) {
@@ -66,7 +71,7 @@ public:
     int code() const { return static_cast<int>(data_); }
 
 private:
-    TypeCode data_;
+    BinaryOpTypeCode data_;
 };
 
 #endif // _DATA_TYPE_H_
