@@ -7,4 +7,6 @@
 
 ObjectRef TreeRoot;
 
+int lineno;
+
 #endif

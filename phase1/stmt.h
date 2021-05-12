@@ -16,6 +16,7 @@ class StoreNode: public StmtNode {
 public:
     Var lval;
     Expr rval;
+    virtual std::string generate_eeyore(Context&);
 };
 
 class Store: public Stmt {
@@ -28,17 +29,20 @@ class AllocateNode: public StmtNode {
 public:
     Var var;
     Expr value;
+    bool with_init_value;
+    virtual std::string generate_eeyore(Context&);
 };
 
 class Allocate: public Stmt {
 public:
-    Allocate(Var var, Expr value);
+    Allocate(Var var, Expr value, bool with_init_value);
     DEFINE_OBJECT_REF_METHODS(Allocate, Stmt, AllocateNode);
 };
 
 class EvaluateNode: public StmtNode {
 public:
     Expr value;
+    virtual std::string generate_eeyore(Context&);
 };
 
 class Evaluate: public Stmt {
@@ -53,6 +57,7 @@ public:
     Var name;
     List<Var> params;
     Stmt body;
+    virtual std::string generate_eeyore(Context&);
 };
 
 class Func: public Stmt {
@@ -64,6 +69,7 @@ public:
 class SeqStmtNode: public StmtNode {
 public:
     std::vector<Stmt> seq;
+    virtual std::string generate_eeyore(Context&);
 };
 
 class SeqStmt: public Stmt {
@@ -78,11 +84,13 @@ public:
     Expr condition;
     Stmt then_case;
     Stmt else_case;
+    bool with_else;
+    virtual std::string generate_eeyore(Context&);
 };
 
 class IfThenElse: public Stmt {
 public:
-    IfThenElse(Expr condition, Stmt then_case, Stmt else_case);
+    IfThenElse(Expr condition, Stmt then_case, Stmt else_case, bool with_else);
     DEFINE_OBJECT_REF_METHODS(IfThenElse, Stmt, IfThenElseNode);
 };
 
@@ -90,6 +98,7 @@ class WhileNode: public StmtNode {
 public:
     Expr condition;
     Stmt body;
+    virtual std::string generate_eeyore(Context&);
 };
 
 class While: public Stmt {
@@ -101,6 +110,7 @@ public:
 class GotoNode: public StmtNode {
 public:
     std::string location;
+    virtual std::string generate_eeyore(Context&);
 };
 
 class Goto: public Stmt {
@@ -112,6 +122,7 @@ public:
 class RetNode: public StmtNode {
 public:
     Var ret_val;
+    virtual std::string generate_eeyore(Context&);
 };
 
 class Ret: public Stmt {

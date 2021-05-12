@@ -8,6 +8,8 @@
 class ExprNode: public Object {
 public:
     DataType dtype;
+    std::string name_key;
+    virtual int get_value();
 };
 
 class Expr: public ObjectRef {
@@ -18,6 +20,9 @@ public:
 class ImmNode: public ExprNode {
 public:
     int value;
+    virtual int get_value() {
+        return value;
+    }
 };
 
 class Imm: public Expr {
@@ -30,6 +35,7 @@ class BinaryOpNode: public ExprNode {
 public:
     BinaryOpType dtype;
     Expr a, b;
+    virtual int get_value();
 };
 
 class BinaryOp: public Expr {
@@ -75,6 +81,7 @@ public:
 class ArrayNode: public VarNode {
 public:
     List<Expr> args;
+    std::vector<int> dims;
 };
 
 class Array: public Var {

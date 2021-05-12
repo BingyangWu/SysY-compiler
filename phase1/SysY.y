@@ -29,7 +29,7 @@ ConstDecl       :CONST INT ConstDefSeq ';'              { $$ = $3; }
 ConstDefSeq     :ConstDefSeq ',' ConstDef               { $$ = AppendStmt($1, $3); }
                 |ConstDef                               { $$ = SeqStmt($1); }
 ;
-ConstDef        :Ident '=' ConstInitVal                 { $$ = Allocate($1, $3); }
+ConstDef        :Ident '=' ConstInitVal                 { $$ = Allocate($1, $3, true); }
 ;
 ConstInitVal    :ConstExp                               { $$ = Evaluate($1); }
                 |'{' ConstInitValSeq '}'                { $$ = List($2); }
@@ -44,7 +44,7 @@ VarDefSeq       :VarDefSeq ',' VarDef                   { $$ = AppendStmt($1, $3
                 |VarDef                                 { $$ = Stmt($1); }
 ;
 VarDef          :Ident                                  { $$ = Allocate($1); }
-                |Ident '=' InitVal                      { $$ = Allocate($1, $3); } 
+                |Ident '=' InitVal                      { $$ = Allocate($1, $3, true); } 
 ;
 InitVal         :Exp                                    { $$ = Evaluate($1); }
                 |'{' InitValSeq '}'                     { $$ = List($2); }
@@ -87,12 +87,12 @@ Stmt            :Ident '=' Exp ';'                      { $$ = Store($1, $3); }
                 |';'                                    { $$ = Stmt(); }
                 |Block                                  { $$ = $1; }
                 |IF '(' Cond ')' Stmt                   { $$ = IfThenElse($3, $5); }
-                |IF '(' Cond ')' Stmt ELSE Stmt         { $$ = IfThenElse($3, $5, $7); }
+                |IF '(' Cond ')' Stmt ELSE Stmt         { $$ = IfThenElse($3, $5, $7, true); }
                 |WHILE '(' Cond ')' Stmt                { $$ = While($3, $5); }
                 |BREAK ';'                              { $$ = Goto("next"); }
                 |CONTINUE ';'                           { $$ = Goto("begin"); }
                 |RET Exp ';'                            { $$ = Ret($2); }
-                |RET ';'                                { $$ = Ret(Var()); }
+                |RET ';'                                { $$ = Ret(Var(nullptr)); }
 ;
 ConstExp        :Exp                                    { $$ = $1; }
 ;

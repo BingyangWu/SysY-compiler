@@ -2,6 +2,8 @@
 #define _OBJECT_H_
 
 #include <type_traits>
+#include <string>
+#include "context.h"
 
 class Object {
 public:
@@ -12,6 +14,8 @@ public:
     Object& operator=(const Object& other) {
         return *this;
     }
+
+    virtual std::string generate_eeyore(Context&) = 0;
 };
 
 class ObjectRef {
@@ -26,7 +30,7 @@ public:
 
     const Object* get() const { return static_cast<Object*>(data_); }
 
-    const Object* operator->() const { return get(); }
+    Object* operator->() const { return static_cast<Object*>(data_); }
 
 protected:
     Object* data_;
