@@ -529,13 +529,16 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "SysY.l"
 #line 2 "SysY.l"
-    #include "SysY.tab.h"
+    #include "SysY.tab.hpp"
     #include <cstdio>
     #include <cstdlib>
     #include <string>
-    #include "Expr.h"
-#line 538 "lex.yy.cpp"
-#line 539 "lex.yy.cpp"
+    #include "expr.h"
+    #include "globals.h"
+    int yyerror(const char *);
+    extern int yylex(void);
+#line 541 "lex.yy.cpp"
+#line 542 "lex.yy.cpp"
 
 #define INITIAL 0
 
@@ -752,10 +755,10 @@ YY_DECL
 		}
 
 	{
-#line 31 "SysY.l"
+#line 34 "SysY.l"
 
 
-#line 759 "lex.yy.cpp"
+#line 762 "lex.yy.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -814,117 +817,117 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 33 "SysY.l"
+#line 36 "SysY.l"
 { ECHO; return IF; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 34 "SysY.l"
+#line 37 "SysY.l"
 { ECHO; return ELSE; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 35 "SysY.l"
+#line 38 "SysY.l"
 { ECHO; return WHILE; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 36 "SysY.l"
+#line 39 "SysY.l"
 { ECHO; return BREAK; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 37 "SysY.l"
+#line 40 "SysY.l"
 { ECHO; return CONTINUE; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 38 "SysY.l"
+#line 41 "SysY.l"
 { ECHO; return RET; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 40 "SysY.l"
+#line 43 "SysY.l"
 { ECHO; return AND; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 41 "SysY.l"
+#line 44 "SysY.l"
 { ECHO; return OR; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 42 "SysY.l"
+#line 45 "SysY.l"
 { ECHO; return EQ; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 43 "SysY.l"
+#line 46 "SysY.l"
 { ECHO; return NEQ; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 44 "SysY.l"
+#line 47 "SysY.l"
 { ECHO; return LEQ; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 45 "SysY.l"
+#line 48 "SysY.l"
 { ECHO; return GEQ; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 47 "SysY.l"
-{ ECHO; yyval = Imm(kInt, (int)strol(yytext, nullptr, 0)); return IMM; }
+#line 50 "SysY.l"
+{ ECHO; yylval = Imm(kInt, (int)strtol(yytext, nullptr, 0)); return IMM; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 49 "SysY.l"
+#line 52 "SysY.l"
 { ECHO; return INT; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 50 "SysY.l"
+#line 53 "SysY.l"
 { ECHO; return CONST; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 51 "SysY.l"
+#line 54 "SysY.l"
 { ECHO; return VOID; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 53 "SysY.l"
-{ ECHO; yyval = Var(kInt, string(yytext)); return ID; }
+#line 56 "SysY.l"
+{ ECHO; yylval = Var(kInt, std::string(yytext)); return ID; }
 	YY_BREAK
 case 18:
 /* rule 18 can match eol */
 YY_RULE_SETUP
-#line 55 "SysY.l"
+#line 58 "SysY.l"
 {  }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 56 "SysY.l"
+#line 59 "SysY.l"
 { ECHO; }
 	YY_BREAK
 case 20:
 /* rule 20 can match eol */
 YY_RULE_SETUP
-#line 57 "SysY.l"
+#line 60 "SysY.l"
 { ECHO; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 59 "SysY.l"
+#line 62 "SysY.l"
 { ECHO; return yytext[0]; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 61 "SysY.l"
+#line 64 "SysY.l"
 ECHO;
 	YY_BREAK
-#line 928 "lex.yy.cpp"
+#line 931 "lex.yy.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1929,5 +1932,9 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 61 "SysY.l"
+#line 64 "SysY.l"
 
+
+int yyerror(const char *message) {
+	return 0;
+}

@@ -34,9 +34,10 @@ std::string Context::find_var(std::string var_name) {
         if (it->symbol_table.find(var_name) != it->symbol_table.end())
             return it->symbol_table[var_name].var_type + it->symbol_table[var_name].var_no;
     }
+    return "error!";
 }
 
-std::string Context::define_func(Var var, DataType ret_type) {
+void Context::define_func(Var var, DataType ret_type) {
     func_table[var->name] = (ret_type.code() == kVoid ? false : true);
 }
 

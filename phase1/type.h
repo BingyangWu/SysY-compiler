@@ -19,6 +19,7 @@ public:
             case kConst: return "const int";
             case kVoid: return "void";
         }
+        return "error!";
     }
 
     int code() const { return static_cast<int>(data_); }
@@ -66,6 +67,7 @@ public:
             case kAnd: return "&&";
             case kOr: return "||";
         }
+        return "error!";
     }
 
     int code() const { return static_cast<int>(data_); }

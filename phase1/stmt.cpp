@@ -1,4 +1,5 @@
 #include "stmt.h"
+#include "context.h"
 
 Store::Store(Var lval, Expr rval) {
     StoreNode* data = new StoreNode();
@@ -42,7 +43,7 @@ SeqStmt::SeqStmt(Stmt stmt) {
     data_ = std::move(data);
 }
 
-IfThenElse::IfThenElse(Expr condition, Stmt then_case, Stmt else_case=Stmt(), bool with_else=false) {
+IfThenElse::IfThenElse(Expr condition, Stmt then_case, Stmt else_case, bool with_else) {
     IfThenElseNode* data = new IfThenElseNode();
     data->condition = condition;
     data->then_case = then_case;
@@ -166,6 +167,7 @@ std::string EvaluateNode::generate_eeyore(Context& context) {
 
 std::string FuncNode::generate_eeyore(Context& context) {
     context.symbol_table_list.push_back(SymbolTable());
+    context.define_func(name, ret_type);
 
     int args_num = params->args.size();
     for (auto it = params->args.begin(); it != params->args.end(); ++it) {
@@ -179,7 +181,7 @@ std::string FuncNode::generate_eeyore(Context& context) {
     text += "end " + func_name + "\n";
 
     context.symbol_table_list.pop_back();
-    return ;
+    return text;
 }
 
 std::string SeqStmtNode::generate_eeyore(Context& context) {

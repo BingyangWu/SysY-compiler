@@ -49,7 +49,7 @@ public:
 
     std::string define_var(Var var, std::string var_type);
     std::string find_var(std::string var_name);
-    std::string define_func(Var var, DataType ret_type);
+    void define_func(Var var, DataType ret_type);
     bool has_ret_value(std::string func_name);
     std::string new_label();
 };

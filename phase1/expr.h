@@ -59,19 +59,6 @@ public:
     DEFINE_OBJECT_REF_METHODS(Not, Expr, NotNode);
 };
 
-class CallNode: public ExprNode {
-public:
-    Var func;
-    List<Expr> args;
-    virtual std::string generate_eeyore(Context&);
-};
-
-class Call: public Expr {
-public:
-    Call(Var func, List<Expr> args);
-    DEFINE_OBJECT_REF_METHODS(Call, Expr, CallNode);
-};
-
 class VarNode: public ExprNode {
 public:
     std::string name;
@@ -82,19 +69,6 @@ class Var: public Expr {
 public:
     Var(DataType dtype, std::string name);
     DEFINE_OBJECT_REF_METHODS(Var, Expr, VarNode);
-};
-
-class ArrayNode: public VarNode {
-public:
-    List<Expr> args;
-    std::string base_var, offset_var;
-    virtual std::string generate_eeyore(Context&);
-};
-
-class Array: public Var {
-public:
-    Array(Var id, List<Expr> args, bool unknown_dim=false);
-    DEFINE_OBJECT_REF_METHODS(Array, Var, ArrayNode);
 };
 
 template<typename T>
@@ -110,6 +84,32 @@ public:
     List(std::vector<T> args);
     List(T arg);
     DEFINE_OBJECT_REF_METHODS(List<T>, Expr, ListNode<T>);
+};
+
+class CallNode: public ExprNode {
+public:
+    Var func;
+    List<Expr> args;
+    virtual std::string generate_eeyore(Context&);
+};
+
+class Call: public Expr {
+public:
+    Call(Var func, List<Expr> args);
+    DEFINE_OBJECT_REF_METHODS(Call, Expr, CallNode);
+};
+
+class ArrayNode: public VarNode {
+public:
+    List<Expr> args;
+    std::string base_var, offset_var;
+    virtual std::string generate_eeyore(Context&);
+};
+
+class Array: public Var {
+public:
+    Array(Var id, List<Expr> args, bool unknown_dim=false);
+    DEFINE_OBJECT_REF_METHODS(Array, Var, ArrayNode);
 };
 
 template<typename T>

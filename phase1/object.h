@@ -3,7 +3,9 @@
 
 #include <type_traits>
 #include <string>
-#include "context.h"
+// #include "context.h"
+
+class Context;
 
 class Object {
 public:

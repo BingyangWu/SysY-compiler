@@ -72,8 +72,10 @@
     #include "globals.h"
     #include "stmt.h"
     #include "expr.h"
+    int yyerror(const char *);
+    extern int yylex(void);
 
-#line 77 "SysY.tab.cpp"
+#line 79 "SysY.tab.cpp"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -517,15 +519,15 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    17,    17,    19,    20,    21,    22,    24,    25,    27,
-      29,    30,    32,    34,    35,    36,    38,    39,    41,    43,
-      44,    46,    47,    49,    50,    51,    53,    54,    56,    57,
-      58,    59,    61,    62,    64,    66,    67,    68,    69,    71,
-      72,    74,    75,    77,    79,    80,    82,    83,    85,    86,
-      87,    88,    89,    90,    91,    92,    93,    94,    95,    97,
-      99,   100,   101,   103,   104,   105,   106,   108,   109,   110,
-     111,   112,   113,   114,   115,   117,   118,   121,   123,   124,
-     126,   127,   129,   130,   131,   133,   134,   135,   136,   137
+       0,    19,    19,    21,    22,    23,    24,    26,    27,    29,
+      31,    32,    34,    36,    37,    38,    40,    41,    43,    45,
+      46,    48,    49,    51,    52,    53,    55,    56,    58,    59,
+      60,    61,    63,    64,    66,    68,    69,    70,    71,    73,
+      74,    76,    77,    79,    81,    82,    84,    85,    87,    88,
+      89,    90,    91,    92,    93,    94,    95,    96,    97,    99,
+     101,   102,   103,   105,   106,   107,   108,   110,   111,   112,
+     113,   114,   115,   116,   117,   119,   120,   123,   125,   126,
+     128,   129,   131,   132,   133,   135,   136,   137,   138,   139
 };
 #endif
 
@@ -1445,535 +1447,535 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 17 "SysY.y"
+#line 19 "SysY.y"
                                                         { TreeRoot = yyvsp[0]; }
-#line 1451 "SysY.tab.cpp"
+#line 1453 "SysY.tab.cpp"
     break;
 
   case 3:
-#line 19 "SysY.y"
+#line 21 "SysY.y"
                                                         { yyval = AppendStmt(yyvsp[-1], yyvsp[0]); }
-#line 1457 "SysY.tab.cpp"
+#line 1459 "SysY.tab.cpp"
     break;
 
   case 4:
-#line 20 "SysY.y"
+#line 22 "SysY.y"
                                                         { yyval = AppendStmt(yyvsp[-1], yyvsp[0]); }
-#line 1463 "SysY.tab.cpp"
+#line 1465 "SysY.tab.cpp"
     break;
 
   case 5:
-#line 21 "SysY.y"
+#line 23 "SysY.y"
                                                         { yyval = SeqStmt(yyvsp[0]); }
-#line 1469 "SysY.tab.cpp"
+#line 1471 "SysY.tab.cpp"
     break;
 
   case 6:
-#line 22 "SysY.y"
+#line 24 "SysY.y"
                                                         { yyval = SeqStmt(yyvsp[0]); }
-#line 1475 "SysY.tab.cpp"
+#line 1477 "SysY.tab.cpp"
     break;
 
   case 7:
-#line 24 "SysY.y"
+#line 26 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1481 "SysY.tab.cpp"
+#line 1483 "SysY.tab.cpp"
     break;
 
   case 8:
-#line 25 "SysY.y"
+#line 27 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1487 "SysY.tab.cpp"
+#line 1489 "SysY.tab.cpp"
     break;
 
   case 9:
-#line 27 "SysY.y"
+#line 29 "SysY.y"
                                                         { yyval = yyvsp[-1]; }
-#line 1493 "SysY.tab.cpp"
+#line 1495 "SysY.tab.cpp"
     break;
 
   case 10:
-#line 29 "SysY.y"
+#line 31 "SysY.y"
                                                         { yyval = AppendStmt(yyvsp[-2], yyvsp[0]); }
-#line 1499 "SysY.tab.cpp"
+#line 1501 "SysY.tab.cpp"
     break;
 
   case 11:
-#line 30 "SysY.y"
+#line 32 "SysY.y"
                                                         { yyval = SeqStmt(yyvsp[0]); }
-#line 1505 "SysY.tab.cpp"
+#line 1507 "SysY.tab.cpp"
     break;
 
   case 12:
-#line 32 "SysY.y"
+#line 34 "SysY.y"
                                                         { yyval = Allocate(yyvsp[-2], yyvsp[0], true); }
-#line 1511 "SysY.tab.cpp"
+#line 1513 "SysY.tab.cpp"
     break;
 
   case 13:
-#line 34 "SysY.y"
+#line 36 "SysY.y"
                                                         { yyval = Evaluate(yyvsp[0]); }
-#line 1517 "SysY.tab.cpp"
+#line 1519 "SysY.tab.cpp"
     break;
 
   case 14:
-#line 35 "SysY.y"
+#line 37 "SysY.y"
                                                         { yyval = List(yyvsp[-1]); }
-#line 1523 "SysY.tab.cpp"
+#line 1525 "SysY.tab.cpp"
     break;
 
   case 15:
-#line 36 "SysY.y"
+#line 38 "SysY.y"
                                                         { yyval = EmptyList(); }
-#line 1529 "SysY.tab.cpp"
+#line 1531 "SysY.tab.cpp"
     break;
 
   case 16:
-#line 38 "SysY.y"
+#line 40 "SysY.y"
                                                         { yyval = AppendList(yyvsp[-2], yyvsp[0]); }
-#line 1535 "SysY.tab.cpp"
+#line 1537 "SysY.tab.cpp"
     break;
 
   case 17:
-#line 39 "SysY.y"
+#line 41 "SysY.y"
                                                         { yyval = List(yyvsp[0]); }
-#line 1541 "SysY.tab.cpp"
+#line 1543 "SysY.tab.cpp"
     break;
 
   case 18:
-#line 41 "SysY.y"
+#line 43 "SysY.y"
                                                        { yyval = yyvsp[-1]; }
-#line 1547 "SysY.tab.cpp"
+#line 1549 "SysY.tab.cpp"
     break;
 
   case 19:
-#line 43 "SysY.y"
+#line 45 "SysY.y"
                                                         { yyval = AppendStmt(yyvsp[-2], yyvsp[0]); }
-#line 1553 "SysY.tab.cpp"
+#line 1555 "SysY.tab.cpp"
     break;
 
   case 20:
-#line 44 "SysY.y"
+#line 46 "SysY.y"
                                                         { yyval = Stmt(yyvsp[0]); }
-#line 1559 "SysY.tab.cpp"
+#line 1561 "SysY.tab.cpp"
     break;
 
   case 21:
-#line 46 "SysY.y"
+#line 48 "SysY.y"
                                                         { yyval = Allocate(yyvsp[0]); }
-#line 1565 "SysY.tab.cpp"
+#line 1567 "SysY.tab.cpp"
     break;
 
   case 22:
-#line 47 "SysY.y"
+#line 49 "SysY.y"
                                                         { yyval = Allocate(yyvsp[-2], yyvsp[0], true); }
-#line 1571 "SysY.tab.cpp"
+#line 1573 "SysY.tab.cpp"
     break;
 
   case 23:
-#line 49 "SysY.y"
+#line 51 "SysY.y"
                                                         { yyval = Evaluate(yyvsp[0]); }
-#line 1577 "SysY.tab.cpp"
+#line 1579 "SysY.tab.cpp"
     break;
 
   case 24:
-#line 50 "SysY.y"
+#line 52 "SysY.y"
                                                         { yyval = List(yyvsp[-1]); }
-#line 1583 "SysY.tab.cpp"
+#line 1585 "SysY.tab.cpp"
     break;
 
   case 25:
-#line 51 "SysY.y"
+#line 53 "SysY.y"
                                                         { yyval = EmptyList(); }
-#line 1589 "SysY.tab.cpp"
+#line 1591 "SysY.tab.cpp"
     break;
 
   case 26:
-#line 53 "SysY.y"
+#line 55 "SysY.y"
                                                         { yyval = AppendList(yyvsp[-2], yyvsp[0]); }
-#line 1595 "SysY.tab.cpp"
+#line 1597 "SysY.tab.cpp"
     break;
 
   case 27:
-#line 54 "SysY.y"
+#line 56 "SysY.y"
                                                         { yyval = List(yyvsp[0]); }
-#line 1601 "SysY.tab.cpp"
+#line 1603 "SysY.tab.cpp"
     break;
 
   case 28:
-#line 56 "SysY.y"
+#line 58 "SysY.y"
                                                     { yyval = Func(kVoid, yyvsp[-4], yyvsp[-2], yyvsp[0]); }
-#line 1607 "SysY.tab.cpp"
+#line 1609 "SysY.tab.cpp"
     break;
 
   case 29:
-#line 57 "SysY.y"
+#line 59 "SysY.y"
                                                     { yyval = Func(kVoid, yyvsp[-3], yyvsp[0]); }
-#line 1613 "SysY.tab.cpp"
+#line 1615 "SysY.tab.cpp"
     break;
 
   case 30:
-#line 58 "SysY.y"
+#line 60 "SysY.y"
                                                    { yyval = Func(kVoid, yyvsp[-4], yyvsp[-2], yyvsp[0]); }
-#line 1619 "SysY.tab.cpp"
+#line 1621 "SysY.tab.cpp"
     break;
 
   case 31:
-#line 59 "SysY.y"
+#line 61 "SysY.y"
                                                    { yyval = Func(kVoid, yyvsp[-3], yyvsp[0]); }
-#line 1625 "SysY.tab.cpp"
+#line 1627 "SysY.tab.cpp"
     break;
 
   case 32:
-#line 61 "SysY.y"
+#line 63 "SysY.y"
                                                         { yyval = AppendStmt(yyvsp[-2], yyvsp[0]); }
-#line 1631 "SysY.tab.cpp"
+#line 1633 "SysY.tab.cpp"
     break;
 
   case 33:
-#line 62 "SysY.y"
+#line 64 "SysY.y"
                                                         { yyval = SeqStmt(yyvsp[0]); }
-#line 1637 "SysY.tab.cpp"
+#line 1639 "SysY.tab.cpp"
     break;
 
   case 34:
-#line 64 "SysY.y"
+#line 66 "SysY.y"
                                                        { yyval = yyvsp[0]; }
-#line 1643 "SysY.tab.cpp"
+#line 1645 "SysY.tab.cpp"
     break;
 
   case 35:
-#line 66 "SysY.y"
+#line 68 "SysY.y"
                                                         { yyval = Array(yyvsp[-3], yyvsp[-1], true); }
-#line 1649 "SysY.tab.cpp"
+#line 1651 "SysY.tab.cpp"
     break;
 
   case 36:
-#line 67 "SysY.y"
+#line 69 "SysY.y"
                                                         { yyval = Array(yyvsp[-1], yyvsp[0], false); }
-#line 1655 "SysY.tab.cpp"
+#line 1657 "SysY.tab.cpp"
     break;
 
   case 37:
-#line 68 "SysY.y"
+#line 70 "SysY.y"
                                                         { yyval = Array(yyvsp[-2], false); }
-#line 1661 "SysY.tab.cpp"
+#line 1663 "SysY.tab.cpp"
     break;
 
   case 38:
-#line 69 "SysY.y"
+#line 71 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1667 "SysY.tab.cpp"
+#line 1669 "SysY.tab.cpp"
     break;
 
   case 39:
-#line 71 "SysY.y"
+#line 73 "SysY.y"
                                                         { yyval = Array(yyvsp[-1], yyvsp[0], false); }
-#line 1673 "SysY.tab.cpp"
+#line 1675 "SysY.tab.cpp"
     break;
 
   case 40:
-#line 72 "SysY.y"
+#line 74 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1679 "SysY.tab.cpp"
+#line 1681 "SysY.tab.cpp"
     break;
 
   case 41:
-#line 74 "SysY.y"
+#line 76 "SysY.y"
                                                         { yyval = AppendList(yyvsp[-3], yyvsp[-1]); }
-#line 1685 "SysY.tab.cpp"
+#line 1687 "SysY.tab.cpp"
     break;
 
   case 42:
-#line 75 "SysY.y"
+#line 77 "SysY.y"
                                                         { yyval = List(yyvsp[-1]); }
-#line 1691 "SysY.tab.cpp"
+#line 1693 "SysY.tab.cpp"
     break;
 
   case 43:
-#line 77 "SysY.y"
+#line 79 "SysY.y"
                                                         { yyval = SeqStmt(yyvsp[-1]); }
-#line 1697 "SysY.tab.cpp"
+#line 1699 "SysY.tab.cpp"
     break;
 
   case 44:
-#line 79 "SysY.y"
+#line 81 "SysY.y"
                                                         { yyval = AppendStmt(yyvsp[-1], yyvsp[0]); }
-#line 1703 "SysY.tab.cpp"
+#line 1705 "SysY.tab.cpp"
     break;
 
   case 45:
-#line 80 "SysY.y"
+#line 82 "SysY.y"
                                                         { yyval = SeqStmt(yyvsp[0]); }
-#line 1709 "SysY.tab.cpp"
+#line 1711 "SysY.tab.cpp"
     break;
 
   case 46:
-#line 82 "SysY.y"
+#line 84 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1715 "SysY.tab.cpp"
+#line 1717 "SysY.tab.cpp"
     break;
 
   case 47:
-#line 83 "SysY.y"
+#line 85 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1721 "SysY.tab.cpp"
+#line 1723 "SysY.tab.cpp"
     break;
 
   case 48:
-#line 85 "SysY.y"
+#line 87 "SysY.y"
                                                         { yyval = Store(yyvsp[-3], yyvsp[-1]); }
-#line 1727 "SysY.tab.cpp"
+#line 1729 "SysY.tab.cpp"
     break;
 
   case 49:
-#line 86 "SysY.y"
+#line 88 "SysY.y"
                                                         { yyval = Evaluate(yyvsp[-1]); }
-#line 1733 "SysY.tab.cpp"
+#line 1735 "SysY.tab.cpp"
     break;
 
   case 50:
-#line 87 "SysY.y"
+#line 89 "SysY.y"
                                                         { yyval = Stmt(); }
-#line 1739 "SysY.tab.cpp"
+#line 1741 "SysY.tab.cpp"
     break;
 
   case 51:
-#line 88 "SysY.y"
+#line 90 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1745 "SysY.tab.cpp"
+#line 1747 "SysY.tab.cpp"
     break;
 
   case 52:
-#line 89 "SysY.y"
+#line 91 "SysY.y"
                                                         { yyval = IfThenElse(yyvsp[-2], yyvsp[0]); }
-#line 1751 "SysY.tab.cpp"
+#line 1753 "SysY.tab.cpp"
     break;
 
   case 53:
-#line 90 "SysY.y"
+#line 92 "SysY.y"
                                                         { yyval = IfThenElse(yyvsp[-4], yyvsp[-2], yyvsp[0], true); }
-#line 1757 "SysY.tab.cpp"
+#line 1759 "SysY.tab.cpp"
     break;
 
   case 54:
-#line 91 "SysY.y"
+#line 93 "SysY.y"
                                                         { yyval = While(yyvsp[-2], yyvsp[0]); }
-#line 1763 "SysY.tab.cpp"
+#line 1765 "SysY.tab.cpp"
     break;
 
   case 55:
-#line 92 "SysY.y"
+#line 94 "SysY.y"
                                                         { yyval = Goto("next"); }
-#line 1769 "SysY.tab.cpp"
+#line 1771 "SysY.tab.cpp"
     break;
 
   case 56:
-#line 93 "SysY.y"
+#line 95 "SysY.y"
                                                         { yyval = Goto("begin"); }
-#line 1775 "SysY.tab.cpp"
+#line 1777 "SysY.tab.cpp"
     break;
 
   case 57:
-#line 94 "SysY.y"
+#line 96 "SysY.y"
                                                         { yyval = Ret(yyvsp[-1]); }
-#line 1781 "SysY.tab.cpp"
+#line 1783 "SysY.tab.cpp"
     break;
 
   case 58:
-#line 95 "SysY.y"
+#line 97 "SysY.y"
                                                         { yyval = Ret(Var(nullptr)); }
-#line 1787 "SysY.tab.cpp"
+#line 1789 "SysY.tab.cpp"
     break;
 
   case 59:
-#line 97 "SysY.y"
+#line 99 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1793 "SysY.tab.cpp"
+#line 1795 "SysY.tab.cpp"
     break;
 
   case 60:
-#line 99 "SysY.y"
+#line 101 "SysY.y"
                                                         { yyval = BinaryOp(yyvsp[-2], kAdd, yyvsp[0]); }
-#line 1799 "SysY.tab.cpp"
+#line 1801 "SysY.tab.cpp"
     break;
 
   case 61:
-#line 100 "SysY.y"
+#line 102 "SysY.y"
                                                         { yyval = BinaryOp(yyvsp[-2], kSub, yyvsp[0]); }
-#line 1805 "SysY.tab.cpp"
+#line 1807 "SysY.tab.cpp"
     break;
 
   case 62:
-#line 101 "SysY.y"
+#line 103 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1811 "SysY.tab.cpp"
+#line 1813 "SysY.tab.cpp"
     break;
 
   case 63:
-#line 103 "SysY.y"
+#line 105 "SysY.y"
                                                         { yyval = BinaryOp(yyvsp[-2], kMul, yyvsp[0]); }
-#line 1817 "SysY.tab.cpp"
+#line 1819 "SysY.tab.cpp"
     break;
 
   case 64:
-#line 104 "SysY.y"
+#line 106 "SysY.y"
                                                         { yyval = BinaryOp(yyvsp[-2], kDiv, yyvsp[0]); }
-#line 1823 "SysY.tab.cpp"
+#line 1825 "SysY.tab.cpp"
     break;
 
   case 65:
-#line 105 "SysY.y"
+#line 107 "SysY.y"
                                                         { yyval = BinaryOp(yyvsp[-2], kMod, yyvsp[0]); }
-#line 1829 "SysY.tab.cpp"
+#line 1831 "SysY.tab.cpp"
     break;
 
   case 66:
-#line 106 "SysY.y"
+#line 108 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1835 "SysY.tab.cpp"
+#line 1837 "SysY.tab.cpp"
     break;
 
   case 67:
-#line 108 "SysY.y"
+#line 110 "SysY.y"
                                                         { yyval = yyvsp[-1]; }
-#line 1841 "SysY.tab.cpp"
+#line 1843 "SysY.tab.cpp"
     break;
 
   case 68:
-#line 109 "SysY.y"
+#line 111 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1847 "SysY.tab.cpp"
+#line 1849 "SysY.tab.cpp"
     break;
 
   case 69:
-#line 110 "SysY.y"
+#line 112 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1853 "SysY.tab.cpp"
+#line 1855 "SysY.tab.cpp"
     break;
 
   case 70:
-#line 111 "SysY.y"
+#line 113 "SysY.y"
                                                         { yyval = Call(yyvsp[-3], yyvsp[-1]); }
-#line 1859 "SysY.tab.cpp"
+#line 1861 "SysY.tab.cpp"
     break;
 
   case 71:
-#line 112 "SysY.y"
+#line 114 "SysY.y"
                                                         { yyval = Call(yyvsp[-2], EmptyList()); }
-#line 1865 "SysY.tab.cpp"
+#line 1867 "SysY.tab.cpp"
     break;
 
   case 72:
-#line 113 "SysY.y"
+#line 115 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1871 "SysY.tab.cpp"
+#line 1873 "SysY.tab.cpp"
     break;
 
   case 73:
-#line 114 "SysY.y"
+#line 116 "SysY.y"
                                                         { yyval = BinaryOp(Imm(kInt, 0), yyvsp[0]); }
-#line 1877 "SysY.tab.cpp"
+#line 1879 "SysY.tab.cpp"
     break;
 
   case 74:
-#line 115 "SysY.y"
+#line 117 "SysY.y"
                                                         { yyval = Not(yyvsp[0]); }
-#line 1883 "SysY.tab.cpp"
+#line 1885 "SysY.tab.cpp"
     break;
 
   case 75:
-#line 117 "SysY.y"
+#line 119 "SysY.y"
                                                         { yyval = AppendList(yyvsp[-2], yyvsp[0]); }
-#line 1889 "SysY.tab.cpp"
+#line 1891 "SysY.tab.cpp"
     break;
 
   case 76:
-#line 118 "SysY.y"
+#line 120 "SysY.y"
                                                         { yyval = List(yyvsp[0]); }
-#line 1895 "SysY.tab.cpp"
+#line 1897 "SysY.tab.cpp"
     break;
 
   case 77:
-#line 121 "SysY.y"
+#line 123 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1901 "SysY.tab.cpp"
+#line 1903 "SysY.tab.cpp"
     break;
 
   case 78:
-#line 123 "SysY.y"
+#line 125 "SysY.y"
                                                         { yyval = BinaryOp(yyvsp[-2], kOr, yyvsp[0]); }
-#line 1907 "SysY.tab.cpp"
+#line 1909 "SysY.tab.cpp"
     break;
 
   case 79:
-#line 124 "SysY.y"
+#line 126 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1913 "SysY.tab.cpp"
+#line 1915 "SysY.tab.cpp"
     break;
 
   case 80:
-#line 126 "SysY.y"
+#line 128 "SysY.y"
                                                         { yyval = BinaryOp(yyvsp[-2], kAnd, yyvsp[0]); }
-#line 1919 "SysY.tab.cpp"
+#line 1921 "SysY.tab.cpp"
     break;
 
   case 81:
-#line 127 "SysY.y"
+#line 129 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1925 "SysY.tab.cpp"
+#line 1927 "SysY.tab.cpp"
     break;
 
   case 82:
-#line 129 "SysY.y"
+#line 131 "SysY.y"
                                                         { yyval = BinaryOp(yyvsp[-2], kEQ, yyvsp[0]); }
-#line 1931 "SysY.tab.cpp"
+#line 1933 "SysY.tab.cpp"
     break;
 
   case 83:
-#line 130 "SysY.y"
+#line 132 "SysY.y"
                                                         { yyval = BinaryOp(yyvsp[-2], kNEQ, yyvsp[0]); }
-#line 1937 "SysY.tab.cpp"
+#line 1939 "SysY.tab.cpp"
     break;
 
   case 84:
-#line 131 "SysY.y"
+#line 133 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1943 "SysY.tab.cpp"
+#line 1945 "SysY.tab.cpp"
     break;
 
   case 85:
-#line 133 "SysY.y"
+#line 135 "SysY.y"
                                                         { yyval = BinaryOp(yyvsp[-2], kLT, yyvsp[0]); }
-#line 1949 "SysY.tab.cpp"
+#line 1951 "SysY.tab.cpp"
     break;
 
   case 86:
-#line 134 "SysY.y"
+#line 136 "SysY.y"
                                                         { yyval = BinaryOp(yyvsp[-2], kGT, yyvsp[0]); }
-#line 1955 "SysY.tab.cpp"
+#line 1957 "SysY.tab.cpp"
     break;
 
   case 87:
-#line 135 "SysY.y"
+#line 137 "SysY.y"
                                                         { yyval = BinaryOp(yyvsp[-2], kLEQ, yyvsp[0]); }
-#line 1961 "SysY.tab.cpp"
+#line 1963 "SysY.tab.cpp"
     break;
 
   case 88:
-#line 136 "SysY.y"
+#line 138 "SysY.y"
                                                         { yyval = BinaryOp(yyvsp[-2], kGEQ, yyvsp[0]); }
-#line 1967 "SysY.tab.cpp"
+#line 1969 "SysY.tab.cpp"
     break;
 
   case 89:
-#line 137 "SysY.y"
+#line 139 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1973 "SysY.tab.cpp"
+#line 1975 "SysY.tab.cpp"
     break;
 
 
-#line 1977 "SysY.tab.cpp"
+#line 1979 "SysY.tab.cpp"
 
       default: break;
     }
@@ -2205,4 +2207,8 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 139 "SysY.y"
+#line 141 "SysY.y"
+
+int yyerror(const char *message) {
+	return 0;
+}

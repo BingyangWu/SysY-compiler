@@ -1,5 +1,6 @@
 #include "expr.h"
 #include "type.h"
+#include "context.h"
 #include <assert.h>
 
 Imm::Imm(DataType dtype, int value) {
@@ -38,7 +39,7 @@ Var::Var(DataType dtype, std::string name) {
     data_ = std::move(data);
 }
 
-Array::Array(Var id, List<Expr> args, bool unknown_dim=false) {
+Array::Array(Var id, List<Expr> args, bool unknown_dim) {
     ArrayNode* data = new ArrayNode();
     data->dtype = id.get()->dtype;
     data->name = id.get()->name;
@@ -50,14 +51,14 @@ Array::Array(Var id, List<Expr> args, bool unknown_dim=false) {
 
 template<typename T>
 List<T>::List(std::vector<T> args) {
-    ListNode* data = new ListNode();
+    ListNode<T>* data = new ListNode<T>();
     data->args = args;
     data_ = std::move(data);
 }
 
 template<typename T>
 List<T>::List(T arg) {
-    ListNode* data = new ListNode();
+    ListNode<T>* data = new ListNode<T>();
     data->args.push_back(arg);
     data_ = std::move(data);
 }
@@ -90,6 +91,7 @@ int BinaryOpNode::get_value() {
         case kAnd: return a->get_value() && b->get_value();
         case kOr: return a->get_value() || b->get_value();
     }
+    return -1;
 }
 
 int NotNode::get_value() {
@@ -213,8 +215,9 @@ std::string ListNode<T>::generate_eeyore(Context& context) {
     std::string text = "";
 
     for (auto it = args.begin(); it != args.end(); ++it) {
-        text += it->generate_eeyore(context);
-        name_key = it->name_key;
+        T expr = *it;
+        text += expr->generate_eeyore(context);
+        name_key = expr->name_key;
     }
 
     return text;

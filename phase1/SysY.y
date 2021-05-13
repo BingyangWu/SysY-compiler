@@ -3,6 +3,8 @@
     #include "globals.h"
     #include "stmt.h"
     #include "expr.h"
+    int yyerror(const char *);
+    extern int yylex(void);
 %}
 %token IF ELSE WHILE BREAK CONTINUE RET
 
@@ -137,3 +139,6 @@ RelOp           :RelOp '<' Exp                          { $$ = BinaryOp($1, kLT,
                 |Exp                                    { $$ = $1; }
 ;
 %%
+int yyerror(const char *message) {
+	return 0;
+}

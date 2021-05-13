@@ -12,6 +12,19 @@ public:
     DEFINE_OBJECT_REF_METHODS(Stmt, ObjectRef, StmtNode);
 };
 
+class SeqStmtNode: public StmtNode {
+public:
+    std::vector<Stmt> seq;
+    virtual std::string generate_eeyore(Context&);
+};
+
+class SeqStmt: public Stmt {
+public:
+    SeqStmt(std::vector<Stmt> seq);
+    SeqStmt(Stmt stmt);
+    DEFINE_OBJECT_REF_METHODS(SeqStmt, Stmt, SeqStmtNode);
+};
+
 class StoreNode: public StmtNode {
 public:
     Var lval;
@@ -66,19 +79,6 @@ public:
     DEFINE_OBJECT_REF_METHODS(Func, Stmt, FuncNode);
 };
 
-class SeqStmtNode: public StmtNode {
-public:
-    std::vector<Stmt> seq;
-    virtual std::string generate_eeyore(Context&);
-};
-
-class SeqStmt: public Stmt {
-public:
-    SeqStmt(std::vector<Stmt> seq);
-    SeqStmt(Stmt stmt);
-    DEFINE_OBJECT_REF_METHODS(SeqStmt, Stmt, SeqStmtNode);
-};
-
 class IfThenElseNode: public StmtNode {
 public:
     Expr condition;
@@ -90,7 +90,7 @@ public:
 
 class IfThenElse: public Stmt {
 public:
-    IfThenElse(Expr condition, Stmt then_case, Stmt else_case, bool with_else);
+    IfThenElse(Expr condition, Stmt then_case, Stmt else_case=Stmt(), bool with_else=false);
     DEFINE_OBJECT_REF_METHODS(IfThenElse, Stmt, IfThenElseNode);
 };
 
