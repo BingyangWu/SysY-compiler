@@ -33,7 +33,7 @@ ConstDef        :Ident '=' ConstInitVal                 { $$ = Allocate($1, $3, 
 ;
 ConstInitVal    :ConstExp                               { $$ = Evaluate($1); }
                 |'{' ConstInitValSeq '}'                { $$ = List($2); }
-                |'{' '}'                                { $$ = EmptyList(); // problematic }
+                |'{' '}'                                { $$ = EmptyList(); }
 ;
 ConstInitValSeq :ConstInitValSeq ',' ConstInitVal       { $$ = AppendList($1, $3); }
                 |ConstInitVal                           { $$ = List($1); }
@@ -54,9 +54,9 @@ InitValSeq      :InitValSeq ',' InitVal                 { $$ = AppendList($1, $3
                 |InitVal                                { $$ = List($1); }
 ;
 FuncDef         :VOID ID '(' FuncFParams ')' Block  { $$ = Func(kVoid, $2, $4, $6); }
-                |VOID ID '(' ')' Block              { $$ = Func(kVoid, $2, $6); }
+                |VOID ID '(' ')' Block              { $$ = Func(kVoid, $2, $5); }
                 |INT ID '(' FuncFParams ')' Block  { $$ = Func(kVoid, $2, $4, $6); }
-                |INT ID '(' ')' Block              { $$ = Func(kVoid, $2, $6); }
+                |INT ID '(' ')' Block              { $$ = Func(kVoid, $2, $5); }
 ;
 FuncFParams     :FuncFParams ',' FuncParam              { $$ = AppendStmt($1, $3); }
                 |FuncParam                              { $$ = SeqStmt($1); }
@@ -74,7 +74,7 @@ Ident           :ID BrackertsSeq                        { $$ = Array($1, $2, fal
 BrackertsSeq    :BrackertsSeq '[' Exp ']'               { $$ = AppendList($1, $3); }
                 |'[' Exp ']'                            { $$ = List($2); }
 ;
-Block           :'{' BlockItemSeq '}'                   { $$ = SeqStmt($2); // problematic }
+Block           :'{' BlockItemSeq '}'                   { $$ = SeqStmt($2); }
 ;
 BlockItemSeq    :BlockItemSeq BlockItem                 { $$ = AppendStmt($1, $2); }
                 |BlockItem                              { $$ = SeqStmt($1); }
@@ -106,7 +106,7 @@ Term            :Term '*' Factor                        { $$ = BinaryOp($1, kMul
                 |Factor                                 { $$ = $1; }
 ;
 Factor          :'(' Exp ')'                            { $$ = $2; }
-                |Ident                                  { $$ = $1; //problematic }
+                |Ident                                  { $$ = $1; }
                 |IMM                                    { $$ = $1; }
                 |ID '(' FuncRParams ')'                 { $$ = Call($1, $3); }
                 |ID '(' ')'                             { $$ = Call($1, EmptyList()); }

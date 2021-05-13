@@ -103,32 +103,34 @@ void step_one(std::vector<int>& v, std::vector<int>& limit, int dim) {
     }
 }
 
-std::string generate_array_code(ArrayNode* var_container, ListNode<Expr>* init_list, std::vector<int> pos, int current_dim) {
+std::string generate_array_code(ArrayNode* var_container, ListNode<Expr>* init_list, std::vector<int> pos, int current_dim, Context& context) {
     std::string text = "";
+    std::vector<int>& dims = context.array_dims[var_container->name_key];
+
     for (auto it = init_list->args.begin(); it != init_list->args.end(); ++it) {
         Expr expr = *it;
         
         if (dynamic_cast<ListNode<Expr>*>(expr.operator->()) == nullptr) {
-            text += var_container->name_key + "[" + std::to_string(prod(pos, var_container->dims)) + "] = " + expr->name_key + "\n";
-            step_one(pos, var_container->dims, pos.size() - 1);
+            text += var_container->name_key + "[" + std::to_string(prod(pos, dims)) + "] = " + expr->name_key + "\n";
+            step_one(pos, dims, pos.size() - 1);
         }
         else {
             std::vector<int> next_pos = pos;
-            step_one(next_pos, var_container->dims, current_dim);
+            step_one(next_pos, dims, current_dim);
 
-            step_one(pos, var_container->dims, pos.size() - 1);
+            step_one(pos, dims, pos.size() - 1);
             while (pos != next_pos) {
-                text += var_container->name_key + "[" + std::to_string(prod(pos, var_container->dims)) + "] = 0\n";
-                step_one(pos, var_container->dims, pos.size() - 1);
+                text += var_container->name_key + "[" + std::to_string(prod(pos, dims)) + "] = 0\n";
+                step_one(pos, dims, pos.size() - 1);
             }
 
-            text += generate_array_code(var_container, init_list, pos, current_dim + 1);
+            text += generate_array_code(var_container, init_list, pos, current_dim + 1, context);
         }
     }
 
-    while (pos[0] != var_container->dims[0]) {
-        text += var_container->name_key + "[" + std::to_string(prod(pos, var_container->dims)) + "] = 0\n";
-        step_one(pos, var_container->dims, pos.size() - 1);
+    while (pos[0] != dims[0]) {
+        text += var_container->name_key + "[" + std::to_string(prod(pos, dims)) + "] = 0\n";
+        step_one(pos, dims, pos.size() - 1);
     }
 
     return text;
@@ -151,7 +153,7 @@ std::string AllocateNode::generate_eeyore(Context& context) {
                 pos.push_back(0);
             }
 
-            text += generate_array_code(var_container, init_list, pos, 0);
+            text += generate_array_code(var_container, init_list, pos, 0, context);
         }
     }
 
@@ -163,7 +165,7 @@ std::string EvaluateNode::generate_eeyore(Context& context) {
 }
 
 std::string FuncNode::generate_eeyore(Context& context) {
-    context.symbole_table_list.push_back(SymbolTable());
+    context.symbol_table_list.push_back(SymbolTable());
 
     int args_num = params->args.size();
     for (auto it = params->args.begin(); it != params->args.end(); ++it) {
@@ -176,22 +178,22 @@ std::string FuncNode::generate_eeyore(Context& context) {
     text += body->generate_eeyore(context);
     text += "end " + func_name + "\n";
 
-    context.symbole_table_list.pop_back();
+    context.symbol_table_list.pop_back();
     return ;
 }
 
 std::string SeqStmtNode::generate_eeyore(Context& context) {
     std::string text = "";
-    context.symbole_table_list.push_back(SymbolTable());
+    context.symbol_table_list.push_back(SymbolTable());
 
     for (std::vector<Stmt>::iterator it = seq.begin(); it != seq.end(); ++it) {
         Stmt stmt = *it;
         text += stmt->generate_eeyore(context);
     }
 
-    text = context.symbole_table_list.back().generate_eeyore() + text;
+    text = context.symbol_table_list.back().generate_eeyore() + text;
 
-    context.symbole_table_list.pop_back();
+    context.symbol_table_list.pop_back();
     return text;
 }
 
@@ -203,14 +205,17 @@ std::string IfThenElseNode::generate_eeyore(Context& context) {
     std::string label_false = context.new_label();
     std::string label_next = context.new_label();
 
-    context.next_label.push_back(label_branch);
+    // context.next_label.push_back(label_branch);
     
     text += condition->generate_eeyore(context);
 
-    context.next_label.pop_back();
+    // context.next_label.pop_back();
 
-    text += "if " + condition->name_key + " < 1 goto " + label_true + "\n";
+    text += "if " + condition->name_key + " == 1 goto " + label_true + "\n";
+    text += label_branch + ":\n";
     text += "goto " + label_false + "\n";
+
+    context.next_label.push_back(label_next);
     
     text += label_true + ":\n";
     text += then_case->generate_eeyore(context);
@@ -220,6 +225,7 @@ std::string IfThenElseNode::generate_eeyore(Context& context) {
     if (with_else) {
         else_case->generate_eeyore(context);
     }
+    context.next_label.pop_back();
 
     text += label_next + ":\n";
 
@@ -232,10 +238,11 @@ std::string WhileNode::generate_eeyore(Context& context) {
     std::string label_next = context.new_label();
     std::string label_condition_begin = context.new_label();
 
-    text += "goto " + label_while_begin + "\n";
+    text += "goto " + label_condition_begin + "\n";
+    text += label_while_begin + ":\n";
 
     context.next_label.push_back(label_next);
-    context.begin_label.push_back(label_while_begin);
+    context.begin_label.push_back(label_condition_begin);
 
     text += body->generate_eeyore(context);
 
@@ -244,9 +251,11 @@ std::string WhileNode::generate_eeyore(Context& context) {
 
     text += label_condition_begin + ":\n";
 
-    context.next_label.push_back(label_while_begin);
+    // context.next_label.push_back(label_next);
     text += condition->generate_eeyore(context);
-    context.next_label.pop_back();
+    // context.next_label.pop_back();
+
+    text += "if " + condition->name_key + " == 1 goto " + label_while_begin + "\n";
 
     text += label_next + ":\n";
 

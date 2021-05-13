@@ -20,6 +20,7 @@ public:
 class ImmNode: public ExprNode {
 public:
     int value;
+    virtual std::string generate_eeyore(Context&);
     virtual int get_value() {
         return value;
     }
@@ -35,6 +36,7 @@ class BinaryOpNode: public ExprNode {
 public:
     BinaryOpType dtype;
     Expr a, b;
+    virtual std::string generate_eeyore(Context&);
     virtual int get_value();
 };
 
@@ -47,6 +49,8 @@ public:
 class NotNode: public ExprNode {
 public:
     Expr a;
+    virtual std::string generate_eeyore(Context&);
+    virtual int get_value();
 };
 
 class Not: public Expr {
@@ -59,6 +63,7 @@ class CallNode: public ExprNode {
 public:
     Var func;
     List<Expr> args;
+    virtual std::string generate_eeyore(Context&);
 };
 
 class Call: public Expr {
@@ -70,6 +75,7 @@ public:
 class VarNode: public ExprNode {
 public:
     std::string name;
+    virtual std::string generate_eeyore(Context&);
 };
 
 class Var: public Expr {
@@ -81,7 +87,8 @@ public:
 class ArrayNode: public VarNode {
 public:
     List<Expr> args;
-    std::vector<int> dims;
+    std::string base_var, offset_var;
+    virtual std::string generate_eeyore(Context&);
 };
 
 class Array: public Var {
@@ -94,6 +101,7 @@ template<typename T>
 class ListNode: public ExprNode {
 public:
     std::vector<T> args;
+    virtual std::string generate_eeyore(Context&);
 };
 
 template<typename T>

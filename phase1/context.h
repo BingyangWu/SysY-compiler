@@ -31,9 +31,12 @@ public:
 
 class Context {
 public:
-    std::vector<SymbolTable> symbole_table_list;
+    std::vector<SymbolTable> symbol_table_list;
     std::map<std::string, int> type_counter;
+    std::map<std::string, std::vector<int>> array_dims;
     int label_counter;
+
+    std::map<std::string, bool> func_table;
 
     std::vector<std::string> next_label;
     std::vector<std::string> begin_label;
@@ -44,10 +47,11 @@ public:
         type_counter["p"] = 0;
     }
 
-    void define_var(Var var, std::string var_type);
-    std::string new_label() {
-        return "l" + std::to_string(label_counter++);
-    }
+    std::string define_var(Var var, std::string var_type);
+    std::string find_var(std::string var_name);
+    std::string define_func(Var var, DataType ret_type);
+    bool has_ret_value(std::string func_name);
+    std::string new_label();
 };
 
 #endif
