@@ -190,7 +190,7 @@ std::string SeqStmtNode::generate_eeyore(Context& context) {
     context.symbol_table_list.push_back(SymbolTable());
 
     for (std::vector<Stmt>::iterator it = seq.begin(); it != seq.end(); ++it) {
-        Stmt stmt = *it;
+        Stmt &stmt = *it;
         text += stmt->generate_eeyore(context);
     }
 

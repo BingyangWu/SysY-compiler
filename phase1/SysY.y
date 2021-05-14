@@ -18,9 +18,9 @@
 
 Program         :CompUnit                               { TreeRoot = $1; }
 ;
-CompUnit        :CompUnit Decl                          { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *new SeqStmt(*dynamic_cast<Stmt*>($2))); }
+CompUnit        :CompUnit Decl                          { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *dynamic_cast<SeqStmt*>($2)); }
                 |CompUnit FuncDef                       { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *new SeqStmt(*dynamic_cast<Stmt*>($2))); }
-                |Decl                                   { $$ = new SeqStmt(*dynamic_cast<Stmt*>($1)); }
+                |Decl                                   { $$ = $1; }
                 |FuncDef                                { $$ = new SeqStmt(*dynamic_cast<Stmt*>($1)); }
 ;
 Decl            :ConstDecl                              { $$ = $1; }

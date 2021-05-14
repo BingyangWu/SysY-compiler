@@ -1454,7 +1454,7 @@ yyreduce:
 
   case 3:
 #line 21 "SysY.y"
-                                                        { yyval = &AppendStmt(*dynamic_cast<SeqStmt*>(yyvsp[-1]), *new SeqStmt(*dynamic_cast<Stmt*>(yyvsp[0]))); }
+                                                        { yyval = &AppendStmt(*dynamic_cast<SeqStmt*>(yyvsp[-1]), *dynamic_cast<SeqStmt*>(yyvsp[0])); }
 #line 1459 "SysY.tab.cpp"
     break;
 
@@ -1466,7 +1466,7 @@ yyreduce:
 
   case 5:
 #line 23 "SysY.y"
-                                                        { yyval = new SeqStmt(*dynamic_cast<Stmt*>(yyvsp[0])); }
+                                                        { yyval = yyvsp[0]; }
 #line 1471 "SysY.tab.cpp"
     break;
 
