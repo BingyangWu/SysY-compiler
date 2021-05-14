@@ -21,7 +21,7 @@ public:
         for (std::map<std::string, SymbolTableEntry>::iterator it = symbol_table.begin(); it != symbol_table.end(); ++it) {
             SymbolTableEntry& entry = it->second;
             std::string var_name = it->first;
-            std::string define_var = "var " + entry.var_type + entry.var_type + " // " + var_name + "\n";
+            std::string define_var = "var " + (entry.width ? std::to_string(entry.width)+" " : "") + entry.var_type + entry.var_no + " // " + var_name + "\n";
             text += define_var;
         }
 

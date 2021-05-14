@@ -18,8 +18,8 @@
 
 Program         :CompUnit                               { TreeRoot = $1; }
 ;
-CompUnit        :CompUnit Decl                          { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *dynamic_cast<SeqStmt*>($2)); }
-                |CompUnit FuncDef                       { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *dynamic_cast<SeqStmt*>($2)); }
+CompUnit        :CompUnit Decl                          { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *new SeqStmt(*dynamic_cast<Stmt*>($2))); }
+                |CompUnit FuncDef                       { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *new SeqStmt(*dynamic_cast<Stmt*>($2))); }
                 |Decl                                   { $$ = new SeqStmt(*dynamic_cast<Stmt*>($1)); }
                 |FuncDef                                { $$ = new SeqStmt(*dynamic_cast<Stmt*>($1)); }
 ;
@@ -73,7 +73,7 @@ FuncIdent       :ID '[' ']' BrackertsSeq                { $$ = new Array(*dynami
 Ident           :ID BrackertsSeq                        { $$ = new Array(*dynamic_cast<Var*>($1), *dynamic_cast<List<Expr>*>($2), false); }
                 |ID                                     { $$ = $1; }
 ;
-BrackertsSeq    :BrackertsSeq '[' Exp ']'               { $$ = &AppendList(*dynamic_cast<List<Expr>*>($1), *dynamic_cast<List<Expr>*>($3)); }
+BrackertsSeq    :BrackertsSeq '[' Exp ']'               { $$ = &AppendList(*dynamic_cast<List<Expr>*>($1), *new List<Expr>(*dynamic_cast<Expr*>($3))); }
                 |'[' Exp ']'                            { $$ = new List<Expr>(*dynamic_cast<Expr*>($1)); }
 ;
 Block           :'{' BlockItemSeq '}'                   { $$ = new SeqStmt(*dynamic_cast<Stmt*>($2)); }
@@ -93,8 +93,8 @@ Stmt            :Ident '=' Exp ';'                      { $$ = new Store(*dynami
                 |WHILE '(' Cond ')' Stmt                { $$ = new While(*dynamic_cast<Expr*>($3), *dynamic_cast<Stmt*>($5)); }
                 |BREAK ';'                              { $$ = new Goto("next"); }
                 |CONTINUE ';'                           { $$ = new Goto("begin"); }
-                |RET Exp ';'                            { $$ = new Ret(*dynamic_cast<Expr*>($2)); }
-                |RET ';'                                { $$ = new Ret(Expr(nullptr)); }
+                |RET Exp ';'                            { $$ = new Ret(*dynamic_cast<Expr*>($2), true); }
+                |RET ';'                                { $$ = new Ret(Expr(), false); }
 ;
 ConstExp        :Exp                                    { $$ = $1; }
 ;
@@ -116,7 +116,7 @@ Factor          :'(' Exp ')'                            { $$ = $2; }
                 |'-' Factor                             { $$ = new BinaryOp(Imm(kInt, 0), kSub, *dynamic_cast<Expr*>($2)); }
                 |'!' Factor                             { $$ = new Not(*dynamic_cast<Expr*>($2)); }
 ;
-FuncRParams     :FuncFParams ',' Exp                    { $$ = &AppendList(*dynamic_cast<List<Expr>*>($1), *dynamic_cast<List<Expr>*>($3)); }
+FuncRParams     :FuncFParams ',' Exp                    { $$ = &AppendList(*dynamic_cast<List<Expr>*>($1), *new List<Expr>(*dynamic_cast<Expr*>($3))); }
                 |Exp                                    { $$ = new List<Expr>(*dynamic_cast<Expr*>($1)); }
 ;
 

@@ -65,9 +65,10 @@ Goto::Goto(std::string location) {
     data_ = std::move(data);
 }
 
-Ret::Ret(Expr ret_val) {
+Ret::Ret(Expr ret_val, bool with_ret_val) {
     RetNode* data = new RetNode();
     data->ret_val = ret_val;
+    data->with_ret_val = with_ret_val;
     data_ = std::move(data);
 }
 
@@ -277,7 +278,7 @@ std::string GotoNode::generate_eeyore(Context& context) {
 
 std::string RetNode::generate_eeyore(Context& context) {
     std::string text = "";
-    if (ret_val.get() == nullptr)
+    if (with_ret_val)
         text += "return\n";
     else {
         text += ret_val->generate_eeyore(context);

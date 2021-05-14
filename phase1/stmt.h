@@ -122,12 +122,13 @@ public:
 class RetNode: public StmtNode {
 public:
     Expr ret_val;
+    bool with_ret_val;
     virtual std::string generate_eeyore(Context&);
 };
 
 class Ret: public Stmt {
 public:
-    Ret(Expr ret_val);
+    Ret(Expr ret_val, bool with_ret_val);
     DEFINE_OBJECT_REF_METHODS(Ret, Stmt, RetNode);
 };
 

@@ -6,18 +6,23 @@
     #include <cstdio>
     #include <cstdlib>
     #include <string>
+    #include <iostream>
+
+    void yyecho() {
+        fprintf(stderr, "%s", yytext);
+    }
 %}
 
 letter              [a-zA-Z]
 whitespace          [ \t]+
-newline             \n
+newline             \n|(\r\n)
 
 digit               [0-9]
 identifier_nondigit {letter}|_
 identifier          {identifier_nondigit}+({identifier_nondigit}|{digit})*
 
 nonzero_digit       [1-9]
-decimal_integer     0|{nonzero_digit}+({nonzero_digit}|0)*
+decimal_integer     0|({nonzero_digit}+({nonzero_digit}|0)*)
 
 octal_digit         [0-7]
 octal_integer       0{octal_digit}+
@@ -32,32 +37,34 @@ comment             "//".*|"/*"[^*]*"*"+([^*/][^*]*"*"+)*"/"
 
 %%
 
-"if"                                { ECHO; return IF; }
-"else"                              { ECHO; return ELSE; }
-"while"                             { ECHO; return WHILE; }
-"break"                             { ECHO; return BREAK; }
-"continue"                          { ECHO; return CONTINUE; }
-"return"                            { ECHO; return RET; }
+"if"                                { yyecho(); return IF; }
+"else"                              { yyecho(); return ELSE; }
+"while"                             { yyecho(); return WHILE; }
+"break"                             { yyecho(); return BREAK; }
+"continue"                          { yyecho(); return CONTINUE; }
+"return"                            { yyecho(); return RET; }
 
-"&&"                                { ECHO; return AND; }
-"||"                                { ECHO; return OR; }
-"=="                                { ECHO; return EQ; }
-"!="                                { ECHO; return NEQ; }
-"<="                                { ECHO; return LEQ; }
-">="                                { ECHO; return GEQ; }
+"&&"                                { yyecho(); return AND; }
+"||"                                { yyecho(); return OR; }
+"=="                                { yyecho(); return EQ; }
+"!="                                { yyecho(); return NEQ; }
+"<="                                { yyecho(); return LEQ; }
+">="                                { yyecho(); return GEQ; }
 
-{integer}                           { ECHO; yylval = new Imm(kInt, (int)strtol(yytext, nullptr, 0)); return IMM; }
+{integer}                           { yyecho(); yylval = new Imm(kInt, (int)strtol(yytext, nullptr, 0)); return IMM; }
 
-"int"                               { ECHO; return INT; }
-"const"                             { ECHO; return CONST; }
-"void"                              { ECHO; return VOID; }
+"int"                               { yyecho(); return INT; }
+"const"                             { yyecho(); return CONST; }
+"void"                              { yyecho(); return VOID; }
 
-{identifier}                        { ECHO; yylval = new Var(kInt, std::string(yytext)); return ID; }
+{identifier}                        { yyecho(); yylval = new Var(kInt, std::string(yytext)); return ID; }
 
 {comment}                           {  }
-{whitespace}                        { ECHO; }
-{newline}                           { ECHO; }
+{whitespace}                        { yyecho(); }
+{newline}                           { yyecho(); }
 
-[\+\-\*\/\%\=\!\<\>\(\)\[\]\,\;]    { ECHO; return yytext[0]; }
+[\+\-\*\/\%\=\!\<\>\(\)\[\]\{\}\,\;]    { yyecho(); return yytext[0]; }
+
+.                                   { fprintf(stderr, "\nflex error!!: %s\n", yytext); }
 
 %%

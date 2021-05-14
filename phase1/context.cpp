@@ -4,7 +4,7 @@ std::string Context::define_var(Var var, std::string var_type) {
     SymbolTableEntry entry;
     std::vector<int> dims;
     entry.var_type = var_type;
-    entry.var_no = type_counter[var_type]++;
+    entry.var_no = std::to_string(type_counter[var_type]++);
     
     ArrayNode *data = dynamic_cast<ArrayNode*>(var.operator->());
     if (data != nullptr) {

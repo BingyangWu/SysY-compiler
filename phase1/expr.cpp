@@ -185,6 +185,7 @@ std::string ArrayNode::generate_eeyore(Context& context) {
         last_var = offset_var;
     }
 
+    text += offset_var + " = " + offset_var + " * 4\n";
     name_key = context.define_var(Var(kInt, "array_rvalue_"+name), "t");
     text += name_key + " = " + base_var + "[" + offset_var + "]\n";
     return text;
