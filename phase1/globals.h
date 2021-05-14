@@ -3,10 +3,8 @@
 
 #include "object.h"
 
-#define YYSTYPE ObjectRef
+#define YYSTYPE ObjectRef*
 
-ObjectRef TreeRoot;
-
-int lineno;
+extern ObjectRef* TreeRoot;
 
 #endif

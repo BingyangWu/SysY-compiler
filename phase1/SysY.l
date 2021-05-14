@@ -1,12 +1,11 @@
+%option noyywrap
 %{
+    #include "expr.h"
+    #include "globals.h"
     #include "SysY.tab.hpp"
     #include <cstdio>
     #include <cstdlib>
     #include <string>
-    #include "expr.h"
-    #include "globals.h"
-    int yyerror(const char *);
-    extern int yylex(void);
 %}
 
 letter              [a-zA-Z]
@@ -47,13 +46,13 @@ comment             "//".*|"/*"[^*]*"*"+([^*/][^*]*"*"+)*"/"
 "<="                                { ECHO; return LEQ; }
 ">="                                { ECHO; return GEQ; }
 
-{integer}                           { ECHO; yylval = Imm(kInt, (int)strtol(yytext, nullptr, 0)); return IMM; }
+{integer}                           { ECHO; yylval = new Imm(kInt, (int)strtol(yytext, nullptr, 0)); return IMM; }
 
 "int"                               { ECHO; return INT; }
 "const"                             { ECHO; return CONST; }
 "void"                              { ECHO; return VOID; }
 
-{identifier}                        { ECHO; yylval = Var(kInt, std::string(yytext)); return ID; }
+{identifier}                        { ECHO; yylval = new Var(kInt, std::string(yytext)); return ID; }
 
 {comment}                           {  }
 {whitespace}                        { ECHO; }
@@ -62,7 +61,3 @@ comment             "//".*|"/*"[^*]*"*"+([^*/][^*]*"*"+)*"/"
 [\+\-\*\/\%\=\!\<\>\(\)\[\]\,\;]    { ECHO; return yytext[0]; }
 
 %%
-
-int yyerror(const char *message) {
-	return 0;
-}

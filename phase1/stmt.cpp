@@ -65,20 +65,20 @@ Goto::Goto(std::string location) {
     data_ = std::move(data);
 }
 
-Ret::Ret(Var ret_val) {
+Ret::Ret(Expr ret_val) {
     RetNode* data = new RetNode();
     data->ret_val = ret_val;
     data_ = std::move(data);
 }
 
-SeqStmt AppendStmt(SeqStmt a, SeqStmt b) {
+SeqStmt& AppendStmt(SeqStmt& a, SeqStmt& b) {
     a->seq.insert(a->seq.end(), b->seq.begin(), b->seq.end());
     return a;
 }
 
 std::string StoreNode::generate_eeyore(Context& context) {
     std::string text = lval->generate_eeyore(context) + rval->generate_eeyore(context);
-    text += lval->name_key + " = " + rval->name_key + "\n";;
+    text += lval->address() + " = " + rval->name_key + "\n";;
     return text;
 }
 

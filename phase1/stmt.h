@@ -121,16 +121,16 @@ public:
 
 class RetNode: public StmtNode {
 public:
-    Var ret_val;
+    Expr ret_val;
     virtual std::string generate_eeyore(Context&);
 };
 
 class Ret: public Stmt {
 public:
-    Ret(Var ret_val);
+    Ret(Expr ret_val);
     DEFINE_OBJECT_REF_METHODS(Ret, Stmt, RetNode);
 };
 
-SeqStmt AppendStmt(SeqStmt a, SeqStmt b);
+SeqStmt& AppendStmt(SeqStmt& a, SeqStmt& b);
 
 #endif // _STMT_H_

@@ -44,35 +44,9 @@ Array::Array(Var id, List<Expr> args, bool unknown_dim) {
     data->dtype = id.get()->dtype;
     data->name = id.get()->name;
     if (unknown_dim)
-        args = AppendList(List<Expr>(Imm(kInt, 0)), args);
+        args = AppendList(*new List<Expr>(Imm(kInt, 0)), args);
     data->args = args;
     data_ = std::move(data);
-}
-
-template<typename T>
-List<T>::List(std::vector<T> args) {
-    ListNode<T>* data = new ListNode<T>();
-    data->args = args;
-    data_ = std::move(data);
-}
-
-template<typename T>
-List<T>::List(T arg) {
-    ListNode<T>* data = new ListNode<T>();
-    data->args.push_back(arg);
-    data_ = std::move(data);
-}
-
-template<typename T>
-List<T> AppendList(List<T> a, List<T> b) {
-    a->args.insert(a->args.end(), b->args.begin(), b->args.end());
-    return a;
-}
-
-List<Expr> EmptyList() {
-    List<Expr> a(Imm(kInt, -1));
-    a->args.pop_back();
-    return a;
 }
 
 int BinaryOpNode::get_value() {
@@ -169,6 +143,12 @@ std::string NotNode::generate_eeyore(Context& context) {
 std::string CallNode::generate_eeyore(Context& context) {
     std::string text = "";
 
+    args->generate_eeyore(context);
+
+    for (auto it = args->args.begin(); it != args->args.end(); ++it) {
+        text += "param " + args->name_key + "\n";
+    }
+
     if (context.has_ret_value(func->name)) {
         name_key = context.define_var(Var(kInt, "call"+func->name), "t");
         text += name_key + " = ";
@@ -207,18 +187,5 @@ std::string ArrayNode::generate_eeyore(Context& context) {
 
     name_key = context.define_var(Var(kInt, "array_rvalue_"+name), "t");
     text += name_key + " = " + base_var + "[" + offset_var + "]\n";
-    return text;
-}
-
-template<typename T>
-std::string ListNode<T>::generate_eeyore(Context& context) {
-    std::string text = "";
-
-    for (auto it = args.begin(); it != args.end(); ++it) {
-        T expr = *it;
-        text += expr->generate_eeyore(context);
-        name_key = expr->name_key;
-    }
-
     return text;
 }

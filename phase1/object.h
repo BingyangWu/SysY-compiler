@@ -17,14 +17,20 @@ public:
         return *this;
     }
 
-    virtual std::string generate_eeyore(Context&) = 0;
+    virtual std::string generate_eeyore(Context&) {
+        return "";
+    }
 };
 
 class ObjectRef {
 public:
-    ObjectRef() = default;
+    ObjectRef() {
+        data_ = new Object();
+    }
 
     explicit ObjectRef(Object* data): data_(data) {}
+
+    virtual ~ObjectRef() = default;
 
     bool operator==(const ObjectRef& other) const { return data_ == other.data_; }
 

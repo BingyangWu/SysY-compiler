@@ -1454,25 +1454,25 @@ yyreduce:
 
   case 3:
 #line 21 "SysY.y"
-                                                        { yyval = AppendStmt(yyvsp[-1], yyvsp[0]); }
+                                                        { yyval = &AppendStmt(*dynamic_cast<SeqStmt*>(yyvsp[-1]), *dynamic_cast<SeqStmt*>(yyvsp[0])); }
 #line 1459 "SysY.tab.cpp"
     break;
 
   case 4:
 #line 22 "SysY.y"
-                                                        { yyval = AppendStmt(yyvsp[-1], yyvsp[0]); }
+                                                        { yyval = &AppendStmt(*dynamic_cast<SeqStmt*>(yyvsp[-1]), *dynamic_cast<SeqStmt*>(yyvsp[0])); }
 #line 1465 "SysY.tab.cpp"
     break;
 
   case 5:
 #line 23 "SysY.y"
-                                                        { yyval = SeqStmt(yyvsp[0]); }
+                                                        { yyval = new SeqStmt(*dynamic_cast<Stmt*>(yyvsp[0])); }
 #line 1471 "SysY.tab.cpp"
     break;
 
   case 6:
 #line 24 "SysY.y"
-                                                        { yyval = SeqStmt(yyvsp[0]); }
+                                                        { yyval = new SeqStmt(*dynamic_cast<Stmt*>(yyvsp[0])); }
 #line 1477 "SysY.tab.cpp"
     break;
 
@@ -1496,49 +1496,49 @@ yyreduce:
 
   case 10:
 #line 31 "SysY.y"
-                                                        { yyval = AppendStmt(yyvsp[-2], yyvsp[0]); }
+                                                        { yyval = &AppendStmt(*dynamic_cast<SeqStmt*>(yyvsp[-2]), *dynamic_cast<SeqStmt*>(yyvsp[0])); }
 #line 1501 "SysY.tab.cpp"
     break;
 
   case 11:
 #line 32 "SysY.y"
-                                                        { yyval = SeqStmt(yyvsp[0]); }
+                                                        { yyval = new SeqStmt(*dynamic_cast<Stmt*>(yyvsp[0])); }
 #line 1507 "SysY.tab.cpp"
     break;
 
   case 12:
 #line 34 "SysY.y"
-                                                        { yyval = Allocate(yyvsp[-2], yyvsp[0], true); }
+                                                        { yyval = new Allocate(*dynamic_cast<Var*>(yyvsp[-2]), *dynamic_cast<Expr*>(yyvsp[0]), true); }
 #line 1513 "SysY.tab.cpp"
     break;
 
   case 13:
 #line 36 "SysY.y"
-                                                        { yyval = Evaluate(yyvsp[0]); }
+                                                        { yyval = yyvsp[0]; }
 #line 1519 "SysY.tab.cpp"
     break;
 
   case 14:
 #line 37 "SysY.y"
-                                                        { yyval = List(yyvsp[-1]); }
+                                                        { yyval = yyvsp[-1]; }
 #line 1525 "SysY.tab.cpp"
     break;
 
   case 15:
 #line 38 "SysY.y"
-                                                        { yyval = EmptyList(); }
+                                                        { yyval = EmptyList<Expr>(); }
 #line 1531 "SysY.tab.cpp"
     break;
 
   case 16:
 #line 40 "SysY.y"
-                                                        { yyval = AppendList(yyvsp[-2], yyvsp[0]); }
+                                                        { yyval = &AppendList(*dynamic_cast<List<Expr>*>(yyvsp[-2]), *dynamic_cast<List<Expr>*>(yyvsp[0])); }
 #line 1537 "SysY.tab.cpp"
     break;
 
   case 17:
 #line 41 "SysY.y"
-                                                        { yyval = List(yyvsp[0]); }
+                                                        { yyval = new List<Expr>(*dynamic_cast<Expr*>(yyvsp[0])); }
 #line 1543 "SysY.tab.cpp"
     break;
 
@@ -1550,91 +1550,91 @@ yyreduce:
 
   case 19:
 #line 45 "SysY.y"
-                                                        { yyval = AppendStmt(yyvsp[-2], yyvsp[0]); }
+                                                        { yyval = &AppendStmt(*dynamic_cast<SeqStmt*>(yyvsp[-2]), *dynamic_cast<SeqStmt*>(yyvsp[0])); }
 #line 1555 "SysY.tab.cpp"
     break;
 
   case 20:
 #line 46 "SysY.y"
-                                                        { yyval = Stmt(yyvsp[0]); }
+                                                        { yyval = new SeqStmt(*dynamic_cast<Stmt*>(yyvsp[0])); }
 #line 1561 "SysY.tab.cpp"
     break;
 
   case 21:
 #line 48 "SysY.y"
-                                                        { yyval = Allocate(yyvsp[0]); }
+                                                        { yyval = new Allocate(*dynamic_cast<Var*>(yyvsp[0]), Expr(), false); }
 #line 1567 "SysY.tab.cpp"
     break;
 
   case 22:
 #line 49 "SysY.y"
-                                                        { yyval = Allocate(yyvsp[-2], yyvsp[0], true); }
+                                                        { yyval = new Allocate(*dynamic_cast<Var*>(yyvsp[-2]), *dynamic_cast<Expr*>(yyvsp[0]), true); }
 #line 1573 "SysY.tab.cpp"
     break;
 
   case 23:
 #line 51 "SysY.y"
-                                                        { yyval = Evaluate(yyvsp[0]); }
+                                                        { yyval = yyvsp[0]; }
 #line 1579 "SysY.tab.cpp"
     break;
 
   case 24:
 #line 52 "SysY.y"
-                                                        { yyval = List(yyvsp[-1]); }
+                                                        { yyval = yyvsp[-1]; }
 #line 1585 "SysY.tab.cpp"
     break;
 
   case 25:
 #line 53 "SysY.y"
-                                                        { yyval = EmptyList(); }
+                                                        { yyval = EmptyList<Expr>(); }
 #line 1591 "SysY.tab.cpp"
     break;
 
   case 26:
 #line 55 "SysY.y"
-                                                        { yyval = AppendList(yyvsp[-2], yyvsp[0]); }
+                                                        { yyval = &AppendList(*dynamic_cast<List<Expr>*>(yyvsp[-2]), *dynamic_cast<List<Expr>*>(yyvsp[0])); }
 #line 1597 "SysY.tab.cpp"
     break;
 
   case 27:
 #line 56 "SysY.y"
-                                                        { yyval = List(yyvsp[0]); }
+                                                        { yyval = new List<Expr>(*dynamic_cast<Expr*>(yyvsp[0])); }
 #line 1603 "SysY.tab.cpp"
     break;
 
   case 28:
 #line 58 "SysY.y"
-                                                    { yyval = Func(kVoid, yyvsp[-4], yyvsp[-2], yyvsp[0]); }
+                                                    { yyval = new Func(kVoid, *dynamic_cast<Var*>(yyvsp[-4]), *dynamic_cast<List<Var>*>(yyvsp[-2]), *dynamic_cast<SeqStmt*>(yyvsp[0])); }
 #line 1609 "SysY.tab.cpp"
     break;
 
   case 29:
 #line 59 "SysY.y"
-                                                    { yyval = Func(kVoid, yyvsp[-3], yyvsp[0]); }
+                                                    { yyval = new Func(kVoid, *dynamic_cast<Var*>(yyvsp[-3]), *EmptyList<Var>(), *dynamic_cast<SeqStmt*>(yyvsp[0])); }
 #line 1615 "SysY.tab.cpp"
     break;
 
   case 30:
 #line 60 "SysY.y"
-                                                   { yyval = Func(kVoid, yyvsp[-4], yyvsp[-2], yyvsp[0]); }
+                                                   { yyval = new Func(kInt, *dynamic_cast<Var*>(yyvsp[-4]), *dynamic_cast<List<Var>*>(yyvsp[-2]), *dynamic_cast<SeqStmt*>(yyvsp[0])); }
 #line 1621 "SysY.tab.cpp"
     break;
 
   case 31:
 #line 61 "SysY.y"
-                                                   { yyval = Func(kVoid, yyvsp[-3], yyvsp[0]); }
+                                                   { yyval = new Func(kInt, *dynamic_cast<Var*>(yyvsp[-3]), *EmptyList<Var>(), *dynamic_cast<SeqStmt*>(yyvsp[0])); }
 #line 1627 "SysY.tab.cpp"
     break;
 
   case 32:
 #line 63 "SysY.y"
-                                                        { yyval = AppendStmt(yyvsp[-2], yyvsp[0]); }
+                                                        { yyval = &AppendList(*dynamic_cast<List<Var>*>(yyvsp[-2]), *dynamic_cast<List<Var>*>(yyvsp[0])); }
 #line 1633 "SysY.tab.cpp"
     break;
 
   case 33:
 #line 64 "SysY.y"
-                                                        { yyval = SeqStmt(yyvsp[0]); }
+                                                        { yyval = new List<Var>(*dynamic_cast<Var*>(yyvsp[0])); }
 #line 1639 "SysY.tab.cpp"
     break;
 
@@ -1646,19 +1646,19 @@ yyreduce:
 
   case 35:
 #line 68 "SysY.y"
-                                                        { yyval = Array(yyvsp[-3], yyvsp[-1], true); }
+                                                        { yyval = new Array(*dynamic_cast<Var*>(yyvsp[-3]), *dynamic_cast<List<Expr>*>(yyvsp[-1]), true); }
 #line 1651 "SysY.tab.cpp"
     break;
 
   case 36:
 #line 69 "SysY.y"
-                                                        { yyval = Array(yyvsp[-1], yyvsp[0], false); }
+                                                        { yyval = new Array(*dynamic_cast<Var*>(yyvsp[-1]), *dynamic_cast<List<Expr>*>(yyvsp[0]), false); }
 #line 1657 "SysY.tab.cpp"
     break;
 
   case 37:
 #line 70 "SysY.y"
-                                                        { yyval = Array(yyvsp[-2], false); }
+                                                        { yyval = new Array(*dynamic_cast<Var*>(yyvsp[-2]), *EmptyList<Expr>(), true); }
 #line 1663 "SysY.tab.cpp"
     break;
 
@@ -1670,7 +1670,7 @@ yyreduce:
 
   case 39:
 #line 73 "SysY.y"
-                                                        { yyval = Array(yyvsp[-1], yyvsp[0], false); }
+                                                        { yyval = new Array(*dynamic_cast<Var*>(yyvsp[-1]), *dynamic_cast<List<Expr>*>(yyvsp[0]), false); }
 #line 1675 "SysY.tab.cpp"
     break;
 
@@ -1682,31 +1682,31 @@ yyreduce:
 
   case 41:
 #line 76 "SysY.y"
-                                                        { yyval = AppendList(yyvsp[-3], yyvsp[-1]); }
+                                                        { yyval = &AppendList(*dynamic_cast<List<Expr>*>(yyvsp[-3]), *dynamic_cast<List<Expr>*>(yyvsp[-1])); }
 #line 1687 "SysY.tab.cpp"
     break;
 
   case 42:
 #line 77 "SysY.y"
-                                                        { yyval = List(yyvsp[-1]); }
+                                                        { yyval = new List<Expr>(*dynamic_cast<Expr*>(yyvsp[-2])); }
 #line 1693 "SysY.tab.cpp"
     break;
 
   case 43:
 #line 79 "SysY.y"
-                                                        { yyval = SeqStmt(yyvsp[-1]); }
+                                                        { yyval = new SeqStmt(*dynamic_cast<Stmt*>(yyvsp[-1])); }
 #line 1699 "SysY.tab.cpp"
     break;
 
   case 44:
 #line 81 "SysY.y"
-                                                        { yyval = AppendStmt(yyvsp[-1], yyvsp[0]); }
+                                                        { yyval = &AppendStmt(*dynamic_cast<SeqStmt*>(yyvsp[-1]), *dynamic_cast<SeqStmt*>(yyvsp[0])); }
 #line 1705 "SysY.tab.cpp"
     break;
 
   case 45:
 #line 82 "SysY.y"
-                                                        { yyval = SeqStmt(yyvsp[0]); }
+                                                        { yyval = new SeqStmt(*dynamic_cast<Stmt*>(yyvsp[0])); }
 #line 1711 "SysY.tab.cpp"
     break;
 
@@ -1724,19 +1724,19 @@ yyreduce:
 
   case 48:
 #line 87 "SysY.y"
-                                                        { yyval = Store(yyvsp[-3], yyvsp[-1]); }
+                                                        { yyval = new Store(*dynamic_cast<Var*>(yyvsp[-3]), *dynamic_cast<List<Expr>*>(yyvsp[-1])); }
 #line 1729 "SysY.tab.cpp"
     break;
 
   case 49:
 #line 88 "SysY.y"
-                                                        { yyval = Evaluate(yyvsp[-1]); }
+                                                        { yyval = new Evaluate(*dynamic_cast<Expr*>(yyvsp[-1])); }
 #line 1735 "SysY.tab.cpp"
     break;
 
   case 50:
 #line 89 "SysY.y"
-                                                        { yyval = Stmt(); }
+                                                        { yyval = new Stmt(); }
 #line 1741 "SysY.tab.cpp"
     break;
 
@@ -1748,43 +1748,43 @@ yyreduce:
 
   case 52:
 #line 91 "SysY.y"
-                                                        { yyval = IfThenElse(yyvsp[-2], yyvsp[0]); }
+                                                        { yyval = new IfThenElse(*dynamic_cast<Expr*>(yyvsp[-2]), *dynamic_cast<Stmt*>(yyvsp[0])); }
 #line 1753 "SysY.tab.cpp"
     break;
 
   case 53:
 #line 92 "SysY.y"
-                                                        { yyval = IfThenElse(yyvsp[-4], yyvsp[-2], yyvsp[0], true); }
+                                                        { yyval = new IfThenElse(*dynamic_cast<Expr*>(yyvsp[-4]), *dynamic_cast<Stmt*>(yyvsp[-2]), *dynamic_cast<Stmt*>(yyvsp[0]), true); }
 #line 1759 "SysY.tab.cpp"
     break;
 
   case 54:
 #line 93 "SysY.y"
-                                                        { yyval = While(yyvsp[-2], yyvsp[0]); }
+                                                        { yyval = new While(*dynamic_cast<Expr*>(yyvsp[-2]), *dynamic_cast<Stmt*>(yyvsp[0])); }
 #line 1765 "SysY.tab.cpp"
     break;
 
   case 55:
 #line 94 "SysY.y"
-                                                        { yyval = Goto("next"); }
+                                                        { yyval = new Goto("next"); }
 #line 1771 "SysY.tab.cpp"
     break;
 
   case 56:
 #line 95 "SysY.y"
-                                                        { yyval = Goto("begin"); }
+                                                        { yyval = new Goto("begin"); }
 #line 1777 "SysY.tab.cpp"
     break;
 
   case 57:
 #line 96 "SysY.y"
-                                                        { yyval = Ret(yyvsp[-1]); }
+                                                        { yyval = new Ret(*dynamic_cast<Expr*>(yyvsp[-1])); }
 #line 1783 "SysY.tab.cpp"
     break;
 
   case 58:
 #line 97 "SysY.y"
-                                                        { yyval = Ret(Var(nullptr)); }
+                                                        { yyval = new Ret(Expr(nullptr)); }
 #line 1789 "SysY.tab.cpp"
     break;
 
@@ -1796,13 +1796,13 @@ yyreduce:
 
   case 60:
 #line 101 "SysY.y"
-                                                        { yyval = BinaryOp(yyvsp[-2], kAdd, yyvsp[0]); }
+                                                        { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kAdd, *dynamic_cast<Expr*>(yyvsp[0])); }
 #line 1801 "SysY.tab.cpp"
     break;
 
   case 61:
 #line 102 "SysY.y"
-                                                        { yyval = BinaryOp(yyvsp[-2], kSub, yyvsp[0]); }
+                                                        { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kSub, *dynamic_cast<Expr*>(yyvsp[0])); }
 #line 1807 "SysY.tab.cpp"
     break;
 
@@ -1814,19 +1814,19 @@ yyreduce:
 
   case 63:
 #line 105 "SysY.y"
-                                                        { yyval = BinaryOp(yyvsp[-2], kMul, yyvsp[0]); }
+                                                        { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kMul, *dynamic_cast<Expr*>(yyvsp[0])); }
 #line 1819 "SysY.tab.cpp"
     break;
 
   case 64:
 #line 106 "SysY.y"
-                                                        { yyval = BinaryOp(yyvsp[-2], kDiv, yyvsp[0]); }
+                                                        { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kDiv, *dynamic_cast<Expr*>(yyvsp[0])); }
 #line 1825 "SysY.tab.cpp"
     break;
 
   case 65:
 #line 107 "SysY.y"
-                                                        { yyval = BinaryOp(yyvsp[-2], kMod, yyvsp[0]); }
+                                                        { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kMod, *dynamic_cast<Expr*>(yyvsp[0])); }
 #line 1831 "SysY.tab.cpp"
     break;
 
@@ -1856,13 +1856,13 @@ yyreduce:
 
   case 70:
 #line 113 "SysY.y"
-                                                        { yyval = Call(yyvsp[-3], yyvsp[-1]); }
+                                                        { yyval = new Call(*dynamic_cast<Var*>(yyvsp[-3]), *dynamic_cast<List<Expr>*>(yyvsp[-1])); }
 #line 1861 "SysY.tab.cpp"
     break;
 
   case 71:
 #line 114 "SysY.y"
-                                                        { yyval = Call(yyvsp[-2], EmptyList()); }
+                                                        { yyval = new Call(*dynamic_cast<Var*>(yyvsp[-2]), *EmptyList<Expr>()); }
 #line 1867 "SysY.tab.cpp"
     break;
 
@@ -1874,25 +1874,25 @@ yyreduce:
 
   case 73:
 #line 116 "SysY.y"
-                                                        { yyval = BinaryOp(Imm(kInt, 0), yyvsp[0]); }
+                                                        { yyval = new BinaryOp(Imm(kInt, 0), kSub, *dynamic_cast<Expr*>(yyvsp[0])); }
 #line 1879 "SysY.tab.cpp"
     break;
 
   case 74:
 #line 117 "SysY.y"
-                                                        { yyval = Not(yyvsp[0]); }
+                                                        { yyval = new Not(*dynamic_cast<Expr*>(yyvsp[0])); }
 #line 1885 "SysY.tab.cpp"
     break;
 
   case 75:
 #line 119 "SysY.y"
-                                                        { yyval = AppendList(yyvsp[-2], yyvsp[0]); }
+                                                        { yyval = &AppendList(*dynamic_cast<List<Expr>*>(yyvsp[-2]), *dynamic_cast<List<Expr>*>(yyvsp[0])); }
 #line 1891 "SysY.tab.cpp"
     break;
 
   case 76:
 #line 120 "SysY.y"
-                                                        { yyval = List(yyvsp[0]); }
+                                                        { yyval = new List<Expr>(*dynamic_cast<Expr*>(yyvsp[0])); }
 #line 1897 "SysY.tab.cpp"
     break;
 
@@ -1904,7 +1904,7 @@ yyreduce:
 
   case 78:
 #line 125 "SysY.y"
-                                                        { yyval = BinaryOp(yyvsp[-2], kOr, yyvsp[0]); }
+                                                        { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kOr, *dynamic_cast<Expr*>(yyvsp[0])); }
 #line 1909 "SysY.tab.cpp"
     break;
 
@@ -1916,7 +1916,7 @@ yyreduce:
 
   case 80:
 #line 128 "SysY.y"
-                                                        { yyval = BinaryOp(yyvsp[-2], kAnd, yyvsp[0]); }
+                                                        { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kAnd, *dynamic_cast<Expr*>(yyvsp[0])); }
 #line 1921 "SysY.tab.cpp"
     break;
 
@@ -1928,13 +1928,13 @@ yyreduce:
 
   case 82:
 #line 131 "SysY.y"
-                                                        { yyval = BinaryOp(yyvsp[-2], kEQ, yyvsp[0]); }
+                                                        { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kEQ, *dynamic_cast<Expr*>(yyvsp[0])); }
 #line 1933 "SysY.tab.cpp"
     break;
 
   case 83:
 #line 132 "SysY.y"
-                                                        { yyval = BinaryOp(yyvsp[-2], kNEQ, yyvsp[0]); }
+                                                        { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kNEQ, *dynamic_cast<Expr*>(yyvsp[0])); }
 #line 1939 "SysY.tab.cpp"
     break;
 
@@ -1946,25 +1946,25 @@ yyreduce:
 
   case 85:
 #line 135 "SysY.y"
-                                                        { yyval = BinaryOp(yyvsp[-2], kLT, yyvsp[0]); }
+                                                        { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kLT, *dynamic_cast<Expr*>(yyvsp[0])); }
 #line 1951 "SysY.tab.cpp"
     break;
 
   case 86:
 #line 136 "SysY.y"
-                                                        { yyval = BinaryOp(yyvsp[-2], kGT, yyvsp[0]); }
+                                                        { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kGT, *dynamic_cast<Expr*>(yyvsp[0])); }
 #line 1957 "SysY.tab.cpp"
     break;
 
   case 87:
 #line 137 "SysY.y"
-                                                        { yyval = BinaryOp(yyvsp[-2], kLEQ, yyvsp[0]); }
+                                                        { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kLEQ, *dynamic_cast<Expr*>(yyvsp[0])); }
 #line 1963 "SysY.tab.cpp"
     break;
 
   case 88:
 #line 138 "SysY.y"
-                                                        { yyval = BinaryOp(yyvsp[-2], kGEQ, yyvsp[0]); }
+                                                        { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kGEQ, *dynamic_cast<Expr*>(yyvsp[0])); }
 #line 1969 "SysY.tab.cpp"
     break;
 

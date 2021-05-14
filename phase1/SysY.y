@@ -18,124 +18,124 @@
 
 Program         :CompUnit                               { TreeRoot = $1; }
 ;
-CompUnit        :CompUnit Decl                          { $$ = AppendStmt($1, $2); }
-                |CompUnit FuncDef                       { $$ = AppendStmt($1, $2); }
-                |Decl                                   { $$ = SeqStmt($1); }
-                |FuncDef                                { $$ = SeqStmt($1); }
+CompUnit        :CompUnit Decl                          { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *dynamic_cast<SeqStmt*>($2)); }
+                |CompUnit FuncDef                       { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *dynamic_cast<SeqStmt*>($2)); }
+                |Decl                                   { $$ = new SeqStmt(*dynamic_cast<Stmt*>($1)); }
+                |FuncDef                                { $$ = new SeqStmt(*dynamic_cast<Stmt*>($1)); }
 ;
 Decl            :ConstDecl                              { $$ = $1; }
                 |VarDecl                                { $$ = $1; }
 ;
 ConstDecl       :CONST INT ConstDefSeq ';'              { $$ = $3; }
 ;
-ConstDefSeq     :ConstDefSeq ',' ConstDef               { $$ = AppendStmt($1, $3); }
-                |ConstDef                               { $$ = SeqStmt($1); }
+ConstDefSeq     :ConstDefSeq ',' ConstDef               { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *dynamic_cast<SeqStmt*>($3)); }
+                |ConstDef                               { $$ = new SeqStmt(*dynamic_cast<Stmt*>($1)); }
 ;
-ConstDef        :Ident '=' ConstInitVal                 { $$ = Allocate($1, $3, true); }
+ConstDef        :Ident '=' ConstInitVal                 { $$ = new Allocate(*dynamic_cast<Var*>($1), *dynamic_cast<Expr*>($3), true); }
 ;
-ConstInitVal    :ConstExp                               { $$ = Evaluate($1); }
-                |'{' ConstInitValSeq '}'                { $$ = List($2); }
-                |'{' '}'                                { $$ = EmptyList(); }
+ConstInitVal    :ConstExp                               { $$ = $1; }
+                |'{' ConstInitValSeq '}'                { $$ = $2; }
+                |'{' '}'                                { $$ = EmptyList<Expr>(); }
 ;
-ConstInitValSeq :ConstInitValSeq ',' ConstInitVal       { $$ = AppendList($1, $3); }
-                |ConstInitVal                           { $$ = List($1); }
+ConstInitValSeq :ConstInitValSeq ',' ConstInitVal       { $$ = &AppendList(*dynamic_cast<List<Expr>*>($1), *dynamic_cast<List<Expr>*>($3)); }
+                |ConstInitVal                           { $$ = new List<Expr>(*dynamic_cast<Expr*>($1)); }
 ;
 VarDecl         :INT VarDefSeq ';'                     { $$ = $2; }
 ;
-VarDefSeq       :VarDefSeq ',' VarDef                   { $$ = AppendStmt($1, $3); }
-                |VarDef                                 { $$ = Stmt($1); }
+VarDefSeq       :VarDefSeq ',' VarDef                   { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *dynamic_cast<SeqStmt*>($3)); }
+                |VarDef                                 { $$ = new SeqStmt(*dynamic_cast<Stmt*>($1)); }
 ;
-VarDef          :Ident                                  { $$ = Allocate($1); }
-                |Ident '=' InitVal                      { $$ = Allocate($1, $3, true); } 
+VarDef          :Ident                                  { $$ = new Allocate(*dynamic_cast<Var*>($1), Expr(), false); }
+                |Ident '=' InitVal                      { $$ = new Allocate(*dynamic_cast<Var*>($1), *dynamic_cast<Expr*>($3), true); } 
 ;
-InitVal         :Exp                                    { $$ = Evaluate($1); }
-                |'{' InitValSeq '}'                     { $$ = List($2); }
-                |'{' '}'                                { $$ = EmptyList(); }
+InitVal         :Exp                                    { $$ = $1; }
+                |'{' InitValSeq '}'                     { $$ = $2; }
+                |'{' '}'                                { $$ = EmptyList<Expr>(); }
 ;
-InitValSeq      :InitValSeq ',' InitVal                 { $$ = AppendList($1, $3); }
-                |InitVal                                { $$ = List($1); }
+InitValSeq      :InitValSeq ',' InitVal                 { $$ = &AppendList(*dynamic_cast<List<Expr>*>($1), *dynamic_cast<List<Expr>*>($3)); }
+                |InitVal                                { $$ = new List<Expr>(*dynamic_cast<Expr*>($1)); }
 ;
-FuncDef         :VOID ID '(' FuncFParams ')' Block  { $$ = Func(kVoid, $2, $4, $6); }
-                |VOID ID '(' ')' Block              { $$ = Func(kVoid, $2, $5); }
-                |INT ID '(' FuncFParams ')' Block  { $$ = Func(kVoid, $2, $4, $6); }
-                |INT ID '(' ')' Block              { $$ = Func(kVoid, $2, $5); }
+FuncDef         :VOID ID '(' FuncFParams ')' Block  { $$ = new Func(kVoid, *dynamic_cast<Var*>($2), *dynamic_cast<List<Var>*>($4), *dynamic_cast<SeqStmt*>($6)); }
+                |VOID ID '(' ')' Block              { $$ = new Func(kVoid, *dynamic_cast<Var*>($2), *EmptyList<Var>(), *dynamic_cast<SeqStmt*>($5)); }
+                |INT ID '(' FuncFParams ')' Block  { $$ = new Func(kInt, *dynamic_cast<Var*>($2), *dynamic_cast<List<Var>*>($4), *dynamic_cast<SeqStmt*>($6)); }
+                |INT ID '(' ')' Block              { $$ = new Func(kInt, *dynamic_cast<Var*>($2), *EmptyList<Var>(), *dynamic_cast<SeqStmt*>($5)); }
 ;
-FuncFParams     :FuncFParams ',' FuncParam              { $$ = AppendStmt($1, $3); }
-                |FuncParam                              { $$ = SeqStmt($1); }
+FuncFParams     :FuncFParams ',' FuncParam              { $$ = &AppendList(*dynamic_cast<List<Var>*>($1), *dynamic_cast<List<Var>*>($3)); }
+                |FuncParam                              { $$ = new List<Var>(*dynamic_cast<Var*>($1)); }
 ;
 FuncParam       :INT FuncIdent                         { $$ = $2; }
 ;
-FuncIdent       :ID '[' ']' BrackertsSeq                { $$ = Array($1, $3, true); }
-                |ID BrackertsSeq                        { $$ = Array($1, $2, false); }
-                |ID '[' ']'                             { $$ = Array($1, false); }
+FuncIdent       :ID '[' ']' BrackertsSeq                { $$ = new Array(*dynamic_cast<Var*>($1), *dynamic_cast<List<Expr>*>($3), true); }
+                |ID BrackertsSeq                        { $$ = new Array(*dynamic_cast<Var*>($1), *dynamic_cast<List<Expr>*>($2), false); }
+                |ID '[' ']'                             { $$ = new Array(*dynamic_cast<Var*>($1), *EmptyList<Expr>(), true); }
                 |ID                                     { $$ = $1; }
 ;
-Ident           :ID BrackertsSeq                        { $$ = Array($1, $2, false); }
+Ident           :ID BrackertsSeq                        { $$ = new Array(*dynamic_cast<Var*>($1), *dynamic_cast<List<Expr>*>($2), false); }
                 |ID                                     { $$ = $1; }
 ;
-BrackertsSeq    :BrackertsSeq '[' Exp ']'               { $$ = AppendList($1, $3); }
-                |'[' Exp ']'                            { $$ = List($2); }
+BrackertsSeq    :BrackertsSeq '[' Exp ']'               { $$ = &AppendList(*dynamic_cast<List<Expr>*>($1), *dynamic_cast<List<Expr>*>($3)); }
+                |'[' Exp ']'                            { $$ = new List<Expr>(*dynamic_cast<Expr*>($1)); }
 ;
-Block           :'{' BlockItemSeq '}'                   { $$ = SeqStmt($2); }
+Block           :'{' BlockItemSeq '}'                   { $$ = new SeqStmt(*dynamic_cast<Stmt*>($2)); }
 ;
-BlockItemSeq    :BlockItemSeq BlockItem                 { $$ = AppendStmt($1, $2); }
-                |BlockItem                              { $$ = SeqStmt($1); }
+BlockItemSeq    :BlockItemSeq BlockItem                 { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *dynamic_cast<SeqStmt*>($2)); }
+                |BlockItem                              { $$ = new SeqStmt(*dynamic_cast<Stmt*>($1)); }
 ;
 BlockItem       :Decl                                   { $$ = $1; }
                 |Stmt                                   { $$ = $1; }
 ;
-Stmt            :Ident '=' Exp ';'                      { $$ = Store($1, $3); }
-                |Exp ';'                                { $$ = Evaluate($1); }
-                |';'                                    { $$ = Stmt(); }
+Stmt            :Ident '=' Exp ';'                      { $$ = new Store(*dynamic_cast<Var*>($1), *dynamic_cast<List<Expr>*>($3)); }
+                |Exp ';'                                { $$ = new Evaluate(*dynamic_cast<Expr*>($1)); }
+                |';'                                    { $$ = new Stmt(); }
                 |Block                                  { $$ = $1; }
-                |IF '(' Cond ')' Stmt                   { $$ = IfThenElse($3, $5); }
-                |IF '(' Cond ')' Stmt ELSE Stmt         { $$ = IfThenElse($3, $5, $7, true); }
-                |WHILE '(' Cond ')' Stmt                { $$ = While($3, $5); }
-                |BREAK ';'                              { $$ = Goto("next"); }
-                |CONTINUE ';'                           { $$ = Goto("begin"); }
-                |RET Exp ';'                            { $$ = Ret($2); }
-                |RET ';'                                { $$ = Ret(Var(nullptr)); }
+                |IF '(' Cond ')' Stmt                   { $$ = new IfThenElse(*dynamic_cast<Expr*>($3), *dynamic_cast<Stmt*>($5)); }
+                |IF '(' Cond ')' Stmt ELSE Stmt         { $$ = new IfThenElse(*dynamic_cast<Expr*>($3), *dynamic_cast<Stmt*>($5), *dynamic_cast<Stmt*>($7), true); }
+                |WHILE '(' Cond ')' Stmt                { $$ = new While(*dynamic_cast<Expr*>($3), *dynamic_cast<Stmt*>($5)); }
+                |BREAK ';'                              { $$ = new Goto("next"); }
+                |CONTINUE ';'                           { $$ = new Goto("begin"); }
+                |RET Exp ';'                            { $$ = new Ret(*dynamic_cast<Expr*>($2)); }
+                |RET ';'                                { $$ = new Ret(Expr(nullptr)); }
 ;
 ConstExp        :Exp                                    { $$ = $1; }
 ;
-Exp             :Exp '+' Term                           { $$ = BinaryOp($1, kAdd, $3); }
-                |Exp '-' Term                           { $$ = BinaryOp($1, kSub, $3); }
+Exp             :Exp '+' Term                           { $$ = new BinaryOp(*dynamic_cast<Expr*>($1), kAdd, *dynamic_cast<Expr*>($3)); }
+                |Exp '-' Term                           { $$ = new BinaryOp(*dynamic_cast<Expr*>($1), kSub, *dynamic_cast<Expr*>($3)); }
                 |Term                                   { $$ = $1; }
 ;
-Term            :Term '*' Factor                        { $$ = BinaryOp($1, kMul, $3); }
-                |Term '/' Factor                        { $$ = BinaryOp($1, kDiv, $3); }
-                |Term '%' Factor                        { $$ = BinaryOp($1, kMod, $3); }
+Term            :Term '*' Factor                        { $$ = new BinaryOp(*dynamic_cast<Expr*>($1), kMul, *dynamic_cast<Expr*>($3)); }
+                |Term '/' Factor                        { $$ = new BinaryOp(*dynamic_cast<Expr*>($1), kDiv, *dynamic_cast<Expr*>($3)); }
+                |Term '%' Factor                        { $$ = new BinaryOp(*dynamic_cast<Expr*>($1), kMod, *dynamic_cast<Expr*>($3)); }
                 |Factor                                 { $$ = $1; }
 ;
 Factor          :'(' Exp ')'                            { $$ = $2; }
                 |Ident                                  { $$ = $1; }
                 |IMM                                    { $$ = $1; }
-                |ID '(' FuncRParams ')'                 { $$ = Call($1, $3); }
-                |ID '(' ')'                             { $$ = Call($1, EmptyList()); }
+                |ID '(' FuncRParams ')'                 { $$ = new Call(*dynamic_cast<Var*>($1), *dynamic_cast<List<Expr>*>($3)); }
+                |ID '(' ')'                             { $$ = new Call(*dynamic_cast<Var*>($1), *EmptyList<Expr>()); }
                 |'+' Factor                             { $$ = $2; }
-                |'-' Factor                             { $$ = BinaryOp(Imm(kInt, 0), $2); }
-                |'!' Factor                             { $$ = Not($2); }
+                |'-' Factor                             { $$ = new BinaryOp(Imm(kInt, 0), kSub, *dynamic_cast<Expr*>($2)); }
+                |'!' Factor                             { $$ = new Not(*dynamic_cast<Expr*>($2)); }
 ;
-FuncRParams     :FuncFParams ',' Exp                    { $$ = AppendList($1, $3); }
-                |Exp                                    { $$ = List($1); }
+FuncRParams     :FuncFParams ',' Exp                    { $$ = &AppendList(*dynamic_cast<List<Expr>*>($1), *dynamic_cast<List<Expr>*>($3)); }
+                |Exp                                    { $$ = new List<Expr>(*dynamic_cast<Expr*>($1)); }
 ;
 
 Cond            :LorOp                                  { $$ = $1; }
 ;
-LorOp           :LorOp OR LandOp                        { $$ = BinaryOp($1, kOr, $3); }
+LorOp           :LorOp OR LandOp                        { $$ = new BinaryOp(*dynamic_cast<Expr*>($1), kOr, *dynamic_cast<Expr*>($3)); }
                 |LandOp                                 { $$ = $1; }
 ;
-LandOp          :LandOp AND EqOp                        { $$ = BinaryOp($1, kAnd, $3); }
+LandOp          :LandOp AND EqOp                        { $$ = new BinaryOp(*dynamic_cast<Expr*>($1), kAnd, *dynamic_cast<Expr*>($3)); }
                 |EqOp                                   { $$ = $1; }
 ;
-EqOp            :EqOp EQ RelOp                          { $$ = BinaryOp($1, kEQ, $3); }
-                |EqOp NEQ RelOp                         { $$ = BinaryOp($1, kNEQ, $3); }
+EqOp            :EqOp EQ RelOp                          { $$ = new BinaryOp(*dynamic_cast<Expr*>($1), kEQ, *dynamic_cast<Expr*>($3)); }
+                |EqOp NEQ RelOp                         { $$ = new BinaryOp(*dynamic_cast<Expr*>($1), kNEQ, *dynamic_cast<Expr*>($3)); }
                 |RelOp                                  { $$ = $1; }
 ;
-RelOp           :RelOp '<' Exp                          { $$ = BinaryOp($1, kLT, $3); }
-                |RelOp '>' Exp                          { $$ = BinaryOp($1, kGT, $3); }
-                |RelOp LEQ Exp                          { $$ = BinaryOp($1, kLEQ, $3); }
-                |RelOp GEQ Exp                          { $$ = BinaryOp($1, kGEQ, $3); }
+RelOp           :RelOp '<' Exp                          { $$ = new BinaryOp(*dynamic_cast<Expr*>($1), kLT, *dynamic_cast<Expr*>($3)); }
+                |RelOp '>' Exp                          { $$ = new BinaryOp(*dynamic_cast<Expr*>($1), kGT, *dynamic_cast<Expr*>($3)); }
+                |RelOp LEQ Exp                          { $$ = new BinaryOp(*dynamic_cast<Expr*>($1), kLEQ, *dynamic_cast<Expr*>($3)); }
+                |RelOp GEQ Exp                          { $$ = new BinaryOp(*dynamic_cast<Expr*>($1), kGEQ, *dynamic_cast<Expr*>($3)); }
                 |Exp                                    { $$ = $1; }
 ;
 %%

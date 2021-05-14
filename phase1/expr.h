@@ -9,7 +9,7 @@ class ExprNode: public Object {
 public:
     DataType dtype;
     std::string name_key;
-    virtual int get_value();
+    virtual int get_value() { return -1; }
 };
 
 class Expr: public ObjectRef {
@@ -63,6 +63,7 @@ class VarNode: public ExprNode {
 public:
     std::string name;
     virtual std::string generate_eeyore(Context&);
+    virtual std::string address() { return name_key; }
 };
 
 class Var: public Expr {
@@ -104,6 +105,7 @@ public:
     List<Expr> args;
     std::string base_var, offset_var;
     virtual std::string generate_eeyore(Context&);
+    virtual std::string address() { return base_var + "[" + offset_var + "]"; }
 };
 
 class Array: public Var {
@@ -113,6 +115,43 @@ public:
 };
 
 template<typename T>
-List<T> AppendList(List<T> a, List<T> b);
+List<T>& AppendList(List<T>& a, List<T>& b) {
+    a->args.insert(a->args.end(), b->args.begin(), b->args.end());
+    return a;
+}
+
+template<typename T>
+List<T>* EmptyList() {
+    List<T>* a = new List<T>(T());
+    (*a)->args.pop_back();
+    return a;
+}
+
+template<typename T>
+List<T>::List(std::vector<T> args) {
+    ListNode<T>* data = new ListNode<T>();
+    data->args = args;
+    data_ = std::move(data);
+}
+
+template<typename T>
+List<T>::List(T arg) {
+    ListNode<T>* data = new ListNode<T>();
+    data->args.push_back(arg);
+    data_ = std::move(data);
+}
+
+template<typename T>
+std::string ListNode<T>::generate_eeyore(Context& context) {
+    std::string text = "";
+
+    for (auto it = args.begin(); it != args.end(); ++it) {
+        T expr = *it;
+        text += expr->generate_eeyore(context);
+        name_key = expr->name_key;
+    }
+
+    return text;
+}
 
 #endif // _EXPR_H_
