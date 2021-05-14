@@ -75,7 +75,8 @@ int NotNode::get_value() {
 }
 
 std::string ImmNode::generate_eeyore(Context& context) {
-    return name_key = std::to_string(value);
+    name_key = std::to_string(value);
+    return "";
 }
 
 std::string BinaryOpNode::generate_eeyore(Context& context) {

@@ -278,7 +278,7 @@ std::string GotoNode::generate_eeyore(Context& context) {
 
 std::string RetNode::generate_eeyore(Context& context) {
     std::string text = "";
-    if (with_ret_val)
+    if (!with_ret_val)
         text += "return\n";
     else {
         text += ret_val->generate_eeyore(context);
