@@ -74,7 +74,7 @@ Ident           :ID BrackertsSeq                        { $$ = new Array(*dynami
                 |ID                                     { $$ = $1; }
 ;
 BrackertsSeq    :BrackertsSeq '[' Exp ']'               { $$ = &AppendList(*dynamic_cast<List<Expr>*>($1), *new List<Expr>(*dynamic_cast<Expr*>($3))); }
-                |'[' Exp ']'                            { $$ = new List<Expr>(*dynamic_cast<Expr*>($1)); }
+                |'[' Exp ']'                            { $$ = new List<Expr>(*dynamic_cast<Expr*>($2)); }
 ;
 Block           :'{' BlockItemSeq '}'                   { $$ = new SeqStmt(*dynamic_cast<Stmt*>($2)); }
 ;

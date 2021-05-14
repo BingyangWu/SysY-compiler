@@ -139,9 +139,9 @@ std::string generate_array_code(ArrayNode* var_container, ListNode<Expr>* init_l
 }
 
 std::string AllocateNode::generate_eeyore(Context& context) {
-    context.define_var(var, "T");
+    var->name_key = context.define_var(var, "T");
     
-    std::string text = var->generate_eeyore(context) + value->generate_eeyore(context);
+    std::string text = /* var->generate_eeyore(context) + */ value->generate_eeyore(context);
     
     if (with_init_value) {
         if (dynamic_cast<ArrayNode *>(var.operator->()) == nullptr) {

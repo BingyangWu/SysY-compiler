@@ -20,7 +20,7 @@ std::string Context::define_var(Var var, std::string var_type) {
     }
 
     if (var_type == "t")
-        var->name += entry.var_no;
+        var->name += "_" + entry.var_no;
     symbol_table_list.back().symbol_table[var->name] = entry;
 
     var->name_key = entry.var_type + entry.var_no;
