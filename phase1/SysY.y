@@ -28,7 +28,7 @@ Decl            :ConstDecl                              { $$ = $1; }
 ;
 ConstDecl       :CONST INT ConstDefSeq ';'              { $$ = $3; }
 ;
-ConstDefSeq     :ConstDefSeq ',' ConstDef               { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *dynamic_cast<SeqStmt*>($3)); }
+ConstDefSeq     :ConstDefSeq ',' ConstDef               { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *new SeqStmt(*dynamic_cast<Stmt*>($3))); }
                 |ConstDef                               { $$ = new SeqStmt(*dynamic_cast<Stmt*>($1)); }
 ;
 ConstDef        :Ident '=' ConstInitVal                 { $$ = new Allocate(*dynamic_cast<Var*>($1), *dynamic_cast<Expr*>($3), true); }
@@ -37,12 +37,12 @@ ConstInitVal    :ConstExp                               { $$ = $1; }
                 |'{' ConstInitValSeq '}'                { $$ = $2; }
                 |'{' '}'                                { $$ = EmptyList<Expr>(); }
 ;
-ConstInitValSeq :ConstInitValSeq ',' ConstInitVal       { $$ = &AppendList(*dynamic_cast<List<Expr>*>($1), *dynamic_cast<List<Expr>*>($3)); }
+ConstInitValSeq :ConstInitValSeq ',' ConstInitVal       { $$ = &AppendList(*dynamic_cast<List<Expr>*>($1), *new List<Expr>(*dynamic_cast<Expr*>($3))); }
                 |ConstInitVal                           { $$ = new List<Expr>(*dynamic_cast<Expr*>($1)); }
 ;
 VarDecl         :INT VarDefSeq ';'                     { $$ = $2; }
 ;
-VarDefSeq       :VarDefSeq ',' VarDef                   { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *dynamic_cast<SeqStmt*>($3)); }
+VarDefSeq       :VarDefSeq ',' VarDef                   { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *new SeqStmt(*dynamic_cast<Stmt*>($3))); }
                 |VarDef                                 { $$ = new SeqStmt(*dynamic_cast<Stmt*>($1)); }
 ;
 VarDef          :Ident                                  { $$ = new Allocate(*dynamic_cast<Var*>($1), Expr(), false); }
@@ -52,7 +52,7 @@ InitVal         :Exp                                    { $$ = $1; }
                 |'{' InitValSeq '}'                     { $$ = $2; }
                 |'{' '}'                                { $$ = EmptyList<Expr>(); }
 ;
-InitValSeq      :InitValSeq ',' InitVal                 { $$ = &AppendList(*dynamic_cast<List<Expr>*>($1), *dynamic_cast<List<Expr>*>($3)); }
+InitValSeq      :InitValSeq ',' InitVal                 { $$ = &AppendList(*dynamic_cast<List<Expr>*>($1), *new List<Expr>(*dynamic_cast<Expr*>($3))); }
                 |InitVal                                { $$ = new List<Expr>(*dynamic_cast<Expr*>($1)); }
 ;
 FuncDef         :VOID ID '(' FuncFParams ')' Block  { $$ = new Func(kVoid, *dynamic_cast<Var*>($2), *dynamic_cast<List<Var>*>($4), *dynamic_cast<SeqStmt*>($6)); }
@@ -60,7 +60,7 @@ FuncDef         :VOID ID '(' FuncFParams ')' Block  { $$ = new Func(kVoid, *dyna
                 |INT ID '(' FuncFParams ')' Block  { $$ = new Func(kInt, *dynamic_cast<Var*>($2), *dynamic_cast<List<Var>*>($4), *dynamic_cast<SeqStmt*>($6)); }
                 |INT ID '(' ')' Block              { $$ = new Func(kInt, *dynamic_cast<Var*>($2), *EmptyList<Var>(), *dynamic_cast<SeqStmt*>($5)); }
 ;
-FuncFParams     :FuncFParams ',' FuncParam              { $$ = &AppendList(*dynamic_cast<List<Var>*>($1), *dynamic_cast<List<Var>*>($3)); }
+FuncFParams     :FuncFParams ',' FuncParam              { $$ = &AppendList(*dynamic_cast<List<Var>*>($1), *new List<Var>(*dynamic_cast<Var*>($3))); }
                 |FuncParam                              { $$ = new List<Var>(*dynamic_cast<Var*>($1)); }
 ;
 FuncParam       :INT FuncIdent                         { $$ = $2; }
@@ -78,13 +78,13 @@ BrackertsSeq    :BrackertsSeq '[' Exp ']'               { $$ = &AppendList(*dyna
 ;
 Block           :'{' BlockItemSeq '}'                   { $$ = new SeqStmt(*dynamic_cast<Stmt*>($2)); }
 ;
-BlockItemSeq    :BlockItemSeq BlockItem                 { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *dynamic_cast<SeqStmt*>($2)); }
+BlockItemSeq    :BlockItemSeq BlockItem                 { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *new SeqStmt(*dynamic_cast<Stmt*>($2))); }
                 |BlockItem                              { $$ = new SeqStmt(*dynamic_cast<Stmt*>($1)); }
 ;
 BlockItem       :Decl                                   { $$ = $1; }
                 |Stmt                                   { $$ = $1; }
 ;
-Stmt            :Ident '=' Exp ';'                      { $$ = new Store(*dynamic_cast<Var*>($1), *dynamic_cast<List<Expr>*>($3)); }
+Stmt            :Ident '=' Exp ';'                      { $$ = new Store(*dynamic_cast<Var*>($1), *dynamic_cast<Expr*>($3)); }
                 |Exp ';'                                { $$ = new Evaluate(*dynamic_cast<Expr*>($1)); }
                 |';'                                    { $$ = new Stmt(); }
                 |Block                                  { $$ = $1; }
