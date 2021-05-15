@@ -461,7 +461,7 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  16
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   276
+#define YYLAST   261
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  37
@@ -470,7 +470,7 @@ union yyalloc
 /* YYNRULES -- Number of rules.  */
 #define YYNRULES  89
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  168
+#define YYNSTATES  167
 
 #define YYUNDEFTOK  2
 #define YYMAXUTOK   274
@@ -561,7 +561,7 @@ static const yytype_int16 yytoknum[] =
 };
 # endif
 
-#define YYPACT_NINF (-137)
+#define YYPACT_NINF (-136)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -575,23 +575,23 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-      79,    -9,    16,    20,    48,    79,  -137,  -137,  -137,  -137,
-     -11,    70,  -137,    49,    41,    39,  -137,  -137,  -137,     0,
-     242,    72,  -137,    41,   204,    77,    96,  -137,   121,     9,
-     111,    74,     2,  -137,  -137,    51,   242,   242,   242,   242,
-    -137,    78,    90,  -137,   242,  -137,   187,  -137,    98,  -137,
-      41,   207,    74,    19,   118,  -137,   143,  -137,   137,    74,
-      55,    53,  -137,  -137,  -137,  -137,   242,   242,   242,   242,
-     242,   108,  -137,  -137,    22,  -137,   190,  -137,  -137,    98,
-    -137,    74,   221,    72,   131,   132,   140,   144,   234,    41,
-    -137,  -137,   145,  -137,    95,  -137,  -137,    24,  -137,  -137,
-    -137,   148,    98,   149,  -137,    90,    90,  -137,  -137,  -137,
-    -137,   204,  -137,  -137,  -137,    38,  -137,    77,   242,   242,
-    -137,  -137,  -137,    36,   242,  -137,  -137,  -137,   170,  -137,
-    -137,   207,  -137,    72,    98,   156,   160,   162,   128,    -2,
-     157,  -137,    57,    98,  -137,   173,   242,   242,   242,   242,
-     242,   242,   242,   242,   173,  -137,   180,   162,   128,    -2,
-      -2,    98,    98,    98,    98,  -137,   173,  -137
+     120,   -11,     4,     7,    36,   120,  -136,  -136,  -136,  -136,
+      23,    41,  -136,    18,    33,    51,  -136,  -136,  -136,    -3,
+     227,    67,  -136,    33,   185,    71,    95,  -136,    68,     9,
+      86,    84,    30,  -136,  -136,    60,   227,   227,   227,   227,
+    -136,    92,   107,  -136,   227,  -136,    49,  -136,   112,  -136,
+      33,   193,    84,    38,   100,  -136,   142,  -136,   129,    84,
+     206,    66,  -136,  -136,  -136,  -136,   227,   227,   227,   227,
+     227,   125,  -136,  -136,    82,  -136,   164,  -136,  -136,   112,
+    -136,    84,    52,    67,   126,   131,   139,   143,   219,    33,
+    -136,  -136,   144,  -136,    94,  -136,  -136,    -9,  -136,  -136,
+    -136,   112,    63,  -136,   107,   107,  -136,  -136,  -136,  -136,
+     185,  -136,  -136,  -136,   105,  -136,    71,   227,   227,  -136,
+    -136,  -136,    13,   227,  -136,  -136,  -136,   227,  -136,  -136,
+     193,  -136,    67,   112,   155,   160,   177,   157,    -7,   170,
+    -136,    24,   112,  -136,   172,   227,   227,   227,   227,   227,
+     227,   227,   227,   172,  -136,   195,   177,   157,    -7,    -7,
+     112,   112,   112,   112,  -136,   172,  -136
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -609,31 +609,31 @@ static const yytype_int8 yydefact[] =
        0,     0,    25,    27,     0,    10,     0,    12,    13,    59,
       29,     0,     0,    36,     0,     0,     0,     0,     0,     0,
       50,    46,    68,    51,     0,    45,    47,     0,    32,    30,
-      71,     0,    76,     0,    67,    60,    61,    63,    64,    65,
-      41,     0,    24,    15,    17,     0,    28,    37,     0,     0,
-      55,    56,    58,     0,     0,    43,    44,    49,     0,    70,
-      26,     0,    14,    35,    89,     0,    77,    79,    81,    84,
-       0,    57,     0,    75,    16,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,    48,    52,    78,    80,    82,
-      83,    87,    88,    85,    86,    54,     0,    53
+      71,    76,     0,    67,    60,    61,    63,    64,    65,    41,
+       0,    24,    15,    17,     0,    28,    37,     0,     0,    55,
+      56,    58,     0,     0,    43,    44,    49,     0,    70,    26,
+       0,    14,    35,    89,     0,    77,    79,    81,    84,     0,
+      57,     0,    75,    16,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,    48,    52,    78,    80,    82,    83,
+      87,    88,    85,    86,    54,     0,    53
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-    -137,  -137,  -137,    42,  -137,  -137,   124,   -70,  -137,  -137,
-    -137,   163,   -43,  -137,   182,   -22,   -56,  -137,    -1,   -50,
-     -23,  -137,   100,  -136,  -137,   -19,    75,   -18,  -137,    71,
-    -137,    82,    50,     6
+    -136,  -136,  -136,    34,  -136,  -136,   150,   -72,  -136,  -136,
+    -136,   182,   -44,  -136,   202,   180,   159,  -136,    -1,   -51,
+     -21,  -136,   119,  -135,  -136,   -19,   118,   -23,  -136,   102,
+    -136,    76,    80,    26
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int16 yydefgoto[] =
 {
-      -1,     4,     5,    91,     7,    26,    27,    77,   115,     8,
+      -1,     4,     5,    91,     7,    26,    27,    77,   114,     8,
       11,    12,    47,    74,     9,    32,    33,    55,    40,    21,
-      93,    94,    95,    96,    78,   134,    42,    43,   103,   135,
-     136,   137,   138,   139
+      93,    94,    95,    96,    78,   133,    42,    43,   102,   134,
+     135,   136,   137,   138
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -641,66 +641,64 @@ static const yytype_int16 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_uint8 yytable[] =
 {
-      13,    41,    98,    73,    83,    48,   114,    53,    57,   156,
-      10,   150,   151,    28,    19,    30,    20,    61,   165,    62,
-      63,    64,    13,    58,    30,    71,    31,    48,    59,    80,
-     167,    14,    79,   152,   153,    52,    99,    97,   101,    15,
-      58,   102,     6,   111,   127,    81,   112,    17,    16,    28,
-     107,   108,   109,    66,    67,    92,   141,    79,   116,   131,
-      25,   144,   132,    41,    29,    66,    67,   133,   130,   123,
-      30,    24,    98,    34,    35,    97,    60,   155,    20,   104,
-      36,   100,    66,    67,    37,    38,    66,    67,    13,    39,
-      22,    23,    48,    92,     1,     2,     3,    56,    84,    44,
-      85,    86,    87,    88,    20,   142,    65,    66,    67,   143,
-      89,     2,    79,    34,    35,    90,    49,    50,    56,   125,
-      36,    68,    69,    70,    37,    38,    97,    66,    67,    39,
-      54,   161,   162,   163,   164,    97,   110,    66,    67,   148,
-     149,   105,   106,    51,    92,    82,    84,    97,    85,    86,
-      87,    88,    30,    92,   159,   160,   118,   119,    89,     2,
-     120,    34,    35,    90,   121,    92,    56,   124,    36,   128,
-     146,   147,    37,    38,    75,   129,    84,    39,    85,    86,
-      87,    88,   145,   154,   166,    30,    45,    18,    34,    35,
-     140,    34,    35,    90,   126,    36,    56,   158,    36,    37,
-      38,     0,    37,    38,    39,    34,    35,    39,    34,    35,
-      46,    72,    36,    76,   113,    36,    37,    38,     0,    37,
-      38,    39,    34,    35,    39,    34,    35,    46,   157,    36,
-      76,     0,    36,    37,    38,     0,    37,    38,    39,    34,
-      35,    39,     0,     0,     0,     0,    36,     0,     0,   117,
-      37,    38,    34,    35,   122,    39,     0,     0,     0,    36,
-      34,    35,     0,    37,    38,     0,     0,    36,    39,     0,
-       0,    37,    38,     0,     0,     0,    39
+      13,    41,    73,    83,   113,    48,   149,   150,    10,   155,
+      57,   126,    30,    28,    62,    63,    64,    61,   164,    14,
+      66,    67,    13,    31,    30,    71,    15,    48,   151,   152,
+     166,    80,    79,   140,     6,    52,    16,    97,    99,    17,
+      24,   101,    66,    67,   154,   106,   107,   108,    19,    28,
+      20,    58,    25,    66,    67,    92,    59,    79,   143,    58,
+     115,    22,    23,    41,    81,   132,   129,    34,    35,   122,
+      34,    35,    46,    72,    36,    97,    29,    36,    37,    38,
+     116,    37,    38,    39,   127,    60,    39,    20,    13,   128,
+      51,    48,   103,    92,    44,    66,    67,    84,    20,    85,
+      86,    87,    88,   110,   141,    54,   111,    56,   142,    89,
+       2,    79,    34,    35,    90,    49,    50,    56,   124,    36,
+      65,    66,    67,    37,    38,    97,   130,    82,    39,   131,
+     160,   161,   162,   163,    97,     1,     2,     3,    68,    69,
+      70,    66,    67,    92,    30,    84,    97,    85,    86,    87,
+      88,   117,    92,   109,    66,    67,   118,    89,     2,   119,
+      34,    35,    90,   120,    92,    56,   123,    36,   147,   148,
+     145,    37,    38,   158,   159,    84,    39,    85,    86,    87,
+      88,   144,    34,    35,   104,   105,   146,    76,   112,    36,
+      34,    35,    90,    37,    38,    56,   153,    36,    39,   165,
+      75,    37,    38,    34,    35,    45,    39,    18,    46,    53,
+      36,    34,    35,   125,    37,    38,    76,    98,    36,    39,
+     139,   156,    37,    38,    34,    35,   157,    39,     0,     0,
+       0,    36,   100,     0,     0,    37,    38,    34,    35,   121,
+      39,     0,     0,     0,    36,    34,    35,     0,    37,    38,
+       0,     0,    36,    39,     0,     0,    37,    38,     0,     0,
+       0,    39
 };
 
 static const yytype_int16 yycheck[] =
 {
-       1,    20,    58,    46,    54,    24,    76,    29,    31,   145,
-      19,    13,    14,    14,    25,    15,    27,    36,   154,    37,
-      38,    39,    23,    21,    15,    44,    26,    46,    26,    52,
-     166,    15,    51,    35,    36,    26,    59,    56,    60,    19,
-      21,    60,     0,    21,    20,    26,    24,     5,     0,    50,
-      68,    69,    70,    29,    30,    56,    20,    76,    81,    21,
-      19,   131,    24,    82,    25,    29,    30,   117,   111,    88,
-      15,    22,   128,    18,    19,    94,    25,    20,    27,    26,
-      25,    26,    29,    30,    29,    30,    29,    30,    89,    34,
-      20,    21,   111,    94,    15,    16,    17,    23,     3,    27,
-       5,     6,     7,     8,    27,   124,    28,    29,    30,   128,
-      15,    16,   131,    18,    19,    20,    20,    21,    23,    24,
-      25,    31,    32,    33,    29,    30,   145,    29,    30,    34,
-      19,   150,   151,   152,   153,   154,    28,    29,    30,    11,
-      12,    66,    67,    22,   145,    27,     3,   166,     5,     6,
-       7,     8,    15,   154,   148,   149,    25,    25,    15,    16,
-      20,    18,    19,    20,    20,   166,    23,    22,    25,    21,
-      10,     9,    29,    30,    50,    26,     3,    34,     5,     6,
-       7,     8,    26,    26,     4,    15,    23,     5,    18,    19,
-     119,    18,    19,    20,    94,    25,    23,   147,    25,    29,
-      30,    -1,    29,    30,    34,    18,    19,    34,    18,    19,
-      23,    24,    25,    23,    24,    25,    29,    30,    -1,    29,
-      30,    34,    18,    19,    34,    18,    19,    23,   146,    25,
-      23,    -1,    25,    29,    30,    -1,    29,    30,    34,    18,
-      19,    34,    -1,    -1,    -1,    -1,    25,    -1,    -1,    28,
-      29,    30,    18,    19,    20,    34,    -1,    -1,    -1,    25,
-      18,    19,    -1,    29,    30,    -1,    -1,    25,    34,    -1,
-      -1,    29,    30,    -1,    -1,    -1,    34
+       1,    20,    46,    54,    76,    24,    13,    14,    19,   144,
+      31,    20,    15,    14,    37,    38,    39,    36,   153,    15,
+      29,    30,    23,    26,    15,    44,    19,    46,    35,    36,
+     165,    52,    51,    20,     0,    26,     0,    56,    59,     5,
+      22,    60,    29,    30,    20,    68,    69,    70,    25,    50,
+      27,    21,    19,    29,    30,    56,    26,    76,   130,    21,
+      81,    20,    21,    82,    26,   116,   110,    18,    19,    88,
+      18,    19,    23,    24,    25,    94,    25,    25,    29,    30,
+      28,    29,    30,    34,    21,    25,    34,    27,    89,    26,
+      22,   110,    26,    94,    27,    29,    30,     3,    27,     5,
+       6,     7,     8,    21,   123,    19,    24,    23,   127,    15,
+      16,   130,    18,    19,    20,    20,    21,    23,    24,    25,
+      28,    29,    30,    29,    30,   144,    21,    27,    34,    24,
+     149,   150,   151,   152,   153,    15,    16,    17,    31,    32,
+      33,    29,    30,   144,    15,     3,   165,     5,     6,     7,
+       8,    25,   153,    28,    29,    30,    25,    15,    16,    20,
+      18,    19,    20,    20,   165,    23,    22,    25,    11,    12,
+      10,    29,    30,   147,   148,     3,    34,     5,     6,     7,
+       8,    26,    18,    19,    66,    67,     9,    23,    24,    25,
+      18,    19,    20,    29,    30,    23,    26,    25,    34,     4,
+      50,    29,    30,    18,    19,    23,    34,     5,    23,    29,
+      25,    18,    19,    94,    29,    30,    23,    58,    25,    34,
+     118,   145,    29,    30,    18,    19,   146,    34,    -1,    -1,
+      -1,    25,    26,    -1,    -1,    29,    30,    18,    19,    20,
+      34,    -1,    -1,    -1,    25,    18,    19,    -1,    29,    30,
+      -1,    -1,    25,    34,    -1,    -1,    29,    30,    -1,    -1,
+      -1,    34
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -717,13 +715,13 @@ static const yytype_int8 yystos[] =
       33,    62,    24,    49,    50,    43,    23,    44,    61,    62,
       57,    26,    27,    56,     3,     5,     6,     7,     8,    15,
       20,    40,    55,    57,    58,    59,    60,    62,    53,    57,
-      26,    52,    62,    65,    26,    63,    63,    64,    64,    64,
-      28,    21,    24,    24,    44,    45,    57,    28,    25,    25,
-      20,    20,    20,    62,    22,    24,    59,    20,    21,    26,
-      49,    21,    24,    56,    62,    66,    67,    68,    69,    70,
-      66,    20,    62,    62,    44,    26,    10,     9,    11,    12,
-      13,    14,    35,    36,    26,    20,    60,    68,    69,    70,
-      70,    62,    62,    62,    62,    60,     4,    60
+      26,    62,    65,    26,    63,    63,    64,    64,    64,    28,
+      21,    24,    24,    44,    45,    57,    28,    25,    25,    20,
+      20,    20,    62,    22,    24,    59,    20,    21,    26,    49,
+      21,    24,    56,    62,    66,    67,    68,    69,    70,    66,
+      20,    62,    62,    44,    26,    10,     9,    11,    12,    13,
+      14,    35,    36,    26,    20,    60,    68,    69,    70,    70,
+      62,    62,    62,    62,    60,     4,    60
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
@@ -1449,533 +1447,533 @@ yyreduce:
   case 2:
 #line 19 "SysY.y"
                                                         { TreeRoot = yyvsp[0]; }
-#line 1453 "SysY.tab.cpp"
+#line 1451 "SysY.tab.cpp"
     break;
 
   case 3:
 #line 21 "SysY.y"
                                                         { yyval = &AppendStmt(*dynamic_cast<SeqStmt*>(yyvsp[-1]), *dynamic_cast<SeqStmt*>(yyvsp[0])); }
-#line 1459 "SysY.tab.cpp"
+#line 1457 "SysY.tab.cpp"
     break;
 
   case 4:
 #line 22 "SysY.y"
                                                         { yyval = &AppendStmt(*dynamic_cast<SeqStmt*>(yyvsp[-1]), *new SeqStmt(*dynamic_cast<Stmt*>(yyvsp[0]))); }
-#line 1465 "SysY.tab.cpp"
+#line 1463 "SysY.tab.cpp"
     break;
 
   case 5:
 #line 23 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1471 "SysY.tab.cpp"
+#line 1469 "SysY.tab.cpp"
     break;
 
   case 6:
 #line 24 "SysY.y"
                                                         { yyval = new SeqStmt(*dynamic_cast<Stmt*>(yyvsp[0])); }
-#line 1477 "SysY.tab.cpp"
+#line 1475 "SysY.tab.cpp"
     break;
 
   case 7:
 #line 26 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1483 "SysY.tab.cpp"
+#line 1481 "SysY.tab.cpp"
     break;
 
   case 8:
 #line 27 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1489 "SysY.tab.cpp"
+#line 1487 "SysY.tab.cpp"
     break;
 
   case 9:
 #line 29 "SysY.y"
                                                         { yyval = yyvsp[-1]; }
-#line 1495 "SysY.tab.cpp"
+#line 1493 "SysY.tab.cpp"
     break;
 
   case 10:
 #line 31 "SysY.y"
                                                         { yyval = &AppendStmt(*dynamic_cast<SeqStmt*>(yyvsp[-2]), *new SeqStmt(*dynamic_cast<Stmt*>(yyvsp[0]))); }
-#line 1501 "SysY.tab.cpp"
+#line 1499 "SysY.tab.cpp"
     break;
 
   case 11:
 #line 32 "SysY.y"
                                                         { yyval = new SeqStmt(*dynamic_cast<Stmt*>(yyvsp[0])); }
-#line 1507 "SysY.tab.cpp"
+#line 1505 "SysY.tab.cpp"
     break;
 
   case 12:
 #line 34 "SysY.y"
                                                         { yyval = new Allocate(*dynamic_cast<Var*>(yyvsp[-2]), *dynamic_cast<Expr*>(yyvsp[0]), true); }
-#line 1513 "SysY.tab.cpp"
+#line 1511 "SysY.tab.cpp"
     break;
 
   case 13:
 #line 36 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1519 "SysY.tab.cpp"
+#line 1517 "SysY.tab.cpp"
     break;
 
   case 14:
 #line 37 "SysY.y"
                                                         { yyval = yyvsp[-1]; }
-#line 1525 "SysY.tab.cpp"
+#line 1523 "SysY.tab.cpp"
     break;
 
   case 15:
 #line 38 "SysY.y"
                                                         { yyval = EmptyList<Expr>(); }
-#line 1531 "SysY.tab.cpp"
+#line 1529 "SysY.tab.cpp"
     break;
 
   case 16:
 #line 40 "SysY.y"
                                                         { yyval = &AppendList(*dynamic_cast<List<Expr>*>(yyvsp[-2]), *new List<Expr>(*dynamic_cast<Expr*>(yyvsp[0]))); }
-#line 1537 "SysY.tab.cpp"
+#line 1535 "SysY.tab.cpp"
     break;
 
   case 17:
 #line 41 "SysY.y"
                                                         { yyval = new List<Expr>(*dynamic_cast<Expr*>(yyvsp[0])); }
-#line 1543 "SysY.tab.cpp"
+#line 1541 "SysY.tab.cpp"
     break;
 
   case 18:
 #line 43 "SysY.y"
                                                        { yyval = yyvsp[-1]; }
-#line 1549 "SysY.tab.cpp"
+#line 1547 "SysY.tab.cpp"
     break;
 
   case 19:
 #line 45 "SysY.y"
                                                         { yyval = &AppendStmt(*dynamic_cast<SeqStmt*>(yyvsp[-2]), *new SeqStmt(*dynamic_cast<Stmt*>(yyvsp[0]))); }
-#line 1555 "SysY.tab.cpp"
+#line 1553 "SysY.tab.cpp"
     break;
 
   case 20:
 #line 46 "SysY.y"
                                                         { yyval = new SeqStmt(*dynamic_cast<Stmt*>(yyvsp[0])); }
-#line 1561 "SysY.tab.cpp"
+#line 1559 "SysY.tab.cpp"
     break;
 
   case 21:
 #line 48 "SysY.y"
                                                         { yyval = new Allocate(*dynamic_cast<Var*>(yyvsp[0]), Expr(), false); }
-#line 1567 "SysY.tab.cpp"
+#line 1565 "SysY.tab.cpp"
     break;
 
   case 22:
 #line 49 "SysY.y"
                                                         { yyval = new Allocate(*dynamic_cast<Var*>(yyvsp[-2]), *dynamic_cast<Expr*>(yyvsp[0]), true); }
-#line 1573 "SysY.tab.cpp"
+#line 1571 "SysY.tab.cpp"
     break;
 
   case 23:
 #line 51 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1579 "SysY.tab.cpp"
+#line 1577 "SysY.tab.cpp"
     break;
 
   case 24:
 #line 52 "SysY.y"
                                                         { yyval = yyvsp[-1]; }
-#line 1585 "SysY.tab.cpp"
+#line 1583 "SysY.tab.cpp"
     break;
 
   case 25:
 #line 53 "SysY.y"
                                                         { yyval = EmptyList<Expr>(); }
-#line 1591 "SysY.tab.cpp"
+#line 1589 "SysY.tab.cpp"
     break;
 
   case 26:
 #line 55 "SysY.y"
                                                         { yyval = &AppendList(*dynamic_cast<List<Expr>*>(yyvsp[-2]), *new List<Expr>(*dynamic_cast<Expr*>(yyvsp[0]))); }
-#line 1597 "SysY.tab.cpp"
+#line 1595 "SysY.tab.cpp"
     break;
 
   case 27:
 #line 56 "SysY.y"
                                                         { yyval = new List<Expr>(*dynamic_cast<Expr*>(yyvsp[0])); }
-#line 1603 "SysY.tab.cpp"
+#line 1601 "SysY.tab.cpp"
     break;
 
   case 28:
 #line 58 "SysY.y"
                                                     { yyval = new Func(kVoid, *dynamic_cast<Var*>(yyvsp[-4]), *dynamic_cast<List<Var>*>(yyvsp[-2]), *dynamic_cast<SeqStmt*>(yyvsp[0])); }
-#line 1609 "SysY.tab.cpp"
+#line 1607 "SysY.tab.cpp"
     break;
 
   case 29:
 #line 59 "SysY.y"
                                                     { yyval = new Func(kVoid, *dynamic_cast<Var*>(yyvsp[-3]), *EmptyList<Var>(), *dynamic_cast<SeqStmt*>(yyvsp[0])); }
-#line 1615 "SysY.tab.cpp"
+#line 1613 "SysY.tab.cpp"
     break;
 
   case 30:
 #line 60 "SysY.y"
                                                    { yyval = new Func(kInt, *dynamic_cast<Var*>(yyvsp[-4]), *dynamic_cast<List<Var>*>(yyvsp[-2]), *dynamic_cast<SeqStmt*>(yyvsp[0])); }
-#line 1621 "SysY.tab.cpp"
+#line 1619 "SysY.tab.cpp"
     break;
 
   case 31:
 #line 61 "SysY.y"
                                                    { yyval = new Func(kInt, *dynamic_cast<Var*>(yyvsp[-3]), *EmptyList<Var>(), *dynamic_cast<SeqStmt*>(yyvsp[0])); }
-#line 1627 "SysY.tab.cpp"
+#line 1625 "SysY.tab.cpp"
     break;
 
   case 32:
 #line 63 "SysY.y"
                                                         { yyval = &AppendList(*dynamic_cast<List<Var>*>(yyvsp[-2]), *new List<Var>(*dynamic_cast<Var*>(yyvsp[0]))); }
-#line 1633 "SysY.tab.cpp"
+#line 1631 "SysY.tab.cpp"
     break;
 
   case 33:
 #line 64 "SysY.y"
                                                         { yyval = new List<Var>(*dynamic_cast<Var*>(yyvsp[0])); }
-#line 1639 "SysY.tab.cpp"
+#line 1637 "SysY.tab.cpp"
     break;
 
   case 34:
 #line 66 "SysY.y"
                                                        { yyval = yyvsp[0]; }
-#line 1645 "SysY.tab.cpp"
+#line 1643 "SysY.tab.cpp"
     break;
 
   case 35:
 #line 68 "SysY.y"
                                                         { yyval = new Array(*dynamic_cast<Var*>(yyvsp[-3]), *dynamic_cast<List<Expr>*>(yyvsp[-1]), true); }
-#line 1651 "SysY.tab.cpp"
+#line 1649 "SysY.tab.cpp"
     break;
 
   case 36:
 #line 69 "SysY.y"
                                                         { yyval = new Array(*dynamic_cast<Var*>(yyvsp[-1]), *dynamic_cast<List<Expr>*>(yyvsp[0]), false); }
-#line 1657 "SysY.tab.cpp"
+#line 1655 "SysY.tab.cpp"
     break;
 
   case 37:
 #line 70 "SysY.y"
                                                         { yyval = new Array(*dynamic_cast<Var*>(yyvsp[-2]), *EmptyList<Expr>(), true); }
-#line 1663 "SysY.tab.cpp"
+#line 1661 "SysY.tab.cpp"
     break;
 
   case 38:
 #line 71 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1669 "SysY.tab.cpp"
+#line 1667 "SysY.tab.cpp"
     break;
 
   case 39:
 #line 73 "SysY.y"
                                                         { yyval = new Array(*dynamic_cast<Var*>(yyvsp[-1]), *dynamic_cast<List<Expr>*>(yyvsp[0]), false); }
-#line 1675 "SysY.tab.cpp"
+#line 1673 "SysY.tab.cpp"
     break;
 
   case 40:
 #line 74 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1681 "SysY.tab.cpp"
+#line 1679 "SysY.tab.cpp"
     break;
 
   case 41:
 #line 76 "SysY.y"
                                                         { yyval = &AppendList(*dynamic_cast<List<Expr>*>(yyvsp[-3]), *new List<Expr>(*dynamic_cast<Expr*>(yyvsp[-1]))); }
-#line 1687 "SysY.tab.cpp"
+#line 1685 "SysY.tab.cpp"
     break;
 
   case 42:
 #line 77 "SysY.y"
                                                         { yyval = new List<Expr>(*dynamic_cast<Expr*>(yyvsp[-1])); }
-#line 1693 "SysY.tab.cpp"
+#line 1691 "SysY.tab.cpp"
     break;
 
   case 43:
 #line 79 "SysY.y"
                                                         { yyval = yyvsp[-1]; }
-#line 1699 "SysY.tab.cpp"
+#line 1697 "SysY.tab.cpp"
     break;
 
   case 44:
 #line 81 "SysY.y"
                                                         { yyval = &AppendStmt(*dynamic_cast<SeqStmt*>(yyvsp[-1]), *dynamic_cast<SeqStmt*>(yyvsp[0])); }
-#line 1705 "SysY.tab.cpp"
+#line 1703 "SysY.tab.cpp"
     break;
 
   case 45:
 #line 82 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1711 "SysY.tab.cpp"
+#line 1709 "SysY.tab.cpp"
     break;
 
   case 46:
 #line 84 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1717 "SysY.tab.cpp"
+#line 1715 "SysY.tab.cpp"
     break;
 
   case 47:
 #line 85 "SysY.y"
                                                         { yyval = new SeqStmt(*dynamic_cast<Stmt*>(yyvsp[0])); }
-#line 1723 "SysY.tab.cpp"
+#line 1721 "SysY.tab.cpp"
     break;
 
   case 48:
 #line 87 "SysY.y"
                                                         { yyval = new Store(*dynamic_cast<Var*>(yyvsp[-3]), *dynamic_cast<Expr*>(yyvsp[-1])); }
-#line 1729 "SysY.tab.cpp"
+#line 1727 "SysY.tab.cpp"
     break;
 
   case 49:
 #line 88 "SysY.y"
                                                         { yyval = new Evaluate(*dynamic_cast<Expr*>(yyvsp[-1])); }
-#line 1735 "SysY.tab.cpp"
+#line 1733 "SysY.tab.cpp"
     break;
 
   case 50:
 #line 89 "SysY.y"
                                                         { yyval = new Stmt(); }
-#line 1741 "SysY.tab.cpp"
+#line 1739 "SysY.tab.cpp"
     break;
 
   case 51:
 #line 90 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1747 "SysY.tab.cpp"
+#line 1745 "SysY.tab.cpp"
     break;
 
   case 52:
 #line 91 "SysY.y"
                                                         { yyval = new IfThenElse(*dynamic_cast<Expr*>(yyvsp[-2]), *dynamic_cast<Stmt*>(yyvsp[0])); }
-#line 1753 "SysY.tab.cpp"
+#line 1751 "SysY.tab.cpp"
     break;
 
   case 53:
 #line 92 "SysY.y"
                                                         { yyval = new IfThenElse(*dynamic_cast<Expr*>(yyvsp[-4]), *dynamic_cast<Stmt*>(yyvsp[-2]), *dynamic_cast<Stmt*>(yyvsp[0]), true); }
-#line 1759 "SysY.tab.cpp"
+#line 1757 "SysY.tab.cpp"
     break;
 
   case 54:
 #line 93 "SysY.y"
                                                         { yyval = new While(*dynamic_cast<Expr*>(yyvsp[-2]), *dynamic_cast<Stmt*>(yyvsp[0])); }
-#line 1765 "SysY.tab.cpp"
+#line 1763 "SysY.tab.cpp"
     break;
 
   case 55:
 #line 94 "SysY.y"
                                                         { yyval = new Goto("next"); }
-#line 1771 "SysY.tab.cpp"
+#line 1769 "SysY.tab.cpp"
     break;
 
   case 56:
 #line 95 "SysY.y"
                                                         { yyval = new Goto("begin"); }
-#line 1777 "SysY.tab.cpp"
+#line 1775 "SysY.tab.cpp"
     break;
 
   case 57:
 #line 96 "SysY.y"
                                                         { yyval = new Ret(*dynamic_cast<Expr*>(yyvsp[-1]), true); }
-#line 1783 "SysY.tab.cpp"
+#line 1781 "SysY.tab.cpp"
     break;
 
   case 58:
 #line 97 "SysY.y"
                                                         { yyval = new Ret(Expr(), false); }
-#line 1789 "SysY.tab.cpp"
+#line 1787 "SysY.tab.cpp"
     break;
 
   case 59:
 #line 99 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1795 "SysY.tab.cpp"
+#line 1793 "SysY.tab.cpp"
     break;
 
   case 60:
 #line 101 "SysY.y"
                                                         { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kAdd, *dynamic_cast<Expr*>(yyvsp[0])); }
-#line 1801 "SysY.tab.cpp"
+#line 1799 "SysY.tab.cpp"
     break;
 
   case 61:
 #line 102 "SysY.y"
                                                         { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kSub, *dynamic_cast<Expr*>(yyvsp[0])); }
-#line 1807 "SysY.tab.cpp"
+#line 1805 "SysY.tab.cpp"
     break;
 
   case 62:
 #line 103 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1813 "SysY.tab.cpp"
+#line 1811 "SysY.tab.cpp"
     break;
 
   case 63:
 #line 105 "SysY.y"
                                                         { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kMul, *dynamic_cast<Expr*>(yyvsp[0])); }
-#line 1819 "SysY.tab.cpp"
+#line 1817 "SysY.tab.cpp"
     break;
 
   case 64:
 #line 106 "SysY.y"
                                                         { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kDiv, *dynamic_cast<Expr*>(yyvsp[0])); }
-#line 1825 "SysY.tab.cpp"
+#line 1823 "SysY.tab.cpp"
     break;
 
   case 65:
 #line 107 "SysY.y"
                                                         { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kMod, *dynamic_cast<Expr*>(yyvsp[0])); }
-#line 1831 "SysY.tab.cpp"
+#line 1829 "SysY.tab.cpp"
     break;
 
   case 66:
 #line 108 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1837 "SysY.tab.cpp"
+#line 1835 "SysY.tab.cpp"
     break;
 
   case 67:
 #line 110 "SysY.y"
                                                         { yyval = yyvsp[-1]; }
-#line 1843 "SysY.tab.cpp"
+#line 1841 "SysY.tab.cpp"
     break;
 
   case 68:
 #line 111 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1849 "SysY.tab.cpp"
+#line 1847 "SysY.tab.cpp"
     break;
 
   case 69:
 #line 112 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1855 "SysY.tab.cpp"
+#line 1853 "SysY.tab.cpp"
     break;
 
   case 70:
 #line 113 "SysY.y"
                                                         { yyval = new Call(*dynamic_cast<Var*>(yyvsp[-3]), *dynamic_cast<List<Expr>*>(yyvsp[-1])); }
-#line 1861 "SysY.tab.cpp"
+#line 1859 "SysY.tab.cpp"
     break;
 
   case 71:
 #line 114 "SysY.y"
                                                         { yyval = new Call(*dynamic_cast<Var*>(yyvsp[-2]), *EmptyList<Expr>()); }
-#line 1867 "SysY.tab.cpp"
+#line 1865 "SysY.tab.cpp"
     break;
 
   case 72:
 #line 115 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1873 "SysY.tab.cpp"
+#line 1871 "SysY.tab.cpp"
     break;
 
   case 73:
 #line 116 "SysY.y"
                                                         { yyval = new BinaryOp(Imm(kInt, 0), kSub, *dynamic_cast<Expr*>(yyvsp[0])); }
-#line 1879 "SysY.tab.cpp"
+#line 1877 "SysY.tab.cpp"
     break;
 
   case 74:
 #line 117 "SysY.y"
                                                         { yyval = new Not(*dynamic_cast<Expr*>(yyvsp[0])); }
-#line 1885 "SysY.tab.cpp"
+#line 1883 "SysY.tab.cpp"
     break;
 
   case 75:
 #line 119 "SysY.y"
                                                         { yyval = &AppendList(*dynamic_cast<List<Expr>*>(yyvsp[-2]), *new List<Expr>(*dynamic_cast<Expr*>(yyvsp[0]))); }
-#line 1891 "SysY.tab.cpp"
+#line 1889 "SysY.tab.cpp"
     break;
 
   case 76:
 #line 120 "SysY.y"
                                                         { yyval = new List<Expr>(*dynamic_cast<Expr*>(yyvsp[0])); }
-#line 1897 "SysY.tab.cpp"
+#line 1895 "SysY.tab.cpp"
     break;
 
   case 77:
 #line 123 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1903 "SysY.tab.cpp"
+#line 1901 "SysY.tab.cpp"
     break;
 
   case 78:
 #line 125 "SysY.y"
                                                         { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kOr, *dynamic_cast<Expr*>(yyvsp[0])); }
-#line 1909 "SysY.tab.cpp"
+#line 1907 "SysY.tab.cpp"
     break;
 
   case 79:
 #line 126 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1915 "SysY.tab.cpp"
+#line 1913 "SysY.tab.cpp"
     break;
 
   case 80:
 #line 128 "SysY.y"
                                                         { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kAnd, *dynamic_cast<Expr*>(yyvsp[0])); }
-#line 1921 "SysY.tab.cpp"
+#line 1919 "SysY.tab.cpp"
     break;
 
   case 81:
 #line 129 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1927 "SysY.tab.cpp"
+#line 1925 "SysY.tab.cpp"
     break;
 
   case 82:
 #line 131 "SysY.y"
                                                         { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kEQ, *dynamic_cast<Expr*>(yyvsp[0])); }
-#line 1933 "SysY.tab.cpp"
+#line 1931 "SysY.tab.cpp"
     break;
 
   case 83:
 #line 132 "SysY.y"
                                                         { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kNEQ, *dynamic_cast<Expr*>(yyvsp[0])); }
-#line 1939 "SysY.tab.cpp"
+#line 1937 "SysY.tab.cpp"
     break;
 
   case 84:
 #line 133 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1945 "SysY.tab.cpp"
+#line 1943 "SysY.tab.cpp"
     break;
 
   case 85:
 #line 135 "SysY.y"
                                                         { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kLT, *dynamic_cast<Expr*>(yyvsp[0])); }
-#line 1951 "SysY.tab.cpp"
+#line 1949 "SysY.tab.cpp"
     break;
 
   case 86:
 #line 136 "SysY.y"
                                                         { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kGT, *dynamic_cast<Expr*>(yyvsp[0])); }
-#line 1957 "SysY.tab.cpp"
+#line 1955 "SysY.tab.cpp"
     break;
 
   case 87:
 #line 137 "SysY.y"
                                                         { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kLEQ, *dynamic_cast<Expr*>(yyvsp[0])); }
-#line 1963 "SysY.tab.cpp"
+#line 1961 "SysY.tab.cpp"
     break;
 
   case 88:
 #line 138 "SysY.y"
                                                         { yyval = new BinaryOp(*dynamic_cast<Expr*>(yyvsp[-2]), kGEQ, *dynamic_cast<Expr*>(yyvsp[0])); }
-#line 1969 "SysY.tab.cpp"
+#line 1967 "SysY.tab.cpp"
     break;
 
   case 89:
 #line 139 "SysY.y"
                                                         { yyval = yyvsp[0]; }
-#line 1975 "SysY.tab.cpp"
+#line 1973 "SysY.tab.cpp"
     break;
 
 
-#line 1979 "SysY.tab.cpp"
+#line 1977 "SysY.tab.cpp"
 
       default: break;
     }

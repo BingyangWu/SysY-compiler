@@ -147,7 +147,7 @@ std::string CallNode::generate_eeyore(Context& context) {
     args->generate_eeyore(context);
 
     for (auto it = args->args.begin(); it != args->args.end(); ++it) {
-        text += "param " + args->name_key + "\n";
+        text += "param " + (*it)->name_key + "\n";
     }
 
     if (context.has_ret_value(func->name)) {

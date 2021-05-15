@@ -116,7 +116,7 @@ Factor          :'(' Exp ')'                            { $$ = $2; }
                 |'-' Factor                             { $$ = new BinaryOp(Imm(kInt, 0), kSub, *dynamic_cast<Expr*>($2)); }
                 |'!' Factor                             { $$ = new Not(*dynamic_cast<Expr*>($2)); }
 ;
-FuncRParams     :FuncFParams ',' Exp                    { $$ = &AppendList(*dynamic_cast<List<Expr>*>($1), *new List<Expr>(*dynamic_cast<Expr*>($3))); }
+FuncRParams     :FuncRParams ',' Exp                    { $$ = &AppendList(*dynamic_cast<List<Expr>*>($1), *new List<Expr>(*dynamic_cast<Expr*>($3))); }
                 |Exp                                    { $$ = new List<Expr>(*dynamic_cast<Expr*>($1)); }
 ;
 
