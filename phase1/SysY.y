@@ -76,13 +76,13 @@ Ident           :ID BrackertsSeq                        { $$ = new Array(*dynami
 BrackertsSeq    :BrackertsSeq '[' Exp ']'               { $$ = &AppendList(*dynamic_cast<List<Expr>*>($1), *new List<Expr>(*dynamic_cast<Expr*>($3))); }
                 |'[' Exp ']'                            { $$ = new List<Expr>(*dynamic_cast<Expr*>($2)); }
 ;
-Block           :'{' BlockItemSeq '}'                   { $$ = new SeqStmt(*dynamic_cast<Stmt*>($2)); }
+Block           :'{' BlockItemSeq '}'                   { $$ = $2; }
 ;
-BlockItemSeq    :BlockItemSeq BlockItem                 { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *new SeqStmt(*dynamic_cast<Stmt*>($2))); }
-                |BlockItem                              { $$ = new SeqStmt(*dynamic_cast<Stmt*>($1)); }
+BlockItemSeq    :BlockItemSeq BlockItem                 { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *dynamic_cast<SeqStmt*>($2)); }
+                |BlockItem                              { $$ = $1; }
 ;
 BlockItem       :Decl                                   { $$ = $1; }
-                |Stmt                                   { $$ = $1; }
+                |Stmt                                   { $$ = new SeqStmt(*dynamic_cast<Stmt*>($1)); }
 ;
 Stmt            :Ident '=' Exp ';'                      { $$ = new Store(*dynamic_cast<Var*>($1), *dynamic_cast<Expr*>($3)); }
                 |Exp ';'                                { $$ = new Evaluate(*dynamic_cast<Expr*>($1)); }

@@ -91,7 +91,7 @@ int prod(std::vector<int>& v, std::vector<int>& limit) {
     return bias;
 }
 
-void step_one(std::vector<int>& v, std::vector<int>& limit, int dim) {
+int step_one(std::vector<int>& v, std::vector<int>& limit, int dim) {
     ++v[dim];
     for (int i = dim + 1; i < v.size(); ++i) {
         v[i] = 0;
@@ -103,36 +103,39 @@ void step_one(std::vector<int>& v, std::vector<int>& limit, int dim) {
         cnt = v[i] / limit[i];
         v[i] %= limit[i];
     }
+    return cnt;
 }
 
-std::string generate_array_code(ArrayNode* var_container, ListNode<Expr>* init_list, std::vector<int> pos, int current_dim, Context& context) {
+std::string generate_array_code(ArrayNode* var_container, ListNode<Expr>* init_list, std::vector<int>& pos, int current_dim, Context& context, int& carry_bit) {
     std::string text = "";
     std::vector<int>& dims = context.array_dims[var_container->name_key];
+    std::vector<int> end_pos = pos;
+    if (current_dim - 1 >= 0) step_one(end_pos, dims, current_dim-1);
 
     for (auto it = init_list->args.begin(); it != init_list->args.end(); ++it) {
         Expr expr = *it;
+        ListNode<Expr>* nested_list = dynamic_cast<ListNode<Expr>*>(expr.operator->());
         
-        if (dynamic_cast<ListNode<Expr>*>(expr.operator->()) == nullptr) {
+        if (nested_list == nullptr) {
             text += var_container->name_key + "[" + std::to_string(prod(pos, dims)) + "] = " + expr->name_key + "\n";
-            step_one(pos, dims, pos.size() - 1);
+            carry_bit = step_one(pos, dims, pos.size() - 1);
         }
         else {
-            std::vector<int> next_pos = pos;
-            step_one(next_pos, dims, current_dim);
+            // std::vector<int> next_pos = pos;
+            // step_one(next_pos, dims, current_dim);
 
-            step_one(pos, dims, pos.size() - 1);
-            while (pos != next_pos) {
-                text += var_container->name_key + "[" + std::to_string(prod(pos, dims)) + "] = 0\n";
-                step_one(pos, dims, pos.size() - 1);
-            }
+            // while (pos != next_pos) {
+            //     text += var_container->name_key + "[" + std::to_string(prod(pos, dims)) + "] = 0\n";
+            //     carry_bit = step_one(pos, dims, pos.size() - 1);
+            // }
 
-            text += generate_array_code(var_container, init_list, pos, current_dim + 1, context);
+            text += generate_array_code(var_container, nested_list, pos, current_dim + 1, context, carry_bit);
         }
     }
 
-    while (pos[0] != dims[0]) {
+    while (pos != end_pos || (carry_bit != 1 && current_dim == 0)) {
         text += var_container->name_key + "[" + std::to_string(prod(pos, dims)) + "] = 0\n";
-        step_one(pos, dims, pos.size() - 1);
+        carry_bit = step_one(pos, dims, pos.size() - 1);
     }
 
     return text;
@@ -155,7 +158,8 @@ std::string AllocateNode::generate_eeyore(Context& context) {
                 pos.push_back(0);
             }
 
-            text += generate_array_code(var_container, init_list, pos, 0, context);
+            int carry_bit = 0;
+            text += generate_array_code(var_container, init_list, pos, 0, context, carry_bit);
         }
     }
 
