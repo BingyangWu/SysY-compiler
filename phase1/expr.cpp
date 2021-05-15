@@ -178,7 +178,7 @@ std::string ArrayNode::generate_eeyore(Context& context) {
     for (int i = 0; i < dims.size(); ++i) {
         offset_var = context.define_var(Var(kInt, "array_"+name+"_"+std::to_string(i)), "t");
         std::string temp_var;
-        args->args[i]->generate_eeyore(context);
+        text += args->args[i]->generate_eeyore(context);
 
         if (i > 0) {
             temp_var = context.define_var(Var(kInt, "temp_array_"+name+"_"+std::to_string(i)), "t");
