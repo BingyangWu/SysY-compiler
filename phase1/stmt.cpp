@@ -212,7 +212,7 @@ std::string IfThenElseNode::generate_eeyore(Context& context) {
 
     // context.next_label.pop_back();
 
-    text += "if " + condition->name_key + " == 1 goto " + label_true + "\n";
+    text += "if " + condition->name_key + " > 0 goto " + label_true + "\n";
     // text += label_branch + ":\n";
     text += "goto " + label_false + "\n";
 
@@ -256,7 +256,7 @@ std::string WhileNode::generate_eeyore(Context& context) {
     text += condition->generate_eeyore(context);
     // context.next_label.pop_back();
 
-    text += "if " + condition->name_key + " == 1 goto " + label_while_begin + "\n";
+    text += "if " + condition->name_key + " > 0 goto " + label_while_begin + "\n";
 
     text += label_next + ":\n";
 
