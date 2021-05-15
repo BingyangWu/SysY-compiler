@@ -8,11 +8,12 @@ Store::Store(Var lval, Expr rval) {
     data_ = std::move(data);
 }
 
-Allocate::Allocate(Var var, Expr value=Expr(), bool with_init_value=false) {
+Allocate::Allocate(Var var, Expr value=Expr(), bool with_init_value=false, DataType dtype=kInt) {
     AllocateNode* data = new AllocateNode();
     data->var = var;
     data->value = value;
     data->with_init_value = with_init_value;
+    data->dtype = dtype;
     data_ = std::move(data);
 }
 
@@ -140,7 +141,10 @@ std::string AllocateNode::generate_eeyore(Context& context) {
     
     if (with_init_value) {
         if (dynamic_cast<ArrayNode *>(var.operator->()) == nullptr) {
-            text += var->name_key + " = " + value->name_key + "\n";
+            if (dtype.code() == kInt)
+                text += var->name_key + " = " + value->name_key + "\n";
+            else 
+                context.set_var(var->name, value->get_value(context));
         } else {
             ArrayNode* var_container = dynamic_cast<ArrayNode *>(var.operator->());
             ListNode<Expr>* init_list = dynamic_cast<ListNode<Expr> *>(value.operator->());

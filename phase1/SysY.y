@@ -31,7 +31,7 @@ ConstDecl       :CONST INT ConstDefSeq ';'              { $$ = $3; }
 ConstDefSeq     :ConstDefSeq ',' ConstDef               { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *new SeqStmt(*dynamic_cast<Stmt*>($3))); }
                 |ConstDef                               { $$ = new SeqStmt(*dynamic_cast<Stmt*>($1)); }
 ;
-ConstDef        :Ident '=' ConstInitVal                 { $$ = new Allocate(*dynamic_cast<Var*>($1), *dynamic_cast<Expr*>($3), true); }
+ConstDef        :Ident '=' ConstInitVal                 { $$ = new Allocate(*dynamic_cast<Var*>($1), *dynamic_cast<Expr*>($3), true, kConst); }
 ;
 ConstInitVal    :ConstExp                               { $$ = $1; }
                 |'{' ConstInitValSeq '}'                { $$ = $2; }
@@ -45,8 +45,8 @@ VarDecl         :INT VarDefSeq ';'                     { $$ = $2; }
 VarDefSeq       :VarDefSeq ',' VarDef                   { $$ = &AppendStmt(*dynamic_cast<SeqStmt*>($1), *new SeqStmt(*dynamic_cast<Stmt*>($3))); }
                 |VarDef                                 { $$ = new SeqStmt(*dynamic_cast<Stmt*>($1)); }
 ;
-VarDef          :Ident                                  { $$ = new Allocate(*dynamic_cast<Var*>($1), Expr(), false); }
-                |Ident '=' InitVal                      { $$ = new Allocate(*dynamic_cast<Var*>($1), *dynamic_cast<Expr*>($3), true); } 
+VarDef          :Ident                                  { $$ = new Allocate(*dynamic_cast<Var*>($1), Expr(), false, kInt); }
+                |Ident '=' InitVal                      { $$ = new Allocate(*dynamic_cast<Var*>($1), *dynamic_cast<Expr*>($3), true, kInt); } 
 ;
 InitVal         :Exp                                    { $$ = $1; }
                 |'{' InitValSeq '}'                     { $$ = $2; }

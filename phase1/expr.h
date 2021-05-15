@@ -9,7 +9,7 @@ class ExprNode: public Object {
 public:
     DataType dtype;
     std::string name_key;
-    virtual int get_value() { return -1; }
+    virtual int get_value(Context& context) { return -1; }
 };
 
 class Expr: public ObjectRef {
@@ -21,7 +21,7 @@ class ImmNode: public ExprNode {
 public:
     int value;
     virtual std::string generate_eeyore(Context&);
-    virtual int get_value() {
+    virtual int get_value(Context& context) {
         return value;
     }
 };
@@ -37,7 +37,7 @@ public:
     BinaryOpType dtype;
     Expr a, b;
     virtual std::string generate_eeyore(Context&);
-    virtual int get_value();
+    virtual int get_value(Context& context);
 };
 
 class BinaryOp: public Expr {
@@ -50,7 +50,7 @@ class NotNode: public ExprNode {
 public:
     Expr a;
     virtual std::string generate_eeyore(Context&);
-    virtual int get_value();
+    virtual int get_value(Context& context);
 };
 
 class Not: public Expr {
@@ -64,6 +64,7 @@ public:
     std::string name;
     virtual std::string generate_eeyore(Context&);
     virtual std::string address() { return name_key; }
+    virtual int get_value(Context& context);
 };
 
 class Var: public Expr {

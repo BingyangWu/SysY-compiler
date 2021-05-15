@@ -49,29 +49,33 @@ Array::Array(Var id, List<Expr> args, bool unknown_dim) {
     data_ = std::move(data);
 }
 
-int BinaryOpNode::get_value() {
+int BinaryOpNode::get_value(Context& context) {
     switch (dtype.code()) {
-        case kAdd: return a->get_value() + b->get_value();
-        case kSub: return a->get_value() - b->get_value();
-        case kMul: return a->get_value() * b->get_value();
-        case kDiv: return a->get_value() / b->get_value();
-        case kMod: return a->get_value() % b->get_value();
-        case kEQ: return a->get_value() == b->get_value();
-        case kNEQ: return a->get_value() != b->get_value();
-        case kLT: return a->get_value() < b->get_value();
-        case kGT: return a->get_value() > b->get_value();
-        case kLEQ: return a->get_value() <= b->get_value();
-        case kGEQ: return a->get_value() >= b->get_value();
-        case kAnd: return a->get_value() && b->get_value();
-        case kOr: return a->get_value() || b->get_value();
+        case kAdd: return a->get_value(context) + b->get_value(context);
+        case kSub: return a->get_value(context) - b->get_value(context);
+        case kMul: return a->get_value(context) * b->get_value(context);
+        case kDiv: return a->get_value(context) / b->get_value(context);
+        case kMod: return a->get_value(context) % b->get_value(context);
+        case kEQ: return a->get_value(context) == b->get_value(context);
+        case kNEQ: return a->get_value(context) != b->get_value(context);
+        case kLT: return a->get_value(context) < b->get_value(context);
+        case kGT: return a->get_value(context) > b->get_value(context);
+        case kLEQ: return a->get_value(context) <= b->get_value(context);
+        case kGEQ: return a->get_value(context) >= b->get_value(context);
+        case kAnd: return a->get_value(context) && b->get_value(context);
+        case kOr: return a->get_value(context) || b->get_value(context);
     }
     return -1;
 }
 
-int NotNode::get_value() {
-    if (a->get_value() > 0)
+int NotNode::get_value(Context& context) {
+    if (a->get_value(context) > 0)
         return 0;
     else return 1;
+}
+
+int VarNode::get_value(Context& context) {
+    return std::stoi(context.find_var(name));
 }
 
 std::string ImmNode::generate_eeyore(Context& context) {

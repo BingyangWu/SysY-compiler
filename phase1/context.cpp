@@ -3,6 +3,8 @@
 std::string Context::define_var(Var var, std::string var_type) {
     SymbolTableEntry entry;
     std::vector<int> dims;
+    entry.is_set = false;
+    entry.value = -1;
     entry.var_type = var_type;
     entry.var_no = std::to_string(type_counter[var_type]++);
     
@@ -11,7 +13,7 @@ std::string Context::define_var(Var var, std::string var_type) {
         entry.width = 4;
         for (auto it = data->args->args.begin(); it != data->args->args.end(); ++it) {
             Expr expr = *it;
-            int dim = expr->get_value();
+            int dim = expr->get_value(*this);
             dims.push_back(dim);
             entry.width *= dim;
         }
@@ -31,10 +33,24 @@ std::string Context::define_var(Var var, std::string var_type) {
 
 std::string Context::find_var(std::string var_name) {
     for (auto it = symbol_table_list.rbegin(); it != symbol_table_list.rend(); ++it) {
-        if (it->symbol_table.find(var_name) != it->symbol_table.end())
-            return it->symbol_table[var_name].var_type + it->symbol_table[var_name].var_no;
+        if (it->symbol_table.find(var_name) != it->symbol_table.end()) {
+            SymbolTableEntry& entry = it->symbol_table[var_name];
+            if (entry.is_set)
+                return std::to_string(entry.value);
+            else
+                return entry.var_type + entry.var_no;
+        }
     }
     return "error!";
+}
+
+void Context::set_var(std::string var_name, int value) {
+    for (auto it = symbol_table_list.rbegin(); it != symbol_table_list.rend(); ++it) {
+        if (it->symbol_table.find(var_name) != it->symbol_table.end()) {
+            it->symbol_table[var_name].value = value;
+            it->symbol_table[var_name].is_set = true;
+        }
+    }
 }
 
 void Context::define_func(Var var, DataType ret_type) {

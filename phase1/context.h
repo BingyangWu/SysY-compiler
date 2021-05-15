@@ -8,7 +8,8 @@
 class SymbolTableEntry {
 public:
     std::string var_type, var_no;
-    int width;
+    int width, value;
+    bool is_set;
 };
 
 class SymbolTable {
@@ -20,6 +21,8 @@ public:
 
         for (std::map<std::string, SymbolTableEntry>::iterator it = symbol_table.begin(); it != symbol_table.end(); ++it) {
             SymbolTableEntry& entry = it->second;
+            if (entry.is_set)
+                continue;
             std::string var_name = it->first;
             std::string define_var = "var " + (entry.width ? std::to_string(entry.width)+" " : "") + entry.var_type + entry.var_no + " // " + var_name + "\n";
             text += define_var;
@@ -52,6 +55,7 @@ public:
 
     std::string define_var(Var var, std::string var_type);
     std::string find_var(std::string var_name);
+    void set_var(std::string var_name, int value);
     void define_func(Var var, DataType ret_type);
     bool has_ret_value(std::string func_name);
     std::string new_label();

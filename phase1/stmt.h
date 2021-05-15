@@ -43,12 +43,13 @@ public:
     Var var;
     Expr value;
     bool with_init_value;
+    DataType dtype;
     virtual std::string generate_eeyore(Context&);
 };
 
 class Allocate: public Stmt {
 public:
-    Allocate(Var var, Expr value, bool with_init_value);
+    Allocate(Var var, Expr value, bool with_init_value, DataType dtype);
     DEFINE_OBJECT_REF_METHODS(Allocate, Stmt, AllocateNode);
 };
 
