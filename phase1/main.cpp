@@ -10,6 +10,6 @@ int main(int argc, char* argv[]) {
 
     Context context;
     std::string text = (*TreeRoot)->generate_eeyore(context);
-    std::cout << text;
+    std::cout << context.variable_definition_code << text;
     return 0;
 }

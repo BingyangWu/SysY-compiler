@@ -41,7 +41,10 @@ public:
     std::vector<std::string> next_label;
     std::vector<std::string> begin_label;
 
+    std::string variable_definition_code;
+
     Context(): label_counter(0) {
+        variable_definition_code = "";
         type_counter["T"] = 0;
         type_counter["t"] = 0;
         type_counter["p"] = 0;

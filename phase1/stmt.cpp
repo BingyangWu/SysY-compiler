@@ -174,7 +174,9 @@ std::string FuncNode::generate_eeyore(Context& context) {
 
     std::string func_name = "f_" + name->name;
     std::string text = func_name + " [" + std::to_string(args_num) + "]\n";
-    text += body->generate_eeyore(context);
+    std::string body_text = body->generate_eeyore(context);
+    text += context.variable_definition_code + body_text;
+    context.variable_definition_code = "";
     text += "end " + func_name + "\n";
 
     context.symbol_table_list.pop_back();
@@ -190,7 +192,7 @@ std::string SeqStmtNode::generate_eeyore(Context& context) {
         text += stmt->generate_eeyore(context);
     }
 
-    text = context.symbol_table_list.back().generate_eeyore() + text;
+    context.variable_definition_code += context.symbol_table_list.back().generate_eeyore();
 
     context.symbol_table_list.pop_back();
     return text;
@@ -214,19 +216,19 @@ std::string IfThenElseNode::generate_eeyore(Context& context) {
     // text += label_branch + ":\n";
     text += "goto " + label_false + "\n";
 
-    context.next_label.push_back(label_next);
+    // context.next_label.push_back(label_next);
     
     text += label_true + ":\n";
     text += then_case->generate_eeyore(context);
-    text += "goto " + label_next + "\n";
+    if (with_else)
+        text += "goto " + label_next + "\n";
 
     text += label_false + ":\n";
     if (with_else) {
         else_case->generate_eeyore(context);
+        text += label_next + ":\n";
     }
-    context.next_label.pop_back();
-
-    text += label_next + ":\n";
+    // context.next_label.pop_back();
 
     return text;
 }
