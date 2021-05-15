@@ -175,9 +175,15 @@ std::string FuncNode::generate_eeyore(Context& context) {
 
     std::string func_name = "f_" + name->name;
     std::string text = func_name + " [" + std::to_string(args_num) + "]\n";
+    
     std::string body_text = body->generate_eeyore(context);
+    
     text += context.variable_definition_code + body_text;
     context.variable_definition_code = "";
+
+    if (ret_type.code() == kVoid)
+        text += "return\n";
+
     text += "end " + func_name + "\n";
 
     context.symbol_table_list.pop_back();
