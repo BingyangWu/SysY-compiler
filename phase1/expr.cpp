@@ -124,20 +124,10 @@ std::string BinaryOpNode::generate_eeyore(Context& context) {
 
 std::string NotNode::generate_eeyore(Context& context) {
     std::string text = "";
-    std::string label_true, label_next;
     name_key = context.define_var(Var(kInt, "!"), "t");
-
-    label_true = context.new_label();
-    label_next = context.new_label();
 
     text += a->generate_eeyore(context);
     text += name_key + " = !" + a->name_key + "\n";
-    // text += "if " + a->name_key + " > 0 goto " + label_true + "\n";
-    // text += name_key + " = 1\n";
-    // text += "goto " + label_next + "\n";
-    // text += label_true + ":\n";
-    // text += name_key + " = 0\n";
-    // text += label_next + ":\n";
 
     return text;
 }
@@ -176,7 +166,8 @@ std::string ArrayNode::generate_eeyore(Context& context) {
 
     text += last_var + " = 0\n";
     
-    for (int i = 0; i < dims.size(); ++i) {
+    int i;
+    for (i = 0; i < args->args.size(); ++i) {
         offset_var = context.define_var(Var(kInt, "array_"+name+"_"+std::to_string(i)), "t");
         std::string temp_var;
         text += args->args[i]->generate_eeyore(context);
@@ -191,8 +182,12 @@ std::string ArrayNode::generate_eeyore(Context& context) {
         last_var = offset_var;
     }
 
+    int width = 4;
+    for (; i < dims.size(); ++i)
+        width *= dims[i];
+
     offset_var = context.define_var(Var(kInt, "array_"+name+"_offset_var"), "t");
-    text += offset_var + " = " + last_var + " * 4\n";
+    text += offset_var + " = " + last_var + " * " + std::to_string(width) + "\n";
     name_key = context.define_var(Var(kInt, "array_rvalue_"+name), "t");
     text += name_key + " = " + base_var + "[" + offset_var + "]\n";
     return text;

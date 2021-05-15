@@ -136,7 +136,7 @@ std::string generate_array_code(ArrayNode* var_container, ListNode<Expr>* init_l
 std::string AllocateNode::generate_eeyore(Context& context) {
     var->name_key = context.define_var(var, "T");
     
-    std::string text = /* var->generate_eeyore(context) + */ value->generate_eeyore(context);
+    std::string text = value->generate_eeyore(context);
     
     if (with_init_value) {
         if (dynamic_cast<ArrayNode *>(var.operator->()) == nullptr) {
@@ -207,23 +207,15 @@ std::string SeqStmtNode::generate_eeyore(Context& context) {
 
 std::string IfThenElseNode::generate_eeyore(Context& context) {
     std::string text = "";
-    
-    // std::string label_branch = context.new_label();
+
     std::string label_true = context.new_label();
     std::string label_false = context.new_label();
     std::string label_next = context.new_label();
-
-    // context.next_label.push_back(label_branch);
     
     text += condition->generate_eeyore(context);
 
-    // context.next_label.pop_back();
-
     text += "if " + condition->name_key + " > 0 goto " + label_true + "\n";
-    // text += label_branch + ":\n";
     text += "goto " + label_false + "\n";
-
-    // context.next_label.push_back(label_next);
     
     text += label_true + ":\n";
     text += then_case->generate_eeyore(context);
@@ -235,7 +227,6 @@ std::string IfThenElseNode::generate_eeyore(Context& context) {
         text += else_case->generate_eeyore(context);
         text += label_next + ":\n";
     }
-    // context.next_label.pop_back();
 
     return text;
 }
@@ -259,9 +250,7 @@ std::string WhileNode::generate_eeyore(Context& context) {
 
     text += label_condition_begin + ":\n";
 
-    // context.next_label.push_back(label_next);
     text += condition->generate_eeyore(context);
-    // context.next_label.pop_back();
 
     text += "if " + condition->name_key + " > 0 goto " + label_while_begin + "\n";
 
