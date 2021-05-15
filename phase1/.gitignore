@@ -1,3 +1,6 @@
 compiler
 error.txt
 .vscode/*
+lex.yy.cpp
+SysY.tab.cpp
+SysY.tab.hpp
