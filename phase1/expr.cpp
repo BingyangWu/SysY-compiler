@@ -182,6 +182,7 @@ std::string ArrayNode::generate_eeyore(Context& context) {
         last_var = offset_var;
     }
 
+    bool get_value = (i == dims.size());
     int width = 4;
     for (; i < dims.size(); ++i)
         width *= dims[i];
@@ -189,6 +190,10 @@ std::string ArrayNode::generate_eeyore(Context& context) {
     offset_var = context.define_var(Var(kInt, "array_"+name+"_offset_var"), "t");
     text += offset_var + " = " + last_var + " * " + std::to_string(width) + "\n";
     name_key = context.define_var(Var(kInt, "array_rvalue_"+name), "t");
-    text += name_key + " = " + base_var + "[" + offset_var + "]\n";
+
+    if (get_value)
+        text += name_key + " = " + base_var + "[" + offset_var + "]\n";
+    else
+        text += name_key + " = " + base_var + "+" + offset_var + "\n";
     return text;
 }
