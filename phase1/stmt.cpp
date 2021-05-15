@@ -177,7 +177,7 @@ std::string FuncNode::generate_eeyore(Context& context) {
     int args_num = params->args.size();
     for (auto it = params->args.begin(); it != params->args.end(); ++it) {
         Var var = *it;
-        context.define_var(var, "p");
+        var->name_key = context.define_var(var, "p");
     }
 
     std::string func_name = "f_" + name->name;

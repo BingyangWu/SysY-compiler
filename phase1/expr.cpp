@@ -115,7 +115,7 @@ std::string BinaryOpNode::generate_eeyore(Context& context) {
 
         default:
             text += a->generate_eeyore(context) + b->generate_eeyore(context);
-            text += name_key + " = " + a->name_key + std::string(dtype) + b->name_key;
+            text += name_key + " = " + a->name_key + std::string(dtype) + b->name_key + "\n";
             break;
     }
 
