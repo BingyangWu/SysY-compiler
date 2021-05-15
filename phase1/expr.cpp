@@ -162,23 +162,21 @@ std::string ArrayNode::generate_eeyore(Context& context) {
     base_var = context.find_var(name);
     std::vector<int>& dims = context.array_dims[base_var];
     std::string text = "";
-    std::string last_var = context.define_var(Var(kInt, "array_"+name+"_"), "t");
-
-    text += last_var + " = 0\n";
+    std::string last_var;
     
     int i;
     for (i = 0; i < args->args.size(); ++i) {
         offset_var = context.define_var(Var(kInt, "array_"+name+"_"+std::to_string(i)), "t");
-        std::string temp_var;
         text += args->args[i]->generate_eeyore(context);
 
         if (i > 0) {
-            temp_var = context.define_var(Var(kInt, "temp_array_"+name+"_"+std::to_string(i)), "t");
+            std::string temp_var = context.define_var(Var(kInt, "temp_array_"+name+"_"+std::to_string(i)), "t");
             text += temp_var + " = " + last_var + " * " + std::to_string(dims[i]) + "\n";
-        }
-        else temp_var = last_var;
-        text += offset_var + " = " + temp_var + " + " + args->args[i]->name_key + "\n";
+            text += offset_var + " = " + temp_var + " + " + args->args[i]->name_key + "\n";
 
+        }
+        else text += offset_var + " = " + args->args[i]->name_key + "\n";
+        
         last_var = offset_var;
     }
 
