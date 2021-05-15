@@ -166,18 +166,16 @@ std::string ArrayNode::generate_eeyore(Context& context) {
     
     int i;
     for (i = 0; i < args->args.size(); ++i) {
-        offset_var = context.define_var(Var(kInt, "array_"+name+"_"+std::to_string(i)), "t");
         text += args->args[i]->generate_eeyore(context);
 
         if (i > 0) {
+            offset_var = context.define_var(Var(kInt, "array_"+name+"_"+std::to_string(i)), "t");
             std::string temp_var = context.define_var(Var(kInt, "temp_array_"+name+"_"+std::to_string(i)), "t");
             text += temp_var + " = " + last_var + " * " + std::to_string(dims[i]) + "\n";
             text += offset_var + " = " + temp_var + " + " + args->args[i]->name_key + "\n";
-
+            last_var = offset_var;
         }
-        else text += offset_var + " = " + args->args[i]->name_key + "\n";
-        
-        last_var = offset_var;
+        else last_var = args->args[i]->name_key;
     }
 
     bool get_value = (i == dims.size());
