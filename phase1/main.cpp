@@ -9,6 +9,12 @@ int main(int argc, char* argv[]) {
     yyparse();
 
     Context context;
+    context.define_func(Var(kInt, "getint"), kInt);
+    context.define_func(Var(kInt, "getch"), kInt);
+    context.define_func(Var(kInt, "getarray"), kInt);
+    context.define_func(Var(kInt, "putch"), kVoid);
+    context.define_func(Var(kInt, "putarray"), kVoid);
+
     std::string text = (*TreeRoot)->generate_eeyore(context);
     std::cout << context.variable_definition_code << text;
     return 0;
