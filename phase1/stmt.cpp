@@ -225,7 +225,7 @@ std::string IfThenElseNode::generate_eeyore(Context& context) {
 
     text += label_false + ":\n";
     if (with_else) {
-        else_case->generate_eeyore(context);
+        text += else_case->generate_eeyore(context);
         text += label_next + ":\n";
     }
     // context.next_label.pop_back();
