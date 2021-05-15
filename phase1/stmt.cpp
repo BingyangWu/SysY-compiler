@@ -117,24 +117,16 @@ std::string generate_array_code(ArrayNode* var_container, ListNode<Expr>* init_l
         ListNode<Expr>* nested_list = dynamic_cast<ListNode<Expr>*>(expr.operator->());
         
         if (nested_list == nullptr) {
-            text += var_container->name_key + "[" + std::to_string(prod(pos, dims)) + "] = " + expr->name_key + "\n";
+            text += var_container->name_key + "[" + std::to_string(prod(pos, dims)*4) + "] = " + expr->name_key + "\n";
             carry_bit = step_one(pos, dims, pos.size() - 1);
         }
         else {
-            // std::vector<int> next_pos = pos;
-            // step_one(next_pos, dims, current_dim);
-
-            // while (pos != next_pos) {
-            //     text += var_container->name_key + "[" + std::to_string(prod(pos, dims)) + "] = 0\n";
-            //     carry_bit = step_one(pos, dims, pos.size() - 1);
-            // }
-
             text += generate_array_code(var_container, nested_list, pos, current_dim + 1, context, carry_bit);
         }
     }
 
     while (pos != end_pos || (carry_bit != 1 && current_dim == 0)) {
-        text += var_container->name_key + "[" + std::to_string(prod(pos, dims)) + "] = 0\n";
+        text += var_container->name_key + "[" + std::to_string(prod(pos, dims)*4) + "] = 0\n";
         carry_bit = step_one(pos, dims, pos.size() - 1);
     }
 
@@ -207,7 +199,7 @@ std::string SeqStmtNode::generate_eeyore(Context& context) {
 std::string IfThenElseNode::generate_eeyore(Context& context) {
     std::string text = "";
     
-    std::string label_branch = context.new_label();
+    // std::string label_branch = context.new_label();
     std::string label_true = context.new_label();
     std::string label_false = context.new_label();
     std::string label_next = context.new_label();
@@ -219,7 +211,7 @@ std::string IfThenElseNode::generate_eeyore(Context& context) {
     // context.next_label.pop_back();
 
     text += "if " + condition->name_key + " == 1 goto " + label_true + "\n";
-    text += label_branch + ":\n";
+    // text += label_branch + ":\n";
     text += "goto " + label_false + "\n";
 
     context.next_label.push_back(label_next);
