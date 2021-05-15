@@ -144,7 +144,7 @@ std::string NotNode::generate_eeyore(Context& context) {
 std::string CallNode::generate_eeyore(Context& context) {
     std::string text = "";
 
-    args->generate_eeyore(context);
+    text += args->generate_eeyore(context);
 
     for (auto it = args->args.begin(); it != args->args.end(); ++it) {
         text += "param " + (*it)->name_key + "\n";
@@ -177,10 +177,14 @@ std::string ArrayNode::generate_eeyore(Context& context) {
     
     for (int i = 0; i < dims.size(); ++i) {
         offset_var = context.define_var(Var(kInt, "array_"+name+"_"+std::to_string(i)), "t");
-        std::string temp_var = context.define_var(Var(kInt, "temp_array_"+name+"_"+std::to_string(i)), "t");
+        std::string temp_var;
         args->args[i]->generate_eeyore(context);
 
-        text += temp_var + " = " + last_var + " * " + std::to_string(dims[i]) + "\n";
+        if (i > 0) {
+            temp_var = context.define_var(Var(kInt, "temp_array_"+name+"_"+std::to_string(i)), "t");
+            text += temp_var + " = " + last_var + " * " + std::to_string(dims[i]) + "\n";
+        }
+        else temp_var = last_var;
         text += offset_var + " = " + temp_var + " + " + args->args[i]->name_key + "\n";
 
         last_var = offset_var;

@@ -1644,7 +1644,7 @@ yyreduce:
 
   case 35:
 #line 68 "SysY.y"
-                                                        { yyval = new Array(*dynamic_cast<Var*>(yyvsp[-3]), *dynamic_cast<List<Expr>*>(yyvsp[-1]), true); }
+                                                        { yyval = new Array(*dynamic_cast<Var*>(yyvsp[-3]), *dynamic_cast<List<Expr>*>(yyvsp[0]), true); }
 #line 1649 "SysY.tab.cpp"
     break;
 

@@ -65,7 +65,7 @@ FuncFParams     :FuncFParams ',' FuncParam              { $$ = &AppendList(*dyna
 ;
 FuncParam       :INT FuncIdent                         { $$ = $2; }
 ;
-FuncIdent       :ID '[' ']' BrackertsSeq                { $$ = new Array(*dynamic_cast<Var*>($1), *dynamic_cast<List<Expr>*>($3), true); }
+FuncIdent       :ID '[' ']' BrackertsSeq                { $$ = new Array(*dynamic_cast<Var*>($1), *dynamic_cast<List<Expr>*>($4), true); }
                 |ID BrackertsSeq                        { $$ = new Array(*dynamic_cast<Var*>($1), *dynamic_cast<List<Expr>*>($2), false); }
                 |ID '[' ']'                             { $$ = new Array(*dynamic_cast<Var*>($1), *EmptyList<Expr>(), true); }
                 |ID                                     { $$ = $1; }
