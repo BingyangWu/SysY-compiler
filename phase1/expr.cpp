@@ -131,7 +131,7 @@ std::string NotNode::generate_eeyore(Context& context) {
     label_next = context.new_label();
 
     text += a->generate_eeyore(context);
-    text += "if " + a->name_key + " == 1 goto " + label_true + "\n";
+    text += "if " + a->name_key + " > 0 goto " + label_true + "\n";
     text += name_key + " = 1\n";
     text += "goto " + label_next + "\n";
     text += label_true + ":\n";
