@@ -194,6 +194,6 @@ std::string ArrayNode::generate_eeyore(Context& context) {
     if (get_value)
         text += name_key + " = " + base_var + "[" + offset_var + "]\n";
     else
-        text += name_key + " = " + base_var + "+" + offset_var + "\n";
+        text += name_key + " = " + base_var + " + " + offset_var + "\n";
     return text;
 }
