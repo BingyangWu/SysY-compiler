@@ -94,9 +94,9 @@ int prod(std::vector<int>& v, std::vector<int>& limit) {
 
 int step_one(std::vector<int>& v, std::vector<int>& limit, int dim) {
     ++v[dim];
-    for (int i = dim + 1; i < v.size(); ++i) {
-        v[i] = 0;
-    }
+    // for (int i = dim + 1; i < v.size(); ++i) {
+    //     v[i] = 0;
+    // }
 
     int cnt = 0;
     for (int i = dim; i >= 0; --i) {
@@ -110,6 +110,11 @@ int step_one(std::vector<int>& v, std::vector<int>& limit, int dim) {
 std::string generate_array_code(ArrayNode* var_container, ListNode<Expr>* init_list, std::vector<int>& pos, int current_dim, Context& context, int& carry_bit) {
     std::string text = "";
     std::vector<int>& dims = context.array_dims[var_container->name_key];
+
+    int i = pos.size();
+    if (pos[i] == 0) for (; i > current_dim && pos[i - 1] == 0; --i);
+    current_dim = i;
+
     std::vector<int> end_pos = pos;
     if (current_dim - 1 >= 0) step_one(end_pos, dims, current_dim-1);
 
@@ -143,8 +148,10 @@ std::string AllocateNode::generate_eeyore(Context& context) {
         if (dynamic_cast<ArrayNode *>(var.operator->()) == nullptr) {
             if (dtype.code() == kInt)
                 text += var->name_key + " = " + value->name_key + "\n";
-            else 
+            else {
+                text = "";
                 context.set_var(var->name, value->get_value(context));
+            }
         } else {
             ArrayNode* var_container = dynamic_cast<ArrayNode *>(var.operator->());
             ListNode<Expr>* init_list = dynamic_cast<ListNode<Expr> *>(value.operator->());
