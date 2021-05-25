@@ -49,21 +49,21 @@ comment             "//".*|"/*"[^*]*"*"+([^*/][^*]*"*"+)*"/"
 "return"                                { zzecho(); return E_RET; }
 "end"                                   { zzecho(); return E_END; }
 
-"&&"                                    { zzecho(); zzlval.str = fork_string(zztext); return E_AND; }
-"||"                                    { zzecho(); zzlval.str = fork_string(zztext); return E_OR; }
-"=="                                    { zzecho(); zzlval.str = fork_string(zztext); return E_EQ; }
-"!="                                    { zzecho(); zzlval.str = fork_string(zztext); return E_NEQ; }
-"<="                                    { zzecho(); zzlval.str = fork_string(zztext); return E_LEQ; }
-">="                                    { zzecho(); zzlval.str = fork_string(zztext); return E_GEQ; }
+"&&"                                    { zzecho(); zzlval = fork_string(zztext); return E_AND; }
+"||"                                    { zzecho(); zzlval = fork_string(zztext); return E_OR; }
+"=="                                    { zzecho(); zzlval = fork_string(zztext); return E_EQ; }
+"!="                                    { zzecho(); zzlval = fork_string(zztext); return E_NEQ; }
+"<="                                    { zzecho(); zzlval = fork_string(zztext); return E_LEQ; }
+">="                                    { zzecho(); zzlval = fork_string(zztext); return E_GEQ; }
 
-{integer}                               { zzecho(); zzlval.str = fork_string(zztext); return E_IMM; }
+{integer}                               { zzecho(); zzlval = fork_string(zztext); return E_IMM; }
 
-{identifier}                            { zzecho(); zzlval.str = fork_string(zztext); return E_ID; }
+{identifier}                            { zzecho(); zzlval = fork_string(zztext); return E_ID; }
 
 {comment}                               {  }
 {whitespace}                            { zzecho(); }
 {newline}                               { zzecho(); }
-[\+\-\*\/\%\=\!\<\>\(\)\[\]\{\}\,\;\:]    { zzecho(); zzlval.str = fork_string(zztext); return zztext[0]; }
+[\+\-\*\/\%\=\!\<\>\(\)\[\]\{\}\,\;\:]    { zzecho(); zzlval = fork_string(zztext); return zztext[0]; }
 
 .                                       { fprintf(stderr, "\nflex error!!: %s\n", zztext); }
 

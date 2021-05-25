@@ -1,15 +1,11 @@
 %define api.prefix {zz}
 %{
-    #include "Tigger.hpp"
+    #include "Eeyore.hpp"
 
     int zzerror(const char *);
     extern int zzlex(void);
 %}
-%define api.value.type {
-    union ZZ_DATA {
-        char* str;
-    }
-}
+%define api.value.type {char *}
 
 %token E_VAR E_PARAM E_CALL E_IF E_GOTO E_RET E_END
 
@@ -22,40 +18,40 @@
 Code            :Code Declaration                       {  }
                 |Code Initialization                    {  }
                 |Code FunctionDef                       {  }
-                |                                       { tigger_statements.clear(); tigger_declarations.clear(); eeyore_functions.clear(); }
+                |                                       { eeyore_statements.clear(); eeyore_initializations.clear(); eeyore_functions.clear(); }
 ;
 Declaration     :E_VAR E_ID                             {}
                 |E_VAR E_IMM E_ID                       {}
 ;
-Initialization  :E_ID '=' RightValue                    {}
-                |E_ID '[' E_IMM ']' '=' RightValue      {}
+Initialization  :E_ID '=' RightValue                    { eeyore_initializations.push_back(new Assignment($1, "", $3, "", "")); }
+                |E_ID '[' E_IMM ']' '=' RightValue      { eeyore_initializations.push_back(new Assignment($1, $3, $6, "", "")); }
 ;
 FunctionDef     :FunctionHeader Statements FunctionEnd  {  }
 ;
-FunctionHeader  :E_ID '[' E_IMM ']'                     {}
+FunctionHeader  :E_ID '[' E_IMM ']'                     { eeyore_statements.push_back(new FunctionHeader($1, $3)); }
 ;
 Statements      :Statements Statement                   {  }
                 |                                       {  }
 ;
-FunctionEnd     :E_END E_ID                             {}
+FunctionEnd     :E_END E_ID                             { eeyore_statements.push_back(new FunctionEnd($2)); }
 ;
 Statement       :Expression                             {  }
                 |Declaration                            {  }
 ;
-Expression      :E_ID '=' RightValue BinOp RightValue   {}
-                |E_ID '=' '!' RightValue                {}
-                |E_ID '=' RightValue                    {}
-                |E_ID '[' RightValue ']' '=' RightValue {}
-                |E_ID '=' E_ID '[' RightValue ']'       {}
+Expression      :E_ID '=' RightValue BinOp RightValue   { eeyore_statements.push_back(new Assignment($1, "", $3, $4, $5)); }
+                |E_ID '=' '!' RightValue                { eeyore_statements.push_back(new Assignment($1, "", $4, "!", "")); }
+                |E_ID '=' RightValue                    { eeyore_statements.push_back(new Assignment($1, "", $3, "", "")); }
+                |E_ID '[' RightValue ']' '=' RightValue { eeyore_statements.push_back(new Assignment($1, $3, $6, "", "")); }
+                |E_ID '=' E_ID '[' RightValue ']'       { eeyore_statements.push_back(new Assignment($1, "", $3, "[]", $5)); }
                 |E_IF RightValue BinOp RightValue E_GOTO E_ID
-                                                        {}
-                |E_GOTO E_ID                            {}
-                |E_ID ':'                               {}
-                |E_PARAM RightValue                     {}
-                |E_CALL E_ID                            {}
-                |E_ID '=' E_CALL E_ID                   {}
-                |E_RET RightValue                       {}
-                |E_RET                                  {}
+                                                        { eeyore_statements.push_back(new IfGoto($6, $2, $3, $4)); }
+                |E_GOTO E_ID                            { eeyore_statements.push_back(new IfGoto($2, "", "", "")); }
+                |E_ID ':'                               { eeyore_statements.push_back(new Label($1)); }
+                |E_PARAM RightValue                     { eeyore_statements.push_back(new PassParameter($2)); }
+                |E_CALL E_ID                            { eeyore_statements.push_back(new CallFunction("", $2)); }
+                |E_ID '=' E_CALL E_ID                   { eeyore_statements.push_back(new CallFunction($1, $4)); }
+                |E_RET RightValue                       { eeyore_statements.push_back(new Return($2)); }
+                |E_RET                                  { eeyore_statements.push_back(new Return("")); }
 ;
 RightValue      :E_ID                                   { $$ = $1; }
                 |E_IMM                                  { $$ = $1; }

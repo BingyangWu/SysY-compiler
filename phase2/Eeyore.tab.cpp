@@ -76,7 +76,7 @@
 /* First part of user prologue.  */
 #line 2 "phase2/Eeyore.y"
 
-    #include "Tigger.hpp"
+    #include "Eeyore.hpp"
 
     int zzerror(const char *);
     extern int zzlex(void);
@@ -157,11 +157,7 @@ extern int zzdebug;
 
 /* Value type.  */
 #if ! defined ZZSTYPE && ! defined ZZSTYPE_IS_DECLARED
-typedef 
-    union ZZ_DATA {
-        char* str;
-    }
- ZZSTYPE;
+typedef char * ZZSTYPE;
 # define ZZSTYPE_IS_TRIVIAL 1
 # define ZZSTYPE_IS_DECLARED 1
 #endif
@@ -535,11 +531,11 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    22,    22,    23,    24,    25,    27,    28,    30,    31,
-      33,    35,    37,    38,    40,    42,    43,    45,    46,    47,
-      48,    49,    50,    52,    53,    54,    55,    56,    57,    58,
-      60,    61,    63,    64,    65,    66,    67,    68,    69,    70,
-      71,    72,    73,    74,    75
+       0,    18,    18,    19,    20,    21,    23,    24,    26,    27,
+      29,    31,    33,    34,    36,    38,    39,    41,    42,    43,
+      44,    45,    46,    48,    49,    50,    51,    52,    53,    54,
+      56,    57,    59,    60,    61,    62,    63,    64,    65,    66,
+      67,    68,    69,    70,    71
 };
 #endif
 
@@ -1374,265 +1370,265 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 22 "phase2/Eeyore.y"
+#line 18 "phase2/Eeyore.y"
                                                         {  }
-#line 1380 "phase2/Eeyore.tab.cpp"
+#line 1376 "phase2/Eeyore.tab.cpp"
     break;
 
   case 3:
-#line 23 "phase2/Eeyore.y"
+#line 19 "phase2/Eeyore.y"
                                                         {  }
-#line 1386 "phase2/Eeyore.tab.cpp"
+#line 1382 "phase2/Eeyore.tab.cpp"
     break;
 
   case 4:
-#line 24 "phase2/Eeyore.y"
+#line 20 "phase2/Eeyore.y"
                                                         {  }
-#line 1392 "phase2/Eeyore.tab.cpp"
+#line 1388 "phase2/Eeyore.tab.cpp"
     break;
 
   case 5:
-#line 25 "phase2/Eeyore.y"
-                                                        { tigger_statements.clear(); tigger_declarations.clear(); eeyore_functions.clear(); }
-#line 1398 "phase2/Eeyore.tab.cpp"
+#line 21 "phase2/Eeyore.y"
+                                                        { eeyore_statements.clear(); eeyore_initializations.clear(); eeyore_functions.clear(); }
+#line 1394 "phase2/Eeyore.tab.cpp"
     break;
 
   case 6:
-#line 27 "phase2/Eeyore.y"
+#line 23 "phase2/Eeyore.y"
                                                         {}
-#line 1404 "phase2/Eeyore.tab.cpp"
+#line 1400 "phase2/Eeyore.tab.cpp"
     break;
 
   case 7:
-#line 28 "phase2/Eeyore.y"
+#line 24 "phase2/Eeyore.y"
                                                         {}
-#line 1410 "phase2/Eeyore.tab.cpp"
+#line 1406 "phase2/Eeyore.tab.cpp"
     break;
 
   case 8:
-#line 30 "phase2/Eeyore.y"
-                                                        {}
-#line 1416 "phase2/Eeyore.tab.cpp"
+#line 26 "phase2/Eeyore.y"
+                                                        { eeyore_initializations.push_back(new Assignment(yyvsp[-2], "", yyvsp[0], "", "")); }
+#line 1412 "phase2/Eeyore.tab.cpp"
     break;
 
   case 9:
-#line 31 "phase2/Eeyore.y"
-                                                        {}
-#line 1422 "phase2/Eeyore.tab.cpp"
+#line 27 "phase2/Eeyore.y"
+                                                        { eeyore_initializations.push_back(new Assignment(yyvsp[-5], yyvsp[-3], yyvsp[0], "", "")); }
+#line 1418 "phase2/Eeyore.tab.cpp"
     break;
 
   case 10:
-#line 33 "phase2/Eeyore.y"
+#line 29 "phase2/Eeyore.y"
                                                         {  }
-#line 1428 "phase2/Eeyore.tab.cpp"
+#line 1424 "phase2/Eeyore.tab.cpp"
     break;
 
   case 11:
-#line 35 "phase2/Eeyore.y"
-                                                        {}
-#line 1434 "phase2/Eeyore.tab.cpp"
+#line 31 "phase2/Eeyore.y"
+                                                        { eeyore_statements.push_back(new FunctionHeader(yyvsp[-3], yyvsp[-1])); }
+#line 1430 "phase2/Eeyore.tab.cpp"
     break;
 
   case 12:
-#line 37 "phase2/Eeyore.y"
+#line 33 "phase2/Eeyore.y"
                                                         {  }
-#line 1440 "phase2/Eeyore.tab.cpp"
+#line 1436 "phase2/Eeyore.tab.cpp"
     break;
 
   case 13:
-#line 38 "phase2/Eeyore.y"
+#line 34 "phase2/Eeyore.y"
                                                         {  }
-#line 1446 "phase2/Eeyore.tab.cpp"
+#line 1442 "phase2/Eeyore.tab.cpp"
     break;
 
   case 14:
-#line 40 "phase2/Eeyore.y"
-                                                        {}
-#line 1452 "phase2/Eeyore.tab.cpp"
+#line 36 "phase2/Eeyore.y"
+                                                        { eeyore_statements.push_back(new FunctionEnd(yyvsp[0])); }
+#line 1448 "phase2/Eeyore.tab.cpp"
     break;
 
   case 15:
-#line 42 "phase2/Eeyore.y"
+#line 38 "phase2/Eeyore.y"
                                                         {  }
-#line 1458 "phase2/Eeyore.tab.cpp"
+#line 1454 "phase2/Eeyore.tab.cpp"
     break;
 
   case 16:
-#line 43 "phase2/Eeyore.y"
+#line 39 "phase2/Eeyore.y"
                                                         {  }
-#line 1464 "phase2/Eeyore.tab.cpp"
+#line 1460 "phase2/Eeyore.tab.cpp"
     break;
 
   case 17:
-#line 45 "phase2/Eeyore.y"
-                                                        {}
-#line 1470 "phase2/Eeyore.tab.cpp"
+#line 41 "phase2/Eeyore.y"
+                                                        { eeyore_statements.push_back(new Assignment(yyvsp[-4], "", yyvsp[-2], yyvsp[-1], yyvsp[0])); }
+#line 1466 "phase2/Eeyore.tab.cpp"
     break;
 
   case 18:
-#line 46 "phase2/Eeyore.y"
-                                                        {}
-#line 1476 "phase2/Eeyore.tab.cpp"
+#line 42 "phase2/Eeyore.y"
+                                                        { eeyore_statements.push_back(new Assignment(yyvsp[-3], "", yyvsp[0], "!", "")); }
+#line 1472 "phase2/Eeyore.tab.cpp"
     break;
 
   case 19:
-#line 47 "phase2/Eeyore.y"
-                                                        {}
-#line 1482 "phase2/Eeyore.tab.cpp"
+#line 43 "phase2/Eeyore.y"
+                                                        { eeyore_statements.push_back(new Assignment(yyvsp[-2], "", yyvsp[0], "", "")); }
+#line 1478 "phase2/Eeyore.tab.cpp"
     break;
 
   case 20:
-#line 48 "phase2/Eeyore.y"
-                                                        {}
-#line 1488 "phase2/Eeyore.tab.cpp"
+#line 44 "phase2/Eeyore.y"
+                                                        { eeyore_statements.push_back(new Assignment(yyvsp[-5], yyvsp[-3], yyvsp[0], "", "")); }
+#line 1484 "phase2/Eeyore.tab.cpp"
     break;
 
   case 21:
-#line 49 "phase2/Eeyore.y"
-                                                        {}
-#line 1494 "phase2/Eeyore.tab.cpp"
+#line 45 "phase2/Eeyore.y"
+                                                        { eeyore_statements.push_back(new Assignment(yyvsp[-5], "", yyvsp[-3], "[]", yyvsp[-1])); }
+#line 1490 "phase2/Eeyore.tab.cpp"
     break;
 
   case 22:
-#line 51 "phase2/Eeyore.y"
-                                                        {}
-#line 1500 "phase2/Eeyore.tab.cpp"
+#line 47 "phase2/Eeyore.y"
+                                                        { eeyore_statements.push_back(new IfGoto(yyvsp[0], yyvsp[-4], yyvsp[-3], yyvsp[-2])); }
+#line 1496 "phase2/Eeyore.tab.cpp"
     break;
 
   case 23:
-#line 52 "phase2/Eeyore.y"
-                                                        {}
-#line 1506 "phase2/Eeyore.tab.cpp"
+#line 48 "phase2/Eeyore.y"
+                                                        { eeyore_statements.push_back(new IfGoto(yyvsp[0], "", "", "")); }
+#line 1502 "phase2/Eeyore.tab.cpp"
     break;
 
   case 24:
-#line 53 "phase2/Eeyore.y"
-                                                        {}
-#line 1512 "phase2/Eeyore.tab.cpp"
+#line 49 "phase2/Eeyore.y"
+                                                        { eeyore_statements.push_back(new Label(yyvsp[-1])); }
+#line 1508 "phase2/Eeyore.tab.cpp"
     break;
 
   case 25:
-#line 54 "phase2/Eeyore.y"
-                                                        {}
-#line 1518 "phase2/Eeyore.tab.cpp"
+#line 50 "phase2/Eeyore.y"
+                                                        { eeyore_statements.push_back(new PassParameter(yyvsp[0])); }
+#line 1514 "phase2/Eeyore.tab.cpp"
     break;
 
   case 26:
-#line 55 "phase2/Eeyore.y"
-                                                        {}
-#line 1524 "phase2/Eeyore.tab.cpp"
+#line 51 "phase2/Eeyore.y"
+                                                        { eeyore_statements.push_back(new CallFunction("", yyvsp[0])); }
+#line 1520 "phase2/Eeyore.tab.cpp"
     break;
 
   case 27:
-#line 56 "phase2/Eeyore.y"
-                                                        {}
-#line 1530 "phase2/Eeyore.tab.cpp"
+#line 52 "phase2/Eeyore.y"
+                                                        { eeyore_statements.push_back(new CallFunction(yyvsp[-3], yyvsp[0])); }
+#line 1526 "phase2/Eeyore.tab.cpp"
     break;
 
   case 28:
-#line 57 "phase2/Eeyore.y"
-                                                        {}
-#line 1536 "phase2/Eeyore.tab.cpp"
+#line 53 "phase2/Eeyore.y"
+                                                        { eeyore_statements.push_back(new Return(yyvsp[0])); }
+#line 1532 "phase2/Eeyore.tab.cpp"
     break;
 
   case 29:
-#line 58 "phase2/Eeyore.y"
-                                                        {}
-#line 1542 "phase2/Eeyore.tab.cpp"
+#line 54 "phase2/Eeyore.y"
+                                                        { eeyore_statements.push_back(new Return("")); }
+#line 1538 "phase2/Eeyore.tab.cpp"
     break;
 
   case 30:
-#line 60 "phase2/Eeyore.y"
+#line 56 "phase2/Eeyore.y"
                                                         { yyval = yyvsp[0]; }
-#line 1548 "phase2/Eeyore.tab.cpp"
+#line 1544 "phase2/Eeyore.tab.cpp"
     break;
 
   case 31:
-#line 61 "phase2/Eeyore.y"
+#line 57 "phase2/Eeyore.y"
                                                         { yyval = yyvsp[0]; }
-#line 1554 "phase2/Eeyore.tab.cpp"
+#line 1550 "phase2/Eeyore.tab.cpp"
     break;
 
   case 32:
-#line 63 "phase2/Eeyore.y"
+#line 59 "phase2/Eeyore.y"
                                                         { yyval = yyvsp[0]; }
-#line 1560 "phase2/Eeyore.tab.cpp"
+#line 1556 "phase2/Eeyore.tab.cpp"
     break;
 
   case 33:
-#line 64 "phase2/Eeyore.y"
+#line 60 "phase2/Eeyore.y"
                                                         { yyval = yyvsp[0]; }
-#line 1566 "phase2/Eeyore.tab.cpp"
+#line 1562 "phase2/Eeyore.tab.cpp"
     break;
 
   case 34:
-#line 65 "phase2/Eeyore.y"
+#line 61 "phase2/Eeyore.y"
                                                         { yyval = yyvsp[0]; }
-#line 1572 "phase2/Eeyore.tab.cpp"
+#line 1568 "phase2/Eeyore.tab.cpp"
     break;
 
   case 35:
-#line 66 "phase2/Eeyore.y"
+#line 62 "phase2/Eeyore.y"
                                                         { yyval = yyvsp[0]; }
-#line 1578 "phase2/Eeyore.tab.cpp"
+#line 1574 "phase2/Eeyore.tab.cpp"
     break;
 
   case 36:
-#line 67 "phase2/Eeyore.y"
+#line 63 "phase2/Eeyore.y"
                                                         { yyval = yyvsp[0]; }
-#line 1584 "phase2/Eeyore.tab.cpp"
+#line 1580 "phase2/Eeyore.tab.cpp"
     break;
 
   case 37:
-#line 68 "phase2/Eeyore.y"
+#line 64 "phase2/Eeyore.y"
                                                         { yyval = yyvsp[0]; }
-#line 1590 "phase2/Eeyore.tab.cpp"
+#line 1586 "phase2/Eeyore.tab.cpp"
     break;
 
   case 38:
-#line 69 "phase2/Eeyore.y"
+#line 65 "phase2/Eeyore.y"
                                                         { yyval = yyvsp[0]; }
-#line 1596 "phase2/Eeyore.tab.cpp"
+#line 1592 "phase2/Eeyore.tab.cpp"
     break;
 
   case 39:
-#line 70 "phase2/Eeyore.y"
+#line 66 "phase2/Eeyore.y"
                                                         { yyval = yyvsp[0]; }
-#line 1602 "phase2/Eeyore.tab.cpp"
+#line 1598 "phase2/Eeyore.tab.cpp"
     break;
 
   case 40:
-#line 71 "phase2/Eeyore.y"
+#line 67 "phase2/Eeyore.y"
                                                         { yyval = yyvsp[0]; }
-#line 1608 "phase2/Eeyore.tab.cpp"
+#line 1604 "phase2/Eeyore.tab.cpp"
     break;
 
   case 41:
-#line 72 "phase2/Eeyore.y"
+#line 68 "phase2/Eeyore.y"
                                                         { yyval = yyvsp[0]; }
-#line 1614 "phase2/Eeyore.tab.cpp"
+#line 1610 "phase2/Eeyore.tab.cpp"
     break;
 
   case 42:
-#line 73 "phase2/Eeyore.y"
+#line 69 "phase2/Eeyore.y"
                                                         { yyval = yyvsp[0]; }
-#line 1620 "phase2/Eeyore.tab.cpp"
+#line 1616 "phase2/Eeyore.tab.cpp"
     break;
 
   case 43:
-#line 74 "phase2/Eeyore.y"
+#line 70 "phase2/Eeyore.y"
                                                         { yyval = yyvsp[0]; }
-#line 1626 "phase2/Eeyore.tab.cpp"
+#line 1622 "phase2/Eeyore.tab.cpp"
     break;
 
   case 44:
-#line 75 "phase2/Eeyore.y"
+#line 71 "phase2/Eeyore.y"
                                                         { yyval = yyvsp[0]; }
-#line 1632 "phase2/Eeyore.tab.cpp"
+#line 1628 "phase2/Eeyore.tab.cpp"
     break;
 
 
-#line 1636 "phase2/Eeyore.tab.cpp"
+#line 1632 "phase2/Eeyore.tab.cpp"
 
       default: break;
     }
@@ -1864,7 +1860,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 77 "phase2/Eeyore.y"
+#line 73 "phase2/Eeyore.y"
 
 int zzerror(const char *message) {
 	return 0;
