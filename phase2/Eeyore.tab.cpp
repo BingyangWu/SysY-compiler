@@ -1395,13 +1395,13 @@ yyreduce:
 
   case 6:
 #line 23 "phase2/Eeyore.y"
-                                                        {}
+                                                        { enviroment.declare(yyvsp[0], 1); }
 #line 1400 "phase2/Eeyore.tab.cpp"
     break;
 
   case 7:
 #line 24 "phase2/Eeyore.y"
-                                                        {}
+                                                        { enviroment.declare(yyvsp[0], std::stoi(yyvsp[-1])); }
 #line 1406 "phase2/Eeyore.tab.cpp"
     break;
 
@@ -1425,7 +1425,7 @@ yyreduce:
 
   case 11:
 #line 31 "phase2/Eeyore.y"
-                                                        { eeyore_statements.push_back(new FunctionHeader(yyvsp[-3], yyvsp[-1])); }
+                                                        { eeyore_statements.push_back(new FunctionHeader(yyvsp[-3], yyvsp[-1])); enviroment.enter_function(yyvsp[-3], eeyore_statements.size()); }
 #line 1430 "phase2/Eeyore.tab.cpp"
     break;
 
@@ -1443,7 +1443,7 @@ yyreduce:
 
   case 14:
 #line 36 "phase2/Eeyore.y"
-                                                        { eeyore_statements.push_back(new FunctionEnd(yyvsp[0])); }
+                                                        { eeyore_statements.push_back(new FunctionEnd(yyvsp[0])); enviroment.exit_function(yyvsp[0], eeyore_statements.size()); }
 #line 1448 "phase2/Eeyore.tab.cpp"
     break;
 
