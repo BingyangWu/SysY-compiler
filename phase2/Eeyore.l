@@ -57,7 +57,7 @@ comment             "//".*|"/*"[^*]*"*"+([^*/][^*]*"*"+)*"/"
 {comment}                               {  }
 {whitespace}                            { zzecho(); }
 {newline}                               { zzecho(); }
-[\+\-\*\/\%\=\!\<\>\(\)\[\]\{\}\,\;]    { zzecho(); return zztext[0]; }
+[\+\-\*\/\%\=\!\<\>\(\)\[\]\{\}\,\;\:]    { zzecho(); return zztext[0]; }
 
 .                                       { fprintf(stderr, "\nflex error!!: %s\n", zztext); }
 
