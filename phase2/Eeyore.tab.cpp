@@ -157,7 +157,6 @@ extern int zzdebug;
 #if ! defined ZZSTYPE && ! defined ZZSTYPE_IS_DECLARED
 typedef 
     union ZZ_DATA {
-        int i;
         char* str;
     }
  ZZSTYPE;
@@ -534,11 +533,11 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    21,    21,    23,    24,    25,    26,    27,    28,    30,
-      31,    33,    34,    35,    36,    38,    40,    42,    43,    45,
-      47,    48,    50,    51,    52,    53,    54,    55,    57,    58,
-      59,    60,    61,    62,    63,    65,    66,    68,    69,    70,
-      71,    72,    73,    74,    75,    76,    77,    78,    79,    80
+       0,    20,    20,    22,    23,    24,    25,    26,    27,    29,
+      30,    32,    33,    34,    35,    37,    39,    41,    42,    44,
+      46,    47,    49,    50,    51,    52,    53,    54,    56,    57,
+      58,    59,    60,    61,    62,    64,    65,    67,    68,    69,
+      70,    71,    72,    73,    74,    75,    76,    77,    78,    79
 };
 #endif
 
@@ -1378,295 +1377,295 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 21 "phase2/Eeyore.y"
+#line 20 "phase2/Eeyore.y"
                                                         {}
-#line 1384 "phase2/Eeyore.tab.cpp"
+#line 1383 "phase2/Eeyore.tab.cpp"
     break;
 
   case 3:
-#line 23 "phase2/Eeyore.y"
+#line 22 "phase2/Eeyore.y"
                                                         {}
-#line 1390 "phase2/Eeyore.tab.cpp"
+#line 1389 "phase2/Eeyore.tab.cpp"
     break;
 
   case 4:
-#line 24 "phase2/Eeyore.y"
+#line 23 "phase2/Eeyore.y"
                                                         {}
-#line 1396 "phase2/Eeyore.tab.cpp"
+#line 1395 "phase2/Eeyore.tab.cpp"
     break;
 
   case 5:
-#line 25 "phase2/Eeyore.y"
+#line 24 "phase2/Eeyore.y"
                                                         {}
-#line 1402 "phase2/Eeyore.tab.cpp"
+#line 1401 "phase2/Eeyore.tab.cpp"
     break;
 
   case 6:
-#line 26 "phase2/Eeyore.y"
+#line 25 "phase2/Eeyore.y"
                                                         {}
-#line 1408 "phase2/Eeyore.tab.cpp"
+#line 1407 "phase2/Eeyore.tab.cpp"
     break;
 
   case 7:
-#line 27 "phase2/Eeyore.y"
+#line 26 "phase2/Eeyore.y"
                                                         {}
-#line 1414 "phase2/Eeyore.tab.cpp"
+#line 1413 "phase2/Eeyore.tab.cpp"
     break;
 
   case 8:
-#line 28 "phase2/Eeyore.y"
+#line 27 "phase2/Eeyore.y"
                                                         {}
-#line 1420 "phase2/Eeyore.tab.cpp"
+#line 1419 "phase2/Eeyore.tab.cpp"
     break;
 
   case 9:
-#line 30 "phase2/Eeyore.y"
+#line 29 "phase2/Eeyore.y"
                                                         {}
-#line 1426 "phase2/Eeyore.tab.cpp"
+#line 1425 "phase2/Eeyore.tab.cpp"
     break;
 
   case 10:
-#line 31 "phase2/Eeyore.y"
+#line 30 "phase2/Eeyore.y"
                                                         {}
-#line 1432 "phase2/Eeyore.tab.cpp"
+#line 1431 "phase2/Eeyore.tab.cpp"
     break;
 
   case 11:
-#line 33 "phase2/Eeyore.y"
+#line 32 "phase2/Eeyore.y"
                                                         {}
-#line 1438 "phase2/Eeyore.tab.cpp"
+#line 1437 "phase2/Eeyore.tab.cpp"
     break;
 
   case 12:
-#line 34 "phase2/Eeyore.y"
+#line 33 "phase2/Eeyore.y"
                                                         {}
-#line 1444 "phase2/Eeyore.tab.cpp"
+#line 1443 "phase2/Eeyore.tab.cpp"
     break;
 
   case 13:
-#line 35 "phase2/Eeyore.y"
+#line 34 "phase2/Eeyore.y"
                                                         {}
-#line 1450 "phase2/Eeyore.tab.cpp"
+#line 1449 "phase2/Eeyore.tab.cpp"
     break;
 
   case 14:
-#line 36 "phase2/Eeyore.y"
+#line 35 "phase2/Eeyore.y"
                                                         {}
-#line 1456 "phase2/Eeyore.tab.cpp"
+#line 1455 "phase2/Eeyore.tab.cpp"
     break;
 
   case 15:
-#line 38 "phase2/Eeyore.y"
+#line 37 "phase2/Eeyore.y"
                                                         {}
-#line 1462 "phase2/Eeyore.tab.cpp"
+#line 1461 "phase2/Eeyore.tab.cpp"
     break;
 
   case 16:
-#line 40 "phase2/Eeyore.y"
+#line 39 "phase2/Eeyore.y"
                                                         {}
-#line 1468 "phase2/Eeyore.tab.cpp"
+#line 1467 "phase2/Eeyore.tab.cpp"
     break;
 
   case 17:
-#line 42 "phase2/Eeyore.y"
+#line 41 "phase2/Eeyore.y"
                                                         {}
-#line 1474 "phase2/Eeyore.tab.cpp"
+#line 1473 "phase2/Eeyore.tab.cpp"
     break;
 
   case 18:
-#line 43 "phase2/Eeyore.y"
+#line 42 "phase2/Eeyore.y"
                                                         {}
-#line 1480 "phase2/Eeyore.tab.cpp"
+#line 1479 "phase2/Eeyore.tab.cpp"
     break;
 
   case 19:
-#line 45 "phase2/Eeyore.y"
+#line 44 "phase2/Eeyore.y"
                                                         {}
-#line 1486 "phase2/Eeyore.tab.cpp"
+#line 1485 "phase2/Eeyore.tab.cpp"
     break;
 
   case 20:
-#line 47 "phase2/Eeyore.y"
+#line 46 "phase2/Eeyore.y"
                                                         {}
-#line 1492 "phase2/Eeyore.tab.cpp"
+#line 1491 "phase2/Eeyore.tab.cpp"
     break;
 
   case 21:
-#line 48 "phase2/Eeyore.y"
+#line 47 "phase2/Eeyore.y"
                                                         {}
-#line 1498 "phase2/Eeyore.tab.cpp"
+#line 1497 "phase2/Eeyore.tab.cpp"
     break;
 
   case 22:
-#line 50 "phase2/Eeyore.y"
+#line 49 "phase2/Eeyore.y"
                                                         {}
-#line 1504 "phase2/Eeyore.tab.cpp"
+#line 1503 "phase2/Eeyore.tab.cpp"
     break;
 
   case 23:
-#line 51 "phase2/Eeyore.y"
+#line 50 "phase2/Eeyore.y"
                                                         {}
-#line 1510 "phase2/Eeyore.tab.cpp"
+#line 1509 "phase2/Eeyore.tab.cpp"
     break;
 
   case 24:
-#line 52 "phase2/Eeyore.y"
+#line 51 "phase2/Eeyore.y"
                                                         {}
-#line 1516 "phase2/Eeyore.tab.cpp"
+#line 1515 "phase2/Eeyore.tab.cpp"
     break;
 
   case 25:
-#line 53 "phase2/Eeyore.y"
+#line 52 "phase2/Eeyore.y"
                                                         {}
-#line 1522 "phase2/Eeyore.tab.cpp"
+#line 1521 "phase2/Eeyore.tab.cpp"
     break;
 
   case 26:
-#line 54 "phase2/Eeyore.y"
+#line 53 "phase2/Eeyore.y"
                                                         {}
-#line 1528 "phase2/Eeyore.tab.cpp"
+#line 1527 "phase2/Eeyore.tab.cpp"
     break;
 
   case 27:
-#line 56 "phase2/Eeyore.y"
+#line 55 "phase2/Eeyore.y"
                                                         {}
-#line 1534 "phase2/Eeyore.tab.cpp"
+#line 1533 "phase2/Eeyore.tab.cpp"
     break;
 
   case 28:
-#line 57 "phase2/Eeyore.y"
+#line 56 "phase2/Eeyore.y"
                                                         {}
-#line 1540 "phase2/Eeyore.tab.cpp"
+#line 1539 "phase2/Eeyore.tab.cpp"
     break;
 
   case 29:
-#line 58 "phase2/Eeyore.y"
+#line 57 "phase2/Eeyore.y"
                                                         {}
-#line 1546 "phase2/Eeyore.tab.cpp"
+#line 1545 "phase2/Eeyore.tab.cpp"
     break;
 
   case 30:
-#line 59 "phase2/Eeyore.y"
+#line 58 "phase2/Eeyore.y"
                                                         {}
-#line 1552 "phase2/Eeyore.tab.cpp"
+#line 1551 "phase2/Eeyore.tab.cpp"
     break;
 
   case 31:
-#line 60 "phase2/Eeyore.y"
+#line 59 "phase2/Eeyore.y"
                                                         {}
-#line 1558 "phase2/Eeyore.tab.cpp"
+#line 1557 "phase2/Eeyore.tab.cpp"
     break;
 
   case 32:
-#line 61 "phase2/Eeyore.y"
+#line 60 "phase2/Eeyore.y"
                                                         {}
-#line 1564 "phase2/Eeyore.tab.cpp"
+#line 1563 "phase2/Eeyore.tab.cpp"
     break;
 
   case 33:
-#line 62 "phase2/Eeyore.y"
+#line 61 "phase2/Eeyore.y"
                                                         {}
-#line 1570 "phase2/Eeyore.tab.cpp"
+#line 1569 "phase2/Eeyore.tab.cpp"
     break;
 
   case 34:
-#line 63 "phase2/Eeyore.y"
+#line 62 "phase2/Eeyore.y"
                                                         {}
-#line 1576 "phase2/Eeyore.tab.cpp"
+#line 1575 "phase2/Eeyore.tab.cpp"
     break;
 
   case 35:
-#line 65 "phase2/Eeyore.y"
+#line 64 "phase2/Eeyore.y"
                                                         {}
-#line 1582 "phase2/Eeyore.tab.cpp"
+#line 1581 "phase2/Eeyore.tab.cpp"
     break;
 
   case 36:
-#line 66 "phase2/Eeyore.y"
+#line 65 "phase2/Eeyore.y"
                                                         {}
-#line 1588 "phase2/Eeyore.tab.cpp"
+#line 1587 "phase2/Eeyore.tab.cpp"
     break;
 
   case 37:
-#line 68 "phase2/Eeyore.y"
+#line 67 "phase2/Eeyore.y"
                                                         {}
-#line 1594 "phase2/Eeyore.tab.cpp"
+#line 1593 "phase2/Eeyore.tab.cpp"
     break;
 
   case 38:
-#line 69 "phase2/Eeyore.y"
+#line 68 "phase2/Eeyore.y"
                                                         {}
-#line 1600 "phase2/Eeyore.tab.cpp"
+#line 1599 "phase2/Eeyore.tab.cpp"
     break;
 
   case 39:
-#line 70 "phase2/Eeyore.y"
+#line 69 "phase2/Eeyore.y"
                                                         {}
-#line 1606 "phase2/Eeyore.tab.cpp"
+#line 1605 "phase2/Eeyore.tab.cpp"
     break;
 
   case 40:
-#line 71 "phase2/Eeyore.y"
+#line 70 "phase2/Eeyore.y"
                                                         {}
-#line 1612 "phase2/Eeyore.tab.cpp"
+#line 1611 "phase2/Eeyore.tab.cpp"
     break;
 
   case 41:
-#line 72 "phase2/Eeyore.y"
+#line 71 "phase2/Eeyore.y"
                                                         {}
-#line 1618 "phase2/Eeyore.tab.cpp"
+#line 1617 "phase2/Eeyore.tab.cpp"
     break;
 
   case 42:
-#line 73 "phase2/Eeyore.y"
+#line 72 "phase2/Eeyore.y"
                                                         {}
-#line 1624 "phase2/Eeyore.tab.cpp"
+#line 1623 "phase2/Eeyore.tab.cpp"
     break;
 
   case 43:
-#line 74 "phase2/Eeyore.y"
+#line 73 "phase2/Eeyore.y"
                                                         {}
-#line 1630 "phase2/Eeyore.tab.cpp"
+#line 1629 "phase2/Eeyore.tab.cpp"
     break;
 
   case 44:
-#line 75 "phase2/Eeyore.y"
+#line 74 "phase2/Eeyore.y"
                                                         {}
-#line 1636 "phase2/Eeyore.tab.cpp"
+#line 1635 "phase2/Eeyore.tab.cpp"
     break;
 
   case 45:
-#line 76 "phase2/Eeyore.y"
+#line 75 "phase2/Eeyore.y"
                                                         {}
-#line 1642 "phase2/Eeyore.tab.cpp"
+#line 1641 "phase2/Eeyore.tab.cpp"
     break;
 
   case 46:
-#line 77 "phase2/Eeyore.y"
+#line 76 "phase2/Eeyore.y"
                                                         {}
-#line 1648 "phase2/Eeyore.tab.cpp"
+#line 1647 "phase2/Eeyore.tab.cpp"
     break;
 
   case 47:
-#line 78 "phase2/Eeyore.y"
+#line 77 "phase2/Eeyore.y"
                                                         {}
-#line 1654 "phase2/Eeyore.tab.cpp"
+#line 1653 "phase2/Eeyore.tab.cpp"
     break;
 
   case 48:
-#line 79 "phase2/Eeyore.y"
+#line 78 "phase2/Eeyore.y"
                                                         {}
-#line 1660 "phase2/Eeyore.tab.cpp"
+#line 1659 "phase2/Eeyore.tab.cpp"
     break;
 
   case 49:
-#line 80 "phase2/Eeyore.y"
+#line 79 "phase2/Eeyore.y"
                                                         {}
-#line 1666 "phase2/Eeyore.tab.cpp"
+#line 1665 "phase2/Eeyore.tab.cpp"
     break;
 
 
-#line 1670 "phase2/Eeyore.tab.cpp"
+#line 1669 "phase2/Eeyore.tab.cpp"
 
       default: break;
     }
@@ -1898,7 +1897,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 82 "phase2/Eeyore.y"
+#line 81 "phase2/Eeyore.y"
 
 int zzerror(const char *message) {
 	return 0;

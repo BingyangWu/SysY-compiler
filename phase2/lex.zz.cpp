@@ -784,8 +784,14 @@ char *yytext;
     void zzecho() {
         fprintf(stderr, "%s", zztext);
     }
-#line 788 "phase2/lex.zz.cpp"
-#line 789 "phase2/lex.zz.cpp"
+
+    char *fork_string(const char*old_ptr) {
+        char *ptr = new char [sizeof(old_ptr)/sizeof(char)];
+        strcpy(ptr, old_ptr);
+        return ptr;
+    }
+#line 794 "phase2/lex.zz.cpp"
+#line 795 "phase2/lex.zz.cpp"
 
 #define INITIAL 0
 
@@ -1002,10 +1008,10 @@ YY_DECL
 		}
 
 	{
-#line 36 "phase2/Eeyore.l"
+#line 42 "phase2/Eeyore.l"
 
 
-#line 1009 "phase2/lex.zz.cpp"
+#line 1015 "phase2/lex.zz.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1064,112 +1070,112 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 38 "phase2/Eeyore.l"
+#line 44 "phase2/Eeyore.l"
 { zzecho(); return E_VAR; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 39 "phase2/Eeyore.l"
+#line 45 "phase2/Eeyore.l"
 { zzecho(); return E_PARAM; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 40 "phase2/Eeyore.l"
+#line 46 "phase2/Eeyore.l"
 { zzecho(); return E_CALL; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 41 "phase2/Eeyore.l"
+#line 47 "phase2/Eeyore.l"
 { zzecho(); return E_IF; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 42 "phase2/Eeyore.l"
+#line 48 "phase2/Eeyore.l"
 { zzecho(); return E_GOTO; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 43 "phase2/Eeyore.l"
+#line 49 "phase2/Eeyore.l"
 { zzecho(); return E_RET; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 44 "phase2/Eeyore.l"
+#line 50 "phase2/Eeyore.l"
 { zzecho(); return E_END; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 46 "phase2/Eeyore.l"
+#line 52 "phase2/Eeyore.l"
 { zzecho(); return E_AND; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 47 "phase2/Eeyore.l"
+#line 53 "phase2/Eeyore.l"
 { zzecho(); return E_OR; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 48 "phase2/Eeyore.l"
+#line 54 "phase2/Eeyore.l"
 { zzecho(); return E_EQ; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 49 "phase2/Eeyore.l"
+#line 55 "phase2/Eeyore.l"
 { zzecho(); return E_NEQ; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 50 "phase2/Eeyore.l"
+#line 56 "phase2/Eeyore.l"
 { zzecho(); return E_LEQ; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 51 "phase2/Eeyore.l"
+#line 57 "phase2/Eeyore.l"
 { zzecho(); return E_GEQ; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 53 "phase2/Eeyore.l"
-{ zzecho(); zzlval.i = (int)strtol(zztext, nullptr, 0); return E_IMM; }
+#line 59 "phase2/Eeyore.l"
+{ zzecho(); zzlval.str = fork_string(zztext); return E_IMM; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 55 "phase2/Eeyore.l"
-{ zzecho(); zzlval.str = new char[sizeof(zztext)/sizeof(char)]; strcpy(zzlval.str, zztext); return E_ID; }
+#line 61 "phase2/Eeyore.l"
+{ zzecho(); zzlval.str = fork_string(zztext); return E_ID; }
 	YY_BREAK
 case 16:
 /* rule 16 can match eol */
 YY_RULE_SETUP
-#line 57 "phase2/Eeyore.l"
+#line 63 "phase2/Eeyore.l"
 {  }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 58 "phase2/Eeyore.l"
+#line 64 "phase2/Eeyore.l"
 { zzecho(); }
 	YY_BREAK
 case 18:
 /* rule 18 can match eol */
 YY_RULE_SETUP
-#line 59 "phase2/Eeyore.l"
+#line 65 "phase2/Eeyore.l"
 { zzecho(); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 60 "phase2/Eeyore.l"
+#line 66 "phase2/Eeyore.l"
 { zzecho(); return zztext[0]; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 62 "phase2/Eeyore.l"
+#line 68 "phase2/Eeyore.l"
 { fprintf(stderr, "\nflex error!!: %s\n", zztext); }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 64 "phase2/Eeyore.l"
+#line 70 "phase2/Eeyore.l"
 ECHO;
 	YY_BREAK
-#line 1173 "phase2/lex.zz.cpp"
+#line 1179 "phase2/lex.zz.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2174,6 +2180,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 64 "phase2/Eeyore.l"
+#line 70 "phase2/Eeyore.l"
 
 

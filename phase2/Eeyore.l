@@ -9,6 +9,12 @@
     void zzecho() {
         fprintf(stderr, "%s", zztext);
     }
+
+    char *fork_string(const char*old_ptr) {
+        char *ptr = new char [sizeof(old_ptr)/sizeof(char)];
+        strcpy(ptr, old_ptr);
+        return ptr;
+    }
 %}
 
 letter              [a-zA-Z]
@@ -50,9 +56,9 @@ comment             "//".*|"/*"[^*]*"*"+([^*/][^*]*"*"+)*"/"
 "<="                                    { zzecho(); return E_LEQ; }
 ">="                                    { zzecho(); return E_GEQ; }
 
-{integer}                               { zzecho(); zzlval.i = (int)strtol(zztext, nullptr, 0); return E_IMM; }
+{integer}                               { zzecho(); zzlval.str = fork_string(zztext); return E_IMM; }
 
-{identifier}                            { zzecho(); zzlval.str = new char[sizeof(zztext)/sizeof(char)]; strcpy(zzlval.str, zztext); return E_ID; }
+{identifier}                            { zzecho(); zzlval.str = fork_string(zztext); return E_ID; }
 
 {comment}                               {  }
 {whitespace}                            { zzecho(); }

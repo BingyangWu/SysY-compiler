@@ -5,7 +5,6 @@
 %}
 %define api.value.type {
     union ZZ_DATA {
-        int i;
         char* str;
     }
 }

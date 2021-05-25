@@ -79,7 +79,6 @@ extern int zzdebug;
 #if ! defined ZZSTYPE && ! defined ZZSTYPE_IS_DECLARED
 typedef 
     union ZZ_DATA {
-        int i;
         char* str;
     }
  ZZSTYPE;
