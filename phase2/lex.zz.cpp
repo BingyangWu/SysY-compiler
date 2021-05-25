@@ -1106,32 +1106,32 @@ YY_RULE_SETUP
 case 8:
 YY_RULE_SETUP
 #line 52 "phase2/Eeyore.l"
-{ zzecho(); return E_AND; }
+{ zzecho(); zzlval.str = fork_string(zztext); return E_AND; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 53 "phase2/Eeyore.l"
-{ zzecho(); return E_OR; }
+{ zzecho(); zzlval.str = fork_string(zztext); return E_OR; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 54 "phase2/Eeyore.l"
-{ zzecho(); return E_EQ; }
+{ zzecho(); zzlval.str = fork_string(zztext); return E_EQ; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 55 "phase2/Eeyore.l"
-{ zzecho(); return E_NEQ; }
+{ zzecho(); zzlval.str = fork_string(zztext); return E_NEQ; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 56 "phase2/Eeyore.l"
-{ zzecho(); return E_LEQ; }
+{ zzecho(); zzlval.str = fork_string(zztext); return E_LEQ; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 57 "phase2/Eeyore.l"
-{ zzecho(); return E_GEQ; }
+{ zzecho(); zzlval.str = fork_string(zztext); return E_GEQ; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
@@ -1163,7 +1163,7 @@ YY_RULE_SETUP
 case 19:
 YY_RULE_SETUP
 #line 66 "phase2/Eeyore.l"
-{ zzecho(); return zztext[0]; }
+{ zzecho(); zzlval.str = fork_string(zztext); return zztext[0]; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP

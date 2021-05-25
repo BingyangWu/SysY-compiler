@@ -76,10 +76,12 @@
 /* First part of user prologue.  */
 #line 2 "phase2/Eeyore.y"
 
+    #include "Tigger.hpp"
+
     int zzerror(const char *);
     extern int zzlex(void);
 
-#line 83 "phase2/Eeyore.tab.cpp"
+#line 85 "phase2/Eeyore.tab.cpp"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -473,18 +475,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  13
+#define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   78
+#define YYLAST   66
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  30
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  13
+#define YYNNTS  12
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  49
+#define YYNRULES  44
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  81
+#define YYNSTATES  74
 
 #define YYUNDEFTOK  2
 #define YYMAXUTOK   272
@@ -533,11 +535,11 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    20,    20,    22,    23,    24,    25,    26,    27,    29,
-      30,    32,    33,    34,    35,    37,    39,    41,    42,    44,
-      46,    47,    49,    50,    51,    52,    53,    54,    56,    57,
-      58,    59,    60,    61,    62,    64,    65,    67,    68,    69,
-      70,    71,    72,    73,    74,    75,    76,    77,    78,    79
+       0,    22,    22,    23,    24,    25,    27,    28,    30,    31,
+      33,    35,    37,    38,    40,    42,    43,    45,    46,    47,
+      48,    49,    50,    52,    53,    54,    55,    56,    57,    58,
+      60,    61,    63,    64,    65,    66,    67,    68,    69,    70,
+      71,    72,    73,    74,    75
 };
 #endif
 
@@ -549,7 +551,7 @@ static const char *const yytname[] =
   "$end", "error", "$undefined", "E_VAR", "E_PARAM", "E_CALL", "E_IF",
   "E_GOTO", "E_RET", "E_END", "E_AND", "E_OR", "E_EQ", "E_NEQ", "E_LEQ",
   "E_GEQ", "E_IMM", "E_ID", "'='", "'['", "']'", "'!'", "':'", "'>'",
-  "'<'", "'+'", "'-'", "'*'", "'/'", "'%'", "$accept", "Eeyore", "Code",
+  "'<'", "'+'", "'-'", "'*'", "'/'", "'%'", "$accept", "Code",
   "Declaration", "Initialization", "FunctionDef", "FunctionHeader",
   "Statements", "FunctionEnd", "Statement", "Expression", "RightValue",
   "BinOp", YY_NULLPTR
@@ -581,15 +583,14 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-       1,   -11,    -4,    16,     1,   -20,   -20,   -20,    40,   -16,
-     -20,    20,    14,   -20,   -20,   -20,   -20,    24,    17,    24,
-      21,    24,    13,   -20,    56,   -20,   -20,   -20,   -20,   -20,
-      30,   -20,   -20,   -20,   -20,    -2,   -20,   -20,    12,    24,
-     -20,    37,   -20,   -20,    38,   -20,   -20,   -20,   -20,   -20,
-     -20,   -20,   -20,   -20,   -20,   -20,   -20,   -20,    24,    49,
-      48,    24,    -2,    35,   -20,    36,    61,   -20,    24,   -20,
-      24,    51,   -20,   -20,    53,    52,   -20,    24,   -20,   -20,
-     -20
+     -20,     3,   -20,    -9,    -3,   -20,   -20,   -20,   -20,   -16,
+     -20,    16,   -11,    49,   -20,   -20,   -20,   -20,    17,    16,
+       0,    16,    19,    16,    22,    12,   -20,   -20,   -20,   -20,
+      25,   -20,   -20,    -1,   -20,   -20,   -20,    24,    16,   -20,
+      16,   -20,   -20,   -20,   -20,   -20,   -20,   -20,   -20,   -20,
+     -20,   -20,   -20,   -20,    16,    30,    23,    16,    -1,    28,
+     -20,    42,   -20,    16,   -20,    16,    32,    43,    39,   -20,
+      16,   -20,   -20,   -20
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -597,29 +598,28 @@ static const yytype_int8 yypact[] =
      means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     0,     0,     0,     2,     4,     6,     8,     0,     0,
-       9,     0,     0,     1,     3,     5,     7,     0,     0,     0,
-       0,    34,     0,    21,     0,    18,    20,    10,    11,    12,
-       0,    36,    35,    30,    31,     0,    28,    33,     0,     0,
-      29,     0,    15,    17,    16,    37,    38,    39,    40,    41,
-      42,    43,    44,    45,    46,    47,    48,    49,     0,     0,
-      35,     0,    24,     0,    19,     0,     0,    32,     0,    23,
-       0,     0,    13,    14,     0,     0,    22,     0,    27,    26,
-      25
+       5,     0,     1,     0,     0,     2,     3,     4,    13,     0,
+       6,     0,     0,     0,     7,    31,    30,     8,     0,     0,
+       0,     0,     0,    29,     0,     0,    16,    10,    12,    15,
+      11,    25,    26,     0,    23,    28,    14,     0,     0,    24,
+       0,    32,    33,    34,    35,    36,    37,    38,    39,    40,
+      41,    42,    43,    44,     0,     0,    30,     0,    19,     0,
+       9,     0,    27,     0,    18,     0,     0,     0,     0,    17,
+       0,    22,    21,    20
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -20,   -20,   -20,     3,    67,    70,   -20,   -20,   -20,    54,
-     -20,   -19,    15
+     -20,   -20,    48,   -20,   -20,   -20,   -20,   -20,   -20,   -20,
+     -19,     4
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     3,     4,    23,     6,     7,     8,    24,    42,    25,
-      26,    33,    58
+      -1,     1,     5,     6,     7,     8,    13,    27,    28,    29,
+      17,    54
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -627,61 +627,58 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      35,    27,    37,     5,     1,     9,    10,    14,    45,    46,
-      47,    48,    49,    50,    11,    12,    13,    59,     2,    62,
-      63,    51,    52,    53,    54,    55,    56,    57,    31,    60,
-      30,    38,    39,    61,    34,    40,    28,    29,    36,    66,
-      31,    32,    69,     1,    17,    18,    19,    20,    21,    75,
-      44,    76,    72,    73,    64,    71,    65,    22,    80,     1,
-      17,    18,    19,    20,    21,    41,    67,    68,    74,    77,
-      78,    15,    79,    22,    16,     0,     0,    70,    43
+      31,    14,    33,     2,    35,    18,     3,     9,    10,    41,
+      42,    43,    44,    45,    46,    11,    12,    32,    58,    59,
+       4,    60,    47,    48,    49,    50,    51,    52,    53,    55,
+      37,    38,    15,    16,    39,    61,    34,    30,    64,    36,
+      15,    56,    63,    40,    68,    57,    69,    62,    66,    67,
+      70,    73,     3,    19,    20,    21,    22,    23,    24,    72,
+      71,    26,    65,     0,     0,     0,    25
 };
 
 static const yytype_int8 yycheck[] =
 {
-      19,    17,    21,     0,     3,    16,    17,     4,    10,    11,
-      12,    13,    14,    15,    18,    19,     0,     5,    17,    38,
-      39,    23,    24,    25,    26,    27,    28,    29,    16,    17,
-      16,    18,    19,    21,    17,    22,    16,    17,    17,    58,
-      16,    17,    61,     3,     4,     5,     6,     7,     8,    68,
-      20,    70,    16,    17,    17,    20,    18,    17,    77,     3,
-       4,     5,     6,     7,     8,     9,    17,    19,     7,    18,
-      17,     4,    20,    17,     4,    -1,    -1,    62,    24
+      19,    17,    21,     0,    23,    16,     3,    16,    17,    10,
+      11,    12,    13,    14,    15,    18,    19,    17,    37,    38,
+      17,    40,    23,    24,    25,    26,    27,    28,    29,     5,
+      18,    19,    16,    17,    22,    54,    17,    20,    57,    17,
+      16,    17,    19,    18,    63,    21,    65,    17,    20,     7,
+      18,    70,     3,     4,     5,     6,     7,     8,     9,    20,
+      17,    13,    58,    -1,    -1,    -1,    17
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     3,    17,    31,    32,    33,    34,    35,    36,    16,
-      17,    18,    19,     0,    33,    34,    35,     4,     5,     6,
-       7,     8,    17,    33,    37,    39,    40,    17,    16,    17,
-      16,    16,    17,    41,    17,    41,    17,    41,    18,    19,
-      22,     9,    38,    39,    20,    10,    11,    12,    13,    14,
-      15,    23,    24,    25,    26,    27,    28,    29,    42,     5,
-      17,    21,    41,    41,    17,    18,    41,    17,    19,    41,
-      42,    20,    16,    17,     7,    41,    41,    18,    17,    20,
-      41
+       0,    31,     0,     3,    17,    32,    33,    34,    35,    16,
+      17,    18,    19,    36,    17,    16,    17,    40,    16,     4,
+       5,     6,     7,     8,     9,    17,    32,    37,    38,    39,
+      20,    40,    17,    40,    17,    40,    17,    18,    19,    22,
+      18,    10,    11,    12,    13,    14,    15,    23,    24,    25,
+      26,    27,    28,    29,    41,     5,    17,    21,    40,    40,
+      40,    40,    17,    19,    40,    41,    20,     7,    40,    40,
+      18,    17,    20,    40
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    30,    31,    32,    32,    32,    32,    32,    32,    33,
-      33,    34,    34,    34,    34,    35,    36,    37,    37,    38,
-      39,    39,    40,    40,    40,    40,    40,    40,    40,    40,
-      40,    40,    40,    40,    40,    41,    41,    42,    42,    42,
-      42,    42,    42,    42,    42,    42,    42,    42,    42,    42
+       0,    30,    31,    31,    31,    31,    32,    32,    33,    33,
+      34,    35,    36,    36,    37,    38,    38,    39,    39,    39,
+      39,    39,    39,    39,    39,    39,    39,    39,    39,    39,
+      40,    40,    41,    41,    41,    41,    41,    41,    41,    41,
+      41,    41,    41,    41,    41
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     1,     2,     1,     2,     1,     2,     1,     2,
-       3,     3,     3,     6,     6,     3,     4,     2,     1,     2,
-       1,     1,     5,     4,     3,     6,     6,     6,     2,     2,
-       2,     2,     4,     2,     1,     1,     1,     1,     1,     1,
-       1,     1,     1,     1,     1,     1,     1,     1,     1,     1
+       0,     2,     2,     2,     2,     0,     2,     3,     3,     6,
+       3,     4,     2,     0,     2,     1,     1,     5,     4,     3,
+       6,     6,     6,     2,     2,     2,     2,     4,     2,     1,
+       1,     1,     1,     1,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1
 };
 
 
@@ -1377,295 +1374,265 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 20 "phase2/Eeyore.y"
-                                                        {}
-#line 1383 "phase2/Eeyore.tab.cpp"
+#line 22 "phase2/Eeyore.y"
+                                                        {  }
+#line 1380 "phase2/Eeyore.tab.cpp"
     break;
 
   case 3:
-#line 22 "phase2/Eeyore.y"
-                                                        {}
-#line 1389 "phase2/Eeyore.tab.cpp"
+#line 23 "phase2/Eeyore.y"
+                                                        {  }
+#line 1386 "phase2/Eeyore.tab.cpp"
     break;
 
   case 4:
-#line 23 "phase2/Eeyore.y"
-                                                        {}
-#line 1395 "phase2/Eeyore.tab.cpp"
+#line 24 "phase2/Eeyore.y"
+                                                        {  }
+#line 1392 "phase2/Eeyore.tab.cpp"
     break;
 
   case 5:
-#line 24 "phase2/Eeyore.y"
-                                                        {}
-#line 1401 "phase2/Eeyore.tab.cpp"
+#line 25 "phase2/Eeyore.y"
+                                                        { tigger_statements.clear(); tigger_declarations.clear(); eeyore_functions.clear(); }
+#line 1398 "phase2/Eeyore.tab.cpp"
     break;
 
   case 6:
-#line 25 "phase2/Eeyore.y"
+#line 27 "phase2/Eeyore.y"
                                                         {}
-#line 1407 "phase2/Eeyore.tab.cpp"
+#line 1404 "phase2/Eeyore.tab.cpp"
     break;
 
   case 7:
-#line 26 "phase2/Eeyore.y"
+#line 28 "phase2/Eeyore.y"
                                                         {}
-#line 1413 "phase2/Eeyore.tab.cpp"
+#line 1410 "phase2/Eeyore.tab.cpp"
     break;
 
   case 8:
-#line 27 "phase2/Eeyore.y"
+#line 30 "phase2/Eeyore.y"
                                                         {}
-#line 1419 "phase2/Eeyore.tab.cpp"
+#line 1416 "phase2/Eeyore.tab.cpp"
     break;
 
   case 9:
-#line 29 "phase2/Eeyore.y"
+#line 31 "phase2/Eeyore.y"
                                                         {}
-#line 1425 "phase2/Eeyore.tab.cpp"
+#line 1422 "phase2/Eeyore.tab.cpp"
     break;
 
   case 10:
-#line 30 "phase2/Eeyore.y"
-                                                        {}
-#line 1431 "phase2/Eeyore.tab.cpp"
+#line 33 "phase2/Eeyore.y"
+                                                        {  }
+#line 1428 "phase2/Eeyore.tab.cpp"
     break;
 
   case 11:
-#line 32 "phase2/Eeyore.y"
+#line 35 "phase2/Eeyore.y"
                                                         {}
-#line 1437 "phase2/Eeyore.tab.cpp"
+#line 1434 "phase2/Eeyore.tab.cpp"
     break;
 
   case 12:
-#line 33 "phase2/Eeyore.y"
-                                                        {}
-#line 1443 "phase2/Eeyore.tab.cpp"
+#line 37 "phase2/Eeyore.y"
+                                                        {  }
+#line 1440 "phase2/Eeyore.tab.cpp"
     break;
 
   case 13:
-#line 34 "phase2/Eeyore.y"
-                                                        {}
-#line 1449 "phase2/Eeyore.tab.cpp"
+#line 38 "phase2/Eeyore.y"
+                                                        {  }
+#line 1446 "phase2/Eeyore.tab.cpp"
     break;
 
   case 14:
-#line 35 "phase2/Eeyore.y"
+#line 40 "phase2/Eeyore.y"
                                                         {}
-#line 1455 "phase2/Eeyore.tab.cpp"
+#line 1452 "phase2/Eeyore.tab.cpp"
     break;
 
   case 15:
-#line 37 "phase2/Eeyore.y"
-                                                        {}
-#line 1461 "phase2/Eeyore.tab.cpp"
+#line 42 "phase2/Eeyore.y"
+                                                        {  }
+#line 1458 "phase2/Eeyore.tab.cpp"
     break;
 
   case 16:
-#line 39 "phase2/Eeyore.y"
-                                                        {}
-#line 1467 "phase2/Eeyore.tab.cpp"
+#line 43 "phase2/Eeyore.y"
+                                                        {  }
+#line 1464 "phase2/Eeyore.tab.cpp"
     break;
 
   case 17:
-#line 41 "phase2/Eeyore.y"
+#line 45 "phase2/Eeyore.y"
                                                         {}
-#line 1473 "phase2/Eeyore.tab.cpp"
+#line 1470 "phase2/Eeyore.tab.cpp"
     break;
 
   case 18:
-#line 42 "phase2/Eeyore.y"
+#line 46 "phase2/Eeyore.y"
                                                         {}
-#line 1479 "phase2/Eeyore.tab.cpp"
+#line 1476 "phase2/Eeyore.tab.cpp"
     break;
 
   case 19:
-#line 44 "phase2/Eeyore.y"
+#line 47 "phase2/Eeyore.y"
                                                         {}
-#line 1485 "phase2/Eeyore.tab.cpp"
+#line 1482 "phase2/Eeyore.tab.cpp"
     break;
 
   case 20:
-#line 46 "phase2/Eeyore.y"
+#line 48 "phase2/Eeyore.y"
                                                         {}
-#line 1491 "phase2/Eeyore.tab.cpp"
+#line 1488 "phase2/Eeyore.tab.cpp"
     break;
 
   case 21:
-#line 47 "phase2/Eeyore.y"
+#line 49 "phase2/Eeyore.y"
                                                         {}
-#line 1497 "phase2/Eeyore.tab.cpp"
+#line 1494 "phase2/Eeyore.tab.cpp"
     break;
 
   case 22:
-#line 49 "phase2/Eeyore.y"
+#line 51 "phase2/Eeyore.y"
                                                         {}
-#line 1503 "phase2/Eeyore.tab.cpp"
+#line 1500 "phase2/Eeyore.tab.cpp"
     break;
 
   case 23:
-#line 50 "phase2/Eeyore.y"
+#line 52 "phase2/Eeyore.y"
                                                         {}
-#line 1509 "phase2/Eeyore.tab.cpp"
+#line 1506 "phase2/Eeyore.tab.cpp"
     break;
 
   case 24:
-#line 51 "phase2/Eeyore.y"
+#line 53 "phase2/Eeyore.y"
                                                         {}
-#line 1515 "phase2/Eeyore.tab.cpp"
+#line 1512 "phase2/Eeyore.tab.cpp"
     break;
 
   case 25:
-#line 52 "phase2/Eeyore.y"
+#line 54 "phase2/Eeyore.y"
                                                         {}
-#line 1521 "phase2/Eeyore.tab.cpp"
+#line 1518 "phase2/Eeyore.tab.cpp"
     break;
 
   case 26:
-#line 53 "phase2/Eeyore.y"
+#line 55 "phase2/Eeyore.y"
                                                         {}
-#line 1527 "phase2/Eeyore.tab.cpp"
+#line 1524 "phase2/Eeyore.tab.cpp"
     break;
 
   case 27:
-#line 55 "phase2/Eeyore.y"
+#line 56 "phase2/Eeyore.y"
                                                         {}
-#line 1533 "phase2/Eeyore.tab.cpp"
+#line 1530 "phase2/Eeyore.tab.cpp"
     break;
 
   case 28:
-#line 56 "phase2/Eeyore.y"
+#line 57 "phase2/Eeyore.y"
                                                         {}
-#line 1539 "phase2/Eeyore.tab.cpp"
+#line 1536 "phase2/Eeyore.tab.cpp"
     break;
 
   case 29:
-#line 57 "phase2/Eeyore.y"
+#line 58 "phase2/Eeyore.y"
                                                         {}
-#line 1545 "phase2/Eeyore.tab.cpp"
+#line 1542 "phase2/Eeyore.tab.cpp"
     break;
 
   case 30:
-#line 58 "phase2/Eeyore.y"
-                                                        {}
-#line 1551 "phase2/Eeyore.tab.cpp"
+#line 60 "phase2/Eeyore.y"
+                                                        { yyval = yyvsp[0]; }
+#line 1548 "phase2/Eeyore.tab.cpp"
     break;
 
   case 31:
-#line 59 "phase2/Eeyore.y"
-                                                        {}
-#line 1557 "phase2/Eeyore.tab.cpp"
+#line 61 "phase2/Eeyore.y"
+                                                        { yyval = yyvsp[0]; }
+#line 1554 "phase2/Eeyore.tab.cpp"
     break;
 
   case 32:
-#line 60 "phase2/Eeyore.y"
-                                                        {}
-#line 1563 "phase2/Eeyore.tab.cpp"
+#line 63 "phase2/Eeyore.y"
+                                                        { yyval = yyvsp[0]; }
+#line 1560 "phase2/Eeyore.tab.cpp"
     break;
 
   case 33:
-#line 61 "phase2/Eeyore.y"
-                                                        {}
-#line 1569 "phase2/Eeyore.tab.cpp"
+#line 64 "phase2/Eeyore.y"
+                                                        { yyval = yyvsp[0]; }
+#line 1566 "phase2/Eeyore.tab.cpp"
     break;
 
   case 34:
-#line 62 "phase2/Eeyore.y"
-                                                        {}
-#line 1575 "phase2/Eeyore.tab.cpp"
+#line 65 "phase2/Eeyore.y"
+                                                        { yyval = yyvsp[0]; }
+#line 1572 "phase2/Eeyore.tab.cpp"
     break;
 
   case 35:
-#line 64 "phase2/Eeyore.y"
-                                                        {}
-#line 1581 "phase2/Eeyore.tab.cpp"
+#line 66 "phase2/Eeyore.y"
+                                                        { yyval = yyvsp[0]; }
+#line 1578 "phase2/Eeyore.tab.cpp"
     break;
 
   case 36:
-#line 65 "phase2/Eeyore.y"
-                                                        {}
-#line 1587 "phase2/Eeyore.tab.cpp"
+#line 67 "phase2/Eeyore.y"
+                                                        { yyval = yyvsp[0]; }
+#line 1584 "phase2/Eeyore.tab.cpp"
     break;
 
   case 37:
-#line 67 "phase2/Eeyore.y"
-                                                        {}
-#line 1593 "phase2/Eeyore.tab.cpp"
+#line 68 "phase2/Eeyore.y"
+                                                        { yyval = yyvsp[0]; }
+#line 1590 "phase2/Eeyore.tab.cpp"
     break;
 
   case 38:
-#line 68 "phase2/Eeyore.y"
-                                                        {}
-#line 1599 "phase2/Eeyore.tab.cpp"
+#line 69 "phase2/Eeyore.y"
+                                                        { yyval = yyvsp[0]; }
+#line 1596 "phase2/Eeyore.tab.cpp"
     break;
 
   case 39:
-#line 69 "phase2/Eeyore.y"
-                                                        {}
-#line 1605 "phase2/Eeyore.tab.cpp"
+#line 70 "phase2/Eeyore.y"
+                                                        { yyval = yyvsp[0]; }
+#line 1602 "phase2/Eeyore.tab.cpp"
     break;
 
   case 40:
-#line 70 "phase2/Eeyore.y"
-                                                        {}
-#line 1611 "phase2/Eeyore.tab.cpp"
+#line 71 "phase2/Eeyore.y"
+                                                        { yyval = yyvsp[0]; }
+#line 1608 "phase2/Eeyore.tab.cpp"
     break;
 
   case 41:
-#line 71 "phase2/Eeyore.y"
-                                                        {}
-#line 1617 "phase2/Eeyore.tab.cpp"
+#line 72 "phase2/Eeyore.y"
+                                                        { yyval = yyvsp[0]; }
+#line 1614 "phase2/Eeyore.tab.cpp"
     break;
 
   case 42:
-#line 72 "phase2/Eeyore.y"
-                                                        {}
-#line 1623 "phase2/Eeyore.tab.cpp"
+#line 73 "phase2/Eeyore.y"
+                                                        { yyval = yyvsp[0]; }
+#line 1620 "phase2/Eeyore.tab.cpp"
     break;
 
   case 43:
-#line 73 "phase2/Eeyore.y"
-                                                        {}
-#line 1629 "phase2/Eeyore.tab.cpp"
+#line 74 "phase2/Eeyore.y"
+                                                        { yyval = yyvsp[0]; }
+#line 1626 "phase2/Eeyore.tab.cpp"
     break;
 
   case 44:
-#line 74 "phase2/Eeyore.y"
-                                                        {}
-#line 1635 "phase2/Eeyore.tab.cpp"
-    break;
-
-  case 45:
 #line 75 "phase2/Eeyore.y"
-                                                        {}
-#line 1641 "phase2/Eeyore.tab.cpp"
-    break;
-
-  case 46:
-#line 76 "phase2/Eeyore.y"
-                                                        {}
-#line 1647 "phase2/Eeyore.tab.cpp"
-    break;
-
-  case 47:
-#line 77 "phase2/Eeyore.y"
-                                                        {}
-#line 1653 "phase2/Eeyore.tab.cpp"
-    break;
-
-  case 48:
-#line 78 "phase2/Eeyore.y"
-                                                        {}
-#line 1659 "phase2/Eeyore.tab.cpp"
-    break;
-
-  case 49:
-#line 79 "phase2/Eeyore.y"
-                                                        {}
-#line 1665 "phase2/Eeyore.tab.cpp"
+                                                        { yyval = yyvsp[0]; }
+#line 1632 "phase2/Eeyore.tab.cpp"
     break;
 
 
-#line 1669 "phase2/Eeyore.tab.cpp"
+#line 1636 "phase2/Eeyore.tab.cpp"
 
       default: break;
     }
@@ -1897,7 +1864,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 81 "phase2/Eeyore.y"
+#line 77 "phase2/Eeyore.y"
 
 int zzerror(const char *message) {
 	return 0;

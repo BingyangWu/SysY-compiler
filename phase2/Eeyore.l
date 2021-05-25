@@ -49,12 +49,12 @@ comment             "//".*|"/*"[^*]*"*"+([^*/][^*]*"*"+)*"/"
 "return"                                { zzecho(); return E_RET; }
 "end"                                   { zzecho(); return E_END; }
 
-"&&"                                    { zzecho(); return E_AND; }
-"||"                                    { zzecho(); return E_OR; }
-"=="                                    { zzecho(); return E_EQ; }
-"!="                                    { zzecho(); return E_NEQ; }
-"<="                                    { zzecho(); return E_LEQ; }
-">="                                    { zzecho(); return E_GEQ; }
+"&&"                                    { zzecho(); zzlval.str = fork_string(zztext); return E_AND; }
+"||"                                    { zzecho(); zzlval.str = fork_string(zztext); return E_OR; }
+"=="                                    { zzecho(); zzlval.str = fork_string(zztext); return E_EQ; }
+"!="                                    { zzecho(); zzlval.str = fork_string(zztext); return E_NEQ; }
+"<="                                    { zzecho(); zzlval.str = fork_string(zztext); return E_LEQ; }
+">="                                    { zzecho(); zzlval.str = fork_string(zztext); return E_GEQ; }
 
 {integer}                               { zzecho(); zzlval.str = fork_string(zztext); return E_IMM; }
 
@@ -63,7 +63,7 @@ comment             "//".*|"/*"[^*]*"*"+([^*/][^*]*"*"+)*"/"
 {comment}                               {  }
 {whitespace}                            { zzecho(); }
 {newline}                               { zzecho(); }
-[\+\-\*\/\%\=\!\<\>\(\)\[\]\{\}\,\;\:]    { zzecho(); return zztext[0]; }
+[\+\-\*\/\%\=\!\<\>\(\)\[\]\{\}\,\;\:]    { zzecho(); zzlval.str = fork_string(zztext); return zztext[0]; }
 
 .                                       { fprintf(stderr, "\nflex error!!: %s\n", zztext); }
 

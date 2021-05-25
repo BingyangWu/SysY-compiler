@@ -1,5 +1,7 @@
 %define api.prefix {zz}
 %{
+    #include "Tigger.hpp"
+
     int zzerror(const char *);
     extern int zzlex(void);
 %}
@@ -17,34 +19,28 @@
 
 %%
 
-Eeyore          :Code                                   {}
-;
-Code            :Code Declaration                       {}
-                |Declaration                            {}
-                |Code Initialization                    {}
-                |Initialization                         {}
-                |Code FunctionDef                       {}
-                |FunctionDef                            {}
+Code            :Code Declaration                       {  }
+                |Code Initialization                    {  }
+                |Code FunctionDef                       {  }
+                |                                       { tigger_statements.clear(); tigger_declarations.clear(); eeyore_functions.clear(); }
 ;
 Declaration     :E_VAR E_ID                             {}
                 |E_VAR E_IMM E_ID                       {}
 ;
-Initialization  :E_ID '=' E_IMM                         {}
-                |E_ID '=' E_ID                          {}
-                |E_ID '[' E_IMM ']' '=' E_IMM           {}
-                |E_ID '[' E_IMM ']' '=' E_ID            {}
+Initialization  :E_ID '=' RightValue                    {}
+                |E_ID '[' E_IMM ']' '=' RightValue      {}
 ;
-FunctionDef     :FunctionHeader Statements FunctionEnd  {}
+FunctionDef     :FunctionHeader Statements FunctionEnd  {  }
 ;
 FunctionHeader  :E_ID '[' E_IMM ']'                     {}
 ;
-Statements      :Statements Statement                   {}
-                |Statement                              {}
+Statements      :Statements Statement                   {  }
+                |                                       {  }
 ;
 FunctionEnd     :E_END E_ID                             {}
 ;
-Statement       :Expression                             {}
-                |Declaration                            {}
+Statement       :Expression                             {  }
+                |Declaration                            {  }
 ;
 Expression      :E_ID '=' RightValue BinOp RightValue   {}
                 |E_ID '=' '!' RightValue                {}
@@ -61,22 +57,22 @@ Expression      :E_ID '=' RightValue BinOp RightValue   {}
                 |E_RET RightValue                       {}
                 |E_RET                                  {}
 ;
-RightValue      :E_ID                                   {}
-                |E_IMM                                  {}
+RightValue      :E_ID                                   { $$ = $1; }
+                |E_IMM                                  { $$ = $1; }
 ;
-BinOp           :E_AND                                  {}
-                |E_OR                                   {}
-                |E_EQ                                   {}
-                |E_NEQ                                  {}
-                |E_LEQ                                  {}
-                |E_GEQ                                  {}
-                |'>'                                    {}
-                |'<'                                    {}
-                |'+'                                    {}
-                |'-'                                    {}
-                |'*'                                    {}
-                |'/'                                    {}
-                |'%'                                    {}
+BinOp           :E_AND                                  { $$ = $1; }
+                |E_OR                                   { $$ = $1; }
+                |E_EQ                                   { $$ = $1; }
+                |E_NEQ                                  { $$ = $1; }
+                |E_LEQ                                  { $$ = $1; }
+                |E_GEQ                                  { $$ = $1; }
+                |'>'                                    { $$ = $1; }
+                |'<'                                    { $$ = $1; }
+                |'+'                                    { $$ = $1; }
+                |'-'                                    { $$ = $1; }
+                |'*'                                    { $$ = $1; }
+                |'/'                                    { $$ = $1; }
+                |'%'                                    { $$ = $1; }
 ;
 %%
 int zzerror(const char *message) {
