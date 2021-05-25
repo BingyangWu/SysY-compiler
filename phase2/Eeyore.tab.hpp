@@ -52,10 +52,37 @@
 extern int zzdebug;
 #endif
 
+/* Token type.  */
+#ifndef ZZTOKENTYPE
+# define ZZTOKENTYPE
+  enum zztokentype
+  {
+    E_VAR = 258,
+    E_PARAM = 259,
+    E_CALL = 260,
+    E_IF = 261,
+    E_GOTO = 262,
+    E_RET = 263,
+    E_END = 264,
+    E_AND = 265,
+    E_OR = 266,
+    E_EQ = 267,
+    E_NEQ = 268,
+    E_LEQ = 269,
+    E_GEQ = 270,
+    E_IMM = 271,
+    E_ID = 272
+  };
+#endif
 
 /* Value type.  */
 #if ! defined ZZSTYPE && ! defined ZZSTYPE_IS_DECLARED
-typedef int ZZSTYPE;
+typedef 
+    union ZZ_DATA {
+        int i;
+        char* str;
+    }
+ ZZSTYPE;
 # define ZZSTYPE_IS_TRIVIAL 1
 # define ZZSTYPE_IS_DECLARED 1
 #endif

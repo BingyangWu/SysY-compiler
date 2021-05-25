@@ -130,10 +130,37 @@
 extern int zzdebug;
 #endif
 
+/* Token type.  */
+#ifndef ZZTOKENTYPE
+# define ZZTOKENTYPE
+  enum zztokentype
+  {
+    E_VAR = 258,
+    E_PARAM = 259,
+    E_CALL = 260,
+    E_IF = 261,
+    E_GOTO = 262,
+    E_RET = 263,
+    E_END = 264,
+    E_AND = 265,
+    E_OR = 266,
+    E_EQ = 267,
+    E_NEQ = 268,
+    E_LEQ = 269,
+    E_GEQ = 270,
+    E_IMM = 271,
+    E_ID = 272
+  };
+#endif
 
 /* Value type.  */
 #if ! defined ZZSTYPE && ! defined ZZSTYPE_IS_DECLARED
-typedef int ZZSTYPE;
+typedef 
+    union ZZ_DATA {
+        int i;
+        char* str;
+    }
+ ZZSTYPE;
 # define ZZSTYPE_IS_TRIVIAL 1
 # define ZZSTYPE_IS_DECLARED 1
 #endif
@@ -452,7 +479,7 @@ union yyalloc
 #define YYLAST   0
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  3
+#define YYNTOKENS  18
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  2
 /* YYNRULES -- Number of rules.  */
@@ -461,7 +488,7 @@ union yyalloc
 #define YYNSTATES  3
 
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   257
+#define YYMAXUTOK   272
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -498,14 +525,16 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     1,     2
+       2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
+       5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
+      15,    16,    17
 };
 
 #if ZZDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,     9,     9
+       0,    21,    21
 };
 #endif
 
@@ -514,7 +543,9 @@ static const yytype_int8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "$accept", "Code", YY_NULLPTR
+  "$end", "error", "$undefined", "E_VAR", "E_PARAM", "E_CALL", "E_IF",
+  "E_GOTO", "E_RET", "E_END", "E_AND", "E_OR", "E_EQ", "E_NEQ", "E_LEQ",
+  "E_GEQ", "E_IMM", "E_ID", "$accept", "Code", YY_NULLPTR
 };
 #endif
 
@@ -523,7 +554,8 @@ static const char *const yytname[] =
    (internal) symbol number NUM (which must be that of a token).  */
 static const yytype_int16 yytoknum[] =
 {
-       0,   256,   257
+       0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
+     265,   266,   267,   268,   269,   270,   271,   272
 };
 # endif
 
@@ -581,13 +613,13 @@ static const yytype_int8 yycheck[] =
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     4,     0
+       0,    19,     0
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,     3,     4
+       0,    18,    19
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -1289,13 +1321,13 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 9 "phase2/Eeyore.y"
-            {}
-#line 1295 "phase2/Eeyore.tab.cpp"
+#line 21 "phase2/Eeyore.y"
+        {}
+#line 1327 "phase2/Eeyore.tab.cpp"
     break;
 
 
-#line 1299 "phase2/Eeyore.tab.cpp"
+#line 1331 "phase2/Eeyore.tab.cpp"
 
       default: break;
     }
@@ -1527,7 +1559,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 11 "phase2/Eeyore.y"
+#line 23 "phase2/Eeyore.y"
 
 int zzerror(const char *message) {
 	return 0;
