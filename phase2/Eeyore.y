@@ -20,7 +20,7 @@ Code            :Code Declaration                       {  }
                 |Code FunctionDef                       {  }
                 |                                       { eeyore_statements.clear(); eeyore_initializations.clear(); eeyore_functions.clear(); }
 ;
-Declaration     :E_VAR E_ID                             { enviroment.declare($2, 1); }
+Declaration     :E_VAR E_ID                             { enviroment.declare($2, 0); }
                 |E_VAR E_IMM E_ID                       { enviroment.declare($3, std::stoi($2)); }
 ;
 Initialization  :E_ID '=' RightValue                    { eeyore_initializations.push_back(new Assignment($1, "", $3, "", "")); }
@@ -28,7 +28,7 @@ Initialization  :E_ID '=' RightValue                    { eeyore_initializations
 ;
 FunctionDef     :FunctionHeader Statements FunctionEnd  {  }
 ;
-FunctionHeader  :E_ID '[' E_IMM ']'                     { eeyore_statements.push_back(new FunctionHeader($1, $3)); enviroment.enter_function($1, eeyore_statements.size()); }
+FunctionHeader  :E_ID '[' E_IMM ']'                     { eeyore_statements.push_back(new FunctionHeader($1, $3)); enviroment.enter_function($1, $3, eeyore_statements.size()); }
 ;
 Statements      :Statements Statement                   {  }
                 |                                       {  }

@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <iostream>
 
 
 class Enviroment;
@@ -15,46 +16,15 @@ public:
 
 class FunctionAttributes {
 public:
-    int start_pos, end_pos, stack_size;
+    int start_pos, end_pos, stack_size, paramter_num;
 
-    FunctionAttributes(): start_pos(0), end_pos(0), stack_size(0) {}
+    FunctionAttributes(): start_pos(0), end_pos(0), stack_size(0), paramter_num(0) {}
 };
 
 
 extern std::vector<EeyoreStatement *> eeyore_statements;
 extern std::vector<EeyoreStatement *> eeyore_initializations;
 extern std::map<std::string, FunctionAttributes> eeyore_functions;
-
-
-class Enviroment {
-public:
-    std::string current_function;
-    int global_variable_counter;
-    std::map<std::string, std::string> variable_table;
-
-    Enviroment(): current_function(""), global_variable_counter(0) {}
-
-    void enter_function(std::string function_name, int lineno) {
-        eeyore_functions[function_name].start_pos = lineno;
-        current_function = function_name;
-    }
-
-    void exit_function(std::string function_name, int lineno) {
-        eeyore_functions[function_name].end_pos = lineno;
-        current_function = "";
-    }
-
-    void declare(std::string variable, int size) {
-        if (current_function == "")
-            variable_table[variable] = "v" + std::to_string(global_variable_counter++);
-        else {
-            int &offset = eeyore_functions[current_function].stack_size;
-            variable_table[variable] = offset;
-            offset += size;
-        }
-    }
-};
-extern Enviroment enviroment;
 
 
 class Assignment : public EeyoreStatement {
@@ -125,8 +95,8 @@ public:
     std::string variable_name;
     int variable_size;
 
-    DefineVariable(std::string variable_name, std::string variable_size):
-        variable_name(variable_name), variable_size(std::stoi(variable_size)) {}
+    DefineVariable(std::string variable_name, int variable_size):
+        variable_name(variable_name), variable_size(variable_size) {}
     
     virtual std::string emit_tigger(Enviroment &env);
 };
@@ -153,6 +123,89 @@ public:
     
     virtual std::string emit_tigger(Enviroment &env);
 };
+
+
+class Enviroment {
+public:
+    std::string current_function;
+    int global_variable_counter;
+    std::map<std::string, std::string> variable_table;
+    std::map<std::string, std::string> register_files;
+    int parameter_id;
+
+    Enviroment(): current_function(""), global_variable_counter(0), parameter_id(0) {
+        for (int i = 0; i < 7; ++i) {
+            register_files["t"+std::to_string(i)] = "";
+        }
+
+        for (int i = 0; i < 8; ++i) {
+            register_files["a"+std::to_string(i)] = "p" + std::to_string(i);
+        }
+
+        for (int i = 0; i < 8; ++i) {
+            variable_table["p"+std::to_string(i)] = std::to_string(i);
+        }
+    }
+
+    void enter_function(std::string function_name, std::string parameter_num, int lineno) {
+        eeyore_functions[function_name].start_pos = lineno;
+        eeyore_functions[function_name].stack_size = 8;
+        eeyore_functions[function_name].paramter_num = std::stoi(parameter_num);
+        current_function = function_name;
+    }
+
+    void exit_function(std::string function_name, int lineno) {
+        eeyore_functions[function_name].end_pos = lineno;
+        current_function = "";
+    }
+
+    void declare(std::string variable, int size) {
+        if (current_function == "") {
+            variable_table[variable] = "v" + std::to_string(global_variable_counter++);
+            
+            eeyore_statements.push_back(new DefineVariable(variable, size));
+        }
+        else {
+            int &offset = eeyore_functions[current_function].stack_size;
+            variable_table[variable] = offset;
+            offset += size > 0 ? size : 1;
+        }
+    }
+
+    std::string get_register(std::string var, std::string &code_segment) {
+        if (var[0] != 't' && var[0] != 'T' && var[0] != 'p') 
+            return var;
+        
+        std::string empty_register = "";
+
+        if (var[0] == 'p') {
+            empty_register = var;
+            empty_register[0] = 'a';
+            return empty_register;
+        }
+
+        for (int i = 0; i < 7; ++i) {
+            std::string register_name = "t"+std::to_string(i);
+            if (register_files[register_name] == "") {
+                empty_register = register_name;
+                break;
+            }
+        }
+
+        if (empty_register == "")
+            std::cerr << "get register fail!\n";
+        
+        register_files[empty_register] = var;
+        code_segment += "load " + var + " " + empty_register + "\n";
+        return empty_register;
+    }
+
+    std::string get_parameter_register() {
+        std::string parameter_register = "a" + std::to_string(parameter_id++);
+        return parameter_register;
+    }
+};
+extern Enviroment enviroment;
 
 
 #endif
