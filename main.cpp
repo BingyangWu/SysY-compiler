@@ -2,6 +2,7 @@
 #include "phase1/SysY.tab.hpp"
 #include "phase1/context.h"
 #include "phase2/Eeyore.tab.hpp"
+#include "phase2/Eeyore.hpp"
 #include <iostream>
 
 typedef struct zz_buffer_state * ZZ_BUFFER_STATE;
@@ -26,5 +27,14 @@ int main(int argc, char* argv[]) {
     ZZ_BUFFER_STATE buffer = zz_scan_string(text.c_str());    
     zzparse();
     // zz_delete_buffer(buffer);
+
+    eeyore_statements.insert(eeyore_statements.begin() + eeyore_functions["f_main"].start_pos, 
+        eeyore_initializations.begin(), eeyore_initializations.end());
+    
+    for (auto it = eeyore_statements.begin(); it != eeyore_statements.end(); ++it) {
+        std::string code_segment = (*it)->emit_tigger(enviroment);
+        std::cout << code_segment;
+    }
+
     return 0;
 }
