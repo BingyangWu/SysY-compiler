@@ -7,23 +7,81 @@ std::map<std::string, FunctionAttributes> eeyore_functions;
 Enviroment enviroment;
 
 std::string Assignment::emit_tigger(Enviroment &env) {
-    std::string code_segment = "// Assignment " + variable + " " + dim + " " + operand_one + " " + binary_op + " " + operand_two + "\n";
+    std::string code_segment = "// Assignment " + variable + " [" + dim + "] = " + operand_one + " " + binary_op + " " + operand_two + "\n";
     
     if (binary_op == "[]") { // variable = operand_one[operand_two]
+        std::string variable_register = env.get_register(variable, code_segment);
+        
+        std::string register_one = operand_one;
+        if (operand_one[0] != 'p') {
+            register_one = env.find_register();
+            code_segment += "loadaddr " + env.variable_table[operand_one] + " " + register_one + "\n";
+        }
 
+        std::string register_two = env.get_register(operand_two, code_segment);
+
+        code_segment += variable_register + " = " + register_one + "[" + register_two + "]\n";
+
+        if (variable_register[0] != 'a')
+            code_segment += "store " + env.variable_table[variable] + " " + variable_register + "\n";
+
+        env.release_register(variable_register);
+        env.release_register(register_one);
+        env.release_register(register_two);
     }
     else if (dim != "") { // variable[dim] = operand_one
+        std::string variable_register = variable;
+        if (variable[0] != 'p') {
+            variable_register = env.find_register();
+            code_segment += "loadaddr " + env.variable_table[variable] + " " + variable_register + "\n";
+        }
 
+        std::string dim_register = env.get_register(dim, code_segment);
+        std::string register_one = env.get_register(operand_one, code_segment);
+
+        code_segment += variable_register + "[" + dim_register + "] = " + register_one + "\n";
+
+        env.release_register(variable_register);
+        env.release_register(dim_register);
+        env.release_register(register_one);
     }
     else {
         if (binary_op == "") { // variable = operand_one
-
+            if (variable[0] != 'p') {
+                std::string register_one = env.get_register(operand_one, code_segment);
+                code_segment += "store " + register_one + " " + env.variable_table[variable] + "\n";
+                env.release_register(register_one);
+            }
+            else {
+                if (operand_one[0] != 'p')
+                    code_segment += "load " + operand_one + " " + env.variable_table[variable] + "\n";
+                else 
+                    code_segment += env.variable_table[variable] + " = " + operand_one;
+            }
         }
         else if (operand_two == "") { // variable = binary_op operand_one
+            std::string variable_register = env.get_register(variable, code_segment);
+            std::string register_one = env.get_register(operand_one, code_segment);
 
+            code_segment += variable_register + " = " + binary_op + " " + register_one + "\n";
+            if (variable[0] != 'p')
+                code_segment += "store " + variable_register + " " + env.variable_table[variable] + "\n";
+            
+            env.release_register(variable_register);
+            env.release_register(register_one);
         }
         else { // variable = operand_one binary_op operand_two
+            std::string variable_register = env.get_register(variable, code_segment);
+            std::string register_one = env.get_register(operand_one, code_segment);
+            std::string register_two = env.get_register(operand_two, code_segment);
 
+            code_segment += variable_register + " = " + register_one + " " + binary_op + " " + register_two + "\n";
+            if (variable[0] != 'p')
+                code_segment += "store " + variable_register + " " + env.variable_table[variable] + "\n";
+            
+            env.release_register(variable_register);
+            env.release_register(register_one);
+            env.release_register(register_two);
         }
     }
     
@@ -38,6 +96,8 @@ std::string IfGoto::emit_tigger(Enviroment &env) {
         std::string register_one = env.get_register(operand_one, code_segment);
         std::string register_two = env.get_register(operand_two, code_segment);
         code_segment += "if " + register_one + " " + binary_op + " " + register_two + " ";
+        env.release_register(register_one);
+        env.release_register(register_two);
     }
     code_segment += "goto " + label + "\n";
 

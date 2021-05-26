@@ -172,6 +172,19 @@ public:
         }
     }
 
+    std::string find_register() {
+        for (int i = 0; i < 7; ++i) {
+            std::string register_name = "t"+std::to_string(i);
+            if (register_files[register_name] == "") {
+                register_files[register_name] = "-";
+                return register_name;
+            }
+        }
+
+        std::cerr << "get register fail!\n";
+        return "error";
+    }
+
     std::string get_register(std::string var, std::string &code_segment) {
         if (var[0] != 't' && var[0] != 'T' && var[0] != 'p') 
             return var;
@@ -184,16 +197,7 @@ public:
             return empty_register;
         }
 
-        for (int i = 0; i < 7; ++i) {
-            std::string register_name = "t"+std::to_string(i);
-            if (register_files[register_name] == "") {
-                empty_register = register_name;
-                break;
-            }
-        }
-
-        if (empty_register == "")
-            std::cerr << "get register fail!\n";
+        empty_register = find_register();
         
         register_files[empty_register] = var;
         code_segment += "load " + var + " " + empty_register + "\n";
@@ -203,6 +207,12 @@ public:
     std::string get_parameter_register() {
         std::string parameter_register = "a" + std::to_string(parameter_id++);
         return parameter_register;
+    }
+
+    void release_register(std::string register_name) {
+        if (register_name[0] != 'a') {
+            register_files[register_name] = "";
+        }
     }
 };
 extern Enviroment enviroment;
