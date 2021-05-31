@@ -167,8 +167,8 @@ public:
         }
         else {
             int &offset = eeyore_functions[current_function].stack_size;
-            variable_table[variable] = offset;
-            offset += size > 0 ? size : 1;
+            variable_table[variable] = std::to_string(offset);
+            offset += size > 0 ? size / 4 : 1;
         }
     }
 
@@ -185,9 +185,15 @@ public:
         return "error";
     }
 
+    std::string lookup_table(std::string var_name) {
+        if (var_name[0] >= '0' && var_name[0] <= '9')
+            return var_name;
+        return variable_table[var_name];
+    }
+
     std::string get_register(std::string var, std::string &code_segment) {
-        if (var[0] != 't' && var[0] != 'T' && var[0] != 'p') 
-            return var;
+        // if (opt && var[0] != 't' && var[0] != 'T' && var[0] != 'p') 
+        //     return var;
         
         std::string empty_register = "";
 
@@ -200,7 +206,10 @@ public:
         empty_register = find_register();
         
         register_files[empty_register] = var;
-        code_segment += "load " + var + " " + empty_register + "\n";
+        if (var[0] >= '0' && var[0] <= '9')
+            code_segment += empty_register + " = " + var + "\n";
+        else
+            code_segment += "load " + lookup_table(var) + " " + empty_register + "\n";
         return empty_register;
     }
 

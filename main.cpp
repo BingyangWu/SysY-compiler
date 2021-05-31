@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
     context.define_func(Var(kInt, "putarray"), kVoid);
 
     std::string text = (*TreeRoot)->generate_eeyore(context);
-    text += context.variable_definition_code;
+    text = context.variable_definition_code + text;
 
     ZZ_BUFFER_STATE buffer = zz_scan_string(text.c_str());    
     zzparse();
