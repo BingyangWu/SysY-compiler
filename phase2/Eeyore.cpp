@@ -85,9 +85,9 @@ std::string Assignment::emit_tigger(Enviroment &env) {
             }
             else {
                 if (operand_one[0] != 'p')
-                    code_segment += "load " + operand_one + " " + env.lookup_table(variable) + "\n";
+                    code_segment += "load " + env.lookup_table(operand_one) + " a" + env.lookup_table(variable) + "\n";
                 else 
-                    code_segment += env.lookup_table(variable) + " = " + operand_one;
+                    code_segment += "a" + env.lookup_table(variable) + " = " + env.lookup_table(operand_one);
             }
         }
         else if (operand_two == "") { // variable = binary_op operand_one
@@ -179,6 +179,8 @@ std::string Return::emit_tigger(Enviroment &env) {
     if (return_variable != "") {
         if (return_variable[0] >= '0' && return_variable[0] <= '9')
             code_segment += "a0 = " + return_variable + "\n";
+        else if (return_variable[0] == 'p')
+            code_segment += "a0 = a" + env.lookup_table(return_variable) + "\n";
         else
             code_segment += "load " + env.lookup_table(return_variable) + " a0\n";
     }

@@ -144,6 +144,7 @@ public:
 
         for (int i = 0; i < 8; ++i) {
             variable_table["p"+std::to_string(i)] = std::to_string(i);
+            variable_table["a"+std::to_string(i)] = std::to_string(i);
         }
     }
 
