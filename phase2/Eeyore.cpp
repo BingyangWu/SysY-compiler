@@ -51,9 +51,10 @@ std::string Assignment::emit_tigger(Enviroment &env) {
         }
 
         std::string register_two = env.get_register(operand_two, code_segment);
+        std::string register_tmp = env.find_register();
 
-        code_segment += register_one + " = " + register_one + " + " + register_two + "\n";
-        code_segment += variable_register + " = " + register_one + "[0]\n";
+        code_segment += register_tmp + " = " + register_one + " + " + register_two + "\n";
+        code_segment += variable_register + " = " + register_tmp + "[0]\n";
 
         if (variable_register[0] != 'a')
             code_segment += "store " + variable_register + " " + env.lookup_table(variable) + "\n";
@@ -61,6 +62,7 @@ std::string Assignment::emit_tigger(Enviroment &env) {
         env.release_register(variable_register);
         env.release_register(register_one);
         env.release_register(register_two);
+        env.release_register(register_tmp);
     }
     else if (dim != "") { // variable[dim] = operand_one
         std::string variable_register = variable;
@@ -74,13 +76,15 @@ std::string Assignment::emit_tigger(Enviroment &env) {
 
         std::string dim_register = env.get_register(dim, code_segment);
         std::string register_one = env.get_register(operand_one, code_segment);
+        std::string register_tmp = env.find_register();
 
-        code_segment += variable_register + " = " + variable_register + " + " + dim_register + "\n";
-        code_segment += variable_register + "[0] = " + register_one + "\n";
+        code_segment += register_tmp + " = " + variable_register + " + " + dim_register + "\n";
+        code_segment += register_tmp + "[0] = " + register_one + "\n";
 
         env.release_register(variable_register);
         env.release_register(dim_register);
         env.release_register(register_one);
+        env.release_register(register_tmp);
     }
     else {
         if (binary_op == "") { // variable = operand_one
