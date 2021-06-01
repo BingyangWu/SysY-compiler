@@ -46,6 +46,9 @@ std::string Assignment::emit_tigger(Enviroment &env) {
             register_one = env.find_register();
             code_segment += "loadaddr " + env.lookup_table(operand_one) + " " + register_one + "\n";
         }
+        else {
+            register_one[0] = 'a';
+        }
 
         std::string register_two = env.get_register(operand_two, code_segment);
 
@@ -64,6 +67,9 @@ std::string Assignment::emit_tigger(Enviroment &env) {
         if (variable[0] != 'p') {
             variable_register = env.find_register();
             code_segment += "loadaddr " + env.lookup_table(variable) + " " + variable_register + "\n";
+        }
+        else {
+            variable_register[0] = 'a';
         }
 
         std::string dim_register = env.get_register(dim, code_segment);
