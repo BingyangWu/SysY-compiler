@@ -87,7 +87,7 @@ std::string Assignment::emit_tigger(Enviroment &env) {
                 if (operand_one[0] != 'p')
                     code_segment += "load " + env.lookup_table(operand_one) + " a" + env.lookup_table(variable) + "\n";
                 else 
-                    code_segment += "a" + env.lookup_table(variable) + " = " + env.lookup_table(operand_one);
+                    code_segment += "a" + env.lookup_table(variable) + " = a" + env.lookup_table(operand_one) + "\n";
             }
         }
         else if (operand_two == "") { // variable = binary_op operand_one
