@@ -131,6 +131,7 @@ public:
     int global_variable_counter;
     std::map<std::string, std::string> variable_table;
     std::map<std::string, std::string> register_files;
+    std::map<std::string, int> variable_type;
     int parameter_id;
 
     Enviroment(): current_function(""), global_variable_counter(0), parameter_id(0) {
@@ -171,6 +172,12 @@ public:
             variable_table[variable] = std::to_string(offset);
             offset += size > 0 ? size / 4 : 1;
         }
+
+        variable_type[variable] = size > 0;
+    }
+
+    bool is_array(std::string var_name) {
+        return variable_type[var_name] > 0;
     }
 
     std::string find_register() {

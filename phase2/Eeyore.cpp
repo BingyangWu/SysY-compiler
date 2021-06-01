@@ -156,7 +156,10 @@ std::string PassParameter::emit_tigger(Enviroment &env) {
 
     std::string register_name = env.get_parameter_register();
     code_segment += "store " + register_name + " " + env.lookup_table(register_name) + "\n";
-    code_segment += "load " + env.lookup_table(parameter) + " " + register_name + "\n";
+    if (env.is_array(parameter))
+        code_segment += "loadaddr " + env.lookup_table(parameter) + " " + register_name + "\n";
+    else
+        code_segment += "load " + env.lookup_table(parameter) + " " + register_name + "\n";
 
     return code_segment;
 }
