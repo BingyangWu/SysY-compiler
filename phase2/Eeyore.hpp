@@ -177,6 +177,8 @@ public:
     }
 
     bool is_array(std::string var_name) {
+        if (var_name[0] == 'p')
+            return false;
         return variable_type[var_name] > 0;
     }
 
@@ -221,7 +223,12 @@ public:
         return empty_register;
     }
 
-    std::string get_parameter_register() {
+    std::string get_parameter_register(std::string &code_segment) {
+        if (parameter_id == 0) {
+            for (int i = 0; i < 8; ++i) {
+                code_segment += "store a" + std::to_string(i) + " " + std::to_string(i) + "\n";
+            }
+        }
         std::string parameter_register = "a" + std::to_string(parameter_id++);
         return parameter_register;
     }
