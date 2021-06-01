@@ -94,7 +94,10 @@ std::string Assignment::emit_tigger(Enviroment &env) {
                 env.release_register(register_one);
             }
             else {
-                if (operand_one[0] != 'p')
+                if (operand_one[0] >= '0' && operand_one[0] <= '9') {
+                    code_segment += "a" + env.lookup_table(variable) + " = " + operand_one + "\n";
+                }
+                else if (operand_one[0] != 'p')
                     code_segment += "load " + env.lookup_table(operand_one) + " a" + env.lookup_table(variable) + "\n";
                 else 
                     code_segment += "a" + env.lookup_table(variable) + " = a" + env.lookup_table(operand_one) + "\n";
