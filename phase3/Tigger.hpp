@@ -3,6 +3,8 @@
 
 #include <string>
 
+extern int STK;
+
 void emit_global_variable_declaration(std::string dst, std::string init_value);
 
 void emit_global_array_declaration(std::string dst, std::string array_size);
@@ -11,7 +13,7 @@ void emit_function_header(std::string func_name, std::string param_num, std::str
 
 void emit_function_end(std::string func_name);
 
-void emit_reg_binary_operation_reg(std::string dst, std::string src_reg1, std::string binop, std::string src_reg2);
+void emit_reg_binary_operation_reg(std::string reg1, std::string reg2, std::string binop, std::string reg3);
 
 void emit_reg_binary_operation_imm(std::string dst, std::string src_reg, std::string binop, std::string src_imm);
 
