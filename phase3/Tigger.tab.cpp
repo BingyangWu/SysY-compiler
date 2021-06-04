@@ -475,10 +475,10 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   97
+#define YYLAST   83
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  31
+#define YYNTOKENS  32
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  9
 /* YYNRULES -- Number of rules.  */
@@ -502,10 +502,10 @@ static const yytype_int8 yytranslate[] =
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,    30,     2,     2,
-       2,     2,    28,    26,     2,    27,     2,    29,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,    23,     2,
-      25,    20,    24,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,    23,     2,     2,     2,    31,     2,     2,
+       2,     2,    29,    27,     2,    28,     2,    30,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,    24,     2,
+      26,    20,    25,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,    21,     2,    22,     2,     2,     2,     2,     2,     2,
@@ -549,8 +549,8 @@ static const char *const yytname[] =
   "$end", "error", "$undefined", "T_CALL", "T_IF", "T_GOTO", "T_RET",
   "T_END", "T_AND", "T_OR", "T_EQ", "T_NEQ", "T_LEQ", "T_GEQ", "T_IMM",
   "T_ID", "T_LOAD", "T_LOADADDR", "T_STORE", "T_MALLOC", "'='", "'['",
-  "']'", "':'", "'>'", "'<'", "'+'", "'-'", "'*'", "'/'", "'%'", "$accept",
-  "TiggerProgram", "TiggerGlobalVarDecl", "TiggerFunctionDef",
+  "']'", "'!'", "':'", "'>'", "'<'", "'+'", "'-'", "'*'", "'/'", "'%'",
+  "$accept", "TiggerProgram", "TiggerGlobalVarDecl", "TiggerFunctionDef",
   "TiggerFunctionHeader", "TiggerExpressions", "TiggerFunctionEnd",
   "TiggerExpression", "TiggerOp", YY_NULLPTR
 };
@@ -563,12 +563,12 @@ static const yytype_int16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
-      61,    91,    93,    58,    62,    60,    43,    45,    42,    47,
-      37
+      61,    91,    93,    33,    58,    62,    60,    43,    45,    42,
+      47,    37
 };
 # endif
 
-#define YYPACT_NINF (-31)
+#define YYPACT_NINF (-17)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -582,14 +582,14 @@ static const yytype_int16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-     -31,    16,   -31,    19,   -31,   -31,   -31,    -5,    -2,    52,
-     -31,     1,    44,    56,    57,    58,   -31,    59,   -10,    46,
-      48,    60,   -31,   -31,   -31,    55,   -31,    24,   -31,   -31,
-      -7,    63,   -31,    64,    65,    66,    67,    69,    70,   -31,
-     -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,
-     -31,   -31,    71,   -31,    17,    72,    68,   -31,   -31,   -31,
-     -31,   -31,    73,    80,    74,    50,   -31,    76,   -31,    77,
-      75,   -31,   -31,    78,   -31,   -31,   -31
+     -17,    36,   -17,    -6,   -17,   -17,   -17,    23,     2,    28,
+     -17,    34,   -16,    37,    43,    44,   -17,    45,    29,    26,
+      40,    46,   -17,   -17,   -17,    41,   -17,    -1,   -17,   -17,
+      24,    49,   -17,    50,    51,    52,    53,    55,    56,   -17,
+     -17,   -17,   -17,   -17,   -17,   -17,   -17,   -17,   -17,   -17,
+     -17,   -17,    57,   -17,    -8,    58,    54,   -17,   -17,   -17,
+     -17,   -17,    59,    66,    60,    42,   -17,    62,   -17,    63,
+      61,   -17,   -17,    64,   -17,   -17,   -17
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -610,7 +610,7 @@ static const yytype_int8 yydefact[] =
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -31,   -31,   -31,   -31,   -31,   -31,   -31,   -31,   -30
+     -17,   -17,   -17,   -17,   -17,   -17,   -17,   -17,    10
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
@@ -624,54 +624,52 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      55,    39,    40,    41,    42,    43,    44,    53,    54,    10,
-      30,    31,    12,    32,    11,    24,     2,    45,    46,    47,
-      48,    49,    50,    51,    65,    39,    40,    41,    42,    43,
-      44,     3,    39,    40,    41,    42,    43,    44,    64,     7,
-       8,    45,    46,    47,    48,    49,    50,    51,    45,    46,
-      47,    48,    49,    50,    51,    13,    14,    15,    16,    17,
-      33,    34,    35,    36,    71,    72,    25,    18,    19,    20,
-      21,    26,    27,    28,    29,    37,    38,    56,     0,    57,
-      58,    59,    60,    61,    62,    69,    63,    66,    70,     0,
-      67,     0,    74,    76,     0,    68,    73,    75
+      39,    40,    41,    42,    43,    44,    25,    39,    40,    41,
+      42,    43,    44,    64,     7,     8,    12,    45,    46,    47,
+      48,    49,    50,    51,    45,    46,    47,    48,    49,    50,
+      51,    13,    14,    15,    16,    17,     2,    10,    53,    54,
+      33,    34,    11,    18,    19,    20,    21,    55,    24,    30,
+      31,     3,    26,    32,    35,    36,    71,    72,    27,    28,
+      29,    37,    38,    56,    65,    57,    58,    59,    60,    61,
+      62,    69,    63,    66,    70,     0,    67,     0,    74,    76,
+       0,    68,    73,    75
 };
 
 static const yytype_int8 yycheck[] =
 {
-      30,     8,     9,    10,    11,    12,    13,    14,    15,    14,
-      20,    21,    14,    23,    19,    14,     0,    24,    25,    26,
-      27,    28,    29,    30,    54,     8,     9,    10,    11,    12,
-      13,    15,     8,     9,    10,    11,    12,    13,    21,    20,
-      21,    24,    25,    26,    27,    28,    29,    30,    24,    25,
-      26,    27,    28,    29,    30,     3,     4,     5,     6,     7,
-      14,    15,    14,    15,    14,    15,    22,    15,    16,    17,
-      18,    15,    15,    15,    15,    15,    21,    14,    -1,    15,
-      15,    15,    15,    14,    14,     5,    15,    15,    14,    -1,
-      22,    -1,    15,    15,    -1,    22,    20,    22
+       8,     9,    10,    11,    12,    13,    22,     8,     9,    10,
+      11,    12,    13,    21,    20,    21,    14,    25,    26,    27,
+      28,    29,    30,    31,    25,    26,    27,    28,    29,    30,
+      31,     3,     4,     5,     6,     7,     0,    14,    14,    15,
+      14,    15,    19,    15,    16,    17,    18,    23,    14,    20,
+      21,    15,    15,    24,    14,    15,    14,    15,    15,    15,
+      15,    15,    21,    14,    54,    15,    15,    15,    15,    14,
+      14,     5,    15,    15,    14,    -1,    22,    -1,    15,    15,
+      -1,    22,    20,    22
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    32,     0,    15,    33,    34,    35,    20,    21,    36,
+       0,    33,     0,    15,    34,    35,    36,    20,    21,    37,
       14,    19,    14,     3,     4,     5,     6,     7,    15,    16,
-      17,    18,    37,    38,    14,    22,    15,    15,    15,    15,
-      20,    21,    23,    14,    15,    14,    15,    15,    21,     8,
-       9,    10,    11,    12,    13,    24,    25,    26,    27,    28,
-      29,    30,    39,    14,    15,    39,    14,    15,    15,    15,
-      15,    14,    14,    15,    21,    39,    15,    22,    22,     5,
+      17,    18,    38,    39,    14,    22,    15,    15,    15,    15,
+      20,    21,    24,    14,    15,    14,    15,    15,    21,     8,
+       9,    10,    11,    12,    13,    25,    26,    27,    28,    29,
+      30,    31,    40,    14,    15,    23,    14,    15,    15,    15,
+      15,    14,    14,    15,    21,    40,    15,    22,    22,     5,
       14,    14,    15,    20,    15,    22,    15
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    31,    32,    32,    32,    33,    33,    34,    35,    36,
-      36,    37,    38,    38,    38,    38,    38,    38,    38,    38,
-      38,    38,    38,    38,    38,    38,    38,    38,    38,    39,
-      39,    39,    39,    39,    39,    39,    39,    39,    39,    39,
-      39,    39
+       0,    32,    33,    33,    33,    34,    34,    35,    36,    37,
+      37,    38,    39,    39,    39,    39,    39,    39,    39,    39,
+      39,    39,    39,    39,    39,    39,    39,    39,    39,    40,
+      40,    40,    40,    40,    40,    40,    40,    40,    40,    40,
+      40,    40
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -1378,246 +1376,246 @@ yyreduce:
     {
   case 2:
 #line 20 "phase3/Tigger.y"
-                                                            {}
-#line 1383 "phase3/Tigger.tab.cpp"
+                                                            {  }
+#line 1381 "phase3/Tigger.tab.cpp"
     break;
 
   case 3:
 #line 21 "phase3/Tigger.y"
-                                                            {}
-#line 1389 "phase3/Tigger.tab.cpp"
+                                                            {  }
+#line 1387 "phase3/Tigger.tab.cpp"
     break;
 
   case 4:
 #line 22 "phase3/Tigger.y"
-                                                            {}
-#line 1395 "phase3/Tigger.tab.cpp"
+                                                            {  }
+#line 1393 "phase3/Tigger.tab.cpp"
     break;
 
   case 5:
 #line 24 "phase3/Tigger.y"
-                                                            {}
-#line 1401 "phase3/Tigger.tab.cpp"
+                                                            { emit_global_variable_declaration(yyvsp[-2], yyvsp[0]); }
+#line 1399 "phase3/Tigger.tab.cpp"
     break;
 
   case 6:
 #line 25 "phase3/Tigger.y"
-                                                            {}
-#line 1407 "phase3/Tigger.tab.cpp"
+                                                            { emit_global_array_declaration(yyvsp[-3], yyvsp[0]); }
+#line 1405 "phase3/Tigger.tab.cpp"
     break;
 
   case 7:
 #line 27 "phase3/Tigger.y"
-                                                                                  {}
-#line 1413 "phase3/Tigger.tab.cpp"
+                                                                                  {  }
+#line 1411 "phase3/Tigger.tab.cpp"
     break;
 
   case 8:
 #line 29 "phase3/Tigger.y"
-                                                            {}
-#line 1419 "phase3/Tigger.tab.cpp"
+                                                            { emit_function_header(yyvsp[-6], yyvsp[-4], yyvsp[-1]); }
+#line 1417 "phase3/Tigger.tab.cpp"
     break;
 
   case 9:
 #line 31 "phase3/Tigger.y"
-                                                            {}
-#line 1425 "phase3/Tigger.tab.cpp"
+                                                            {  }
+#line 1423 "phase3/Tigger.tab.cpp"
     break;
 
   case 10:
 #line 32 "phase3/Tigger.y"
-                                                            {}
-#line 1431 "phase3/Tigger.tab.cpp"
+                                                            {  }
+#line 1429 "phase3/Tigger.tab.cpp"
     break;
 
   case 11:
 #line 34 "phase3/Tigger.y"
-                                                            {}
-#line 1437 "phase3/Tigger.tab.cpp"
+                                                            { emit_function_end(yyvsp[0]); }
+#line 1435 "phase3/Tigger.tab.cpp"
     break;
 
   case 12:
 #line 36 "phase3/Tigger.y"
-                                                            {}
-#line 1443 "phase3/Tigger.tab.cpp"
+                                                            { emit_reg_binary_operation_reg(yyvsp[-4], yyvsp[-2], yyvsp[-1], yyvsp[0]); }
+#line 1441 "phase3/Tigger.tab.cpp"
     break;
 
   case 13:
 #line 37 "phase3/Tigger.y"
-                                                            {}
-#line 1449 "phase3/Tigger.tab.cpp"
+                                                            { emit_reg_binary_operation_imm(yyvsp[-4], yyvsp[-2], yyvsp[-1], yyvsp[0]); }
+#line 1447 "phase3/Tigger.tab.cpp"
     break;
 
   case 14:
 #line 38 "phase3/Tigger.y"
-                                                            {}
-#line 1455 "phase3/Tigger.tab.cpp"
+                                                            { emit_reg_not_reg(yyvsp[-3], yyvsp[0]); }
+#line 1453 "phase3/Tigger.tab.cpp"
     break;
 
   case 15:
 #line 39 "phase3/Tigger.y"
-                                                            {}
-#line 1461 "phase3/Tigger.tab.cpp"
+                                                            { emit_assignment(yyvsp[-2], yyvsp[0]); }
+#line 1459 "phase3/Tigger.tab.cpp"
     break;
 
   case 16:
 #line 40 "phase3/Tigger.y"
-                                                            {}
-#line 1467 "phase3/Tigger.tab.cpp"
+                                                            { emit_assignment_imm(yyvsp[-2], yyvsp[0]); }
+#line 1465 "phase3/Tigger.tab.cpp"
     break;
 
   case 17:
 #line 41 "phase3/Tigger.y"
-                                                            {}
-#line 1473 "phase3/Tigger.tab.cpp"
+                                                            { emit_array_assignment_reg(yyvsp[-5], yyvsp[-3], yyvsp[0]); }
+#line 1471 "phase3/Tigger.tab.cpp"
     break;
 
   case 18:
 #line 42 "phase3/Tigger.y"
-                                                            {}
-#line 1479 "phase3/Tigger.tab.cpp"
+                                                            { emit_reg_assignment_array(yyvsp[-5], yyvsp[-3], yyvsp[-1]); }
+#line 1477 "phase3/Tigger.tab.cpp"
     break;
 
   case 19:
 #line 44 "phase3/Tigger.y"
-                                                            {}
-#line 1485 "phase3/Tigger.tab.cpp"
+                                                            { emit_conditional_goto(yyvsp[-4], yyvsp[-3], yyvsp[-2], yyvsp[0]); }
+#line 1483 "phase3/Tigger.tab.cpp"
     break;
 
   case 20:
 #line 45 "phase3/Tigger.y"
-                                                            {}
-#line 1491 "phase3/Tigger.tab.cpp"
+                                                            { emit_goto(yyvsp[0]); }
+#line 1489 "phase3/Tigger.tab.cpp"
     break;
 
   case 21:
 #line 46 "phase3/Tigger.y"
-                                                            {}
-#line 1497 "phase3/Tigger.tab.cpp"
+                                                            { emit_label(yyvsp[-1]); }
+#line 1495 "phase3/Tigger.tab.cpp"
     break;
 
   case 22:
 #line 47 "phase3/Tigger.y"
-                                                            {}
-#line 1503 "phase3/Tigger.tab.cpp"
+                                                            { emit_call(yyvsp[0]); }
+#line 1501 "phase3/Tigger.tab.cpp"
     break;
 
   case 23:
 #line 48 "phase3/Tigger.y"
-                                                            {}
-#line 1509 "phase3/Tigger.tab.cpp"
+                                                            { emit_return(); }
+#line 1507 "phase3/Tigger.tab.cpp"
     break;
 
   case 24:
 #line 49 "phase3/Tigger.y"
-                                                            {}
-#line 1515 "phase3/Tigger.tab.cpp"
+                                                            { emit_store(yyvsp[-1], yyvsp[0]); }
+#line 1513 "phase3/Tigger.tab.cpp"
     break;
 
   case 25:
 #line 50 "phase3/Tigger.y"
-                                                            {}
-#line 1521 "phase3/Tigger.tab.cpp"
+                                                            { emit_load_stack(yyvsp[-1], yyvsp[0]); }
+#line 1519 "phase3/Tigger.tab.cpp"
     break;
 
   case 26:
 #line 51 "phase3/Tigger.y"
-                                                            {}
-#line 1527 "phase3/Tigger.tab.cpp"
+                                                            { emit_load_variable(yyvsp[-1], yyvsp[0]); }
+#line 1525 "phase3/Tigger.tab.cpp"
     break;
 
   case 27:
 #line 52 "phase3/Tigger.y"
-                                                            {}
-#line 1533 "phase3/Tigger.tab.cpp"
+                                                            { emit_loadaddr_stack(yyvsp[-1], yyvsp[0]); }
+#line 1531 "phase3/Tigger.tab.cpp"
     break;
 
   case 28:
 #line 53 "phase3/Tigger.y"
-                                                            {}
-#line 1539 "phase3/Tigger.tab.cpp"
+                                                            { emit_loadaddr_variable(yyvsp[-1], yyvsp[0]); }
+#line 1537 "phase3/Tigger.tab.cpp"
     break;
 
   case 29:
 #line 55 "phase3/Tigger.y"
                                                             { yyval = yyvsp[0]; }
-#line 1545 "phase3/Tigger.tab.cpp"
+#line 1543 "phase3/Tigger.tab.cpp"
     break;
 
   case 30:
 #line 56 "phase3/Tigger.y"
                                                             { yyval = yyvsp[0]; }
-#line 1551 "phase3/Tigger.tab.cpp"
+#line 1549 "phase3/Tigger.tab.cpp"
     break;
 
   case 31:
 #line 57 "phase3/Tigger.y"
                                                             { yyval = yyvsp[0]; }
-#line 1557 "phase3/Tigger.tab.cpp"
+#line 1555 "phase3/Tigger.tab.cpp"
     break;
 
   case 32:
 #line 58 "phase3/Tigger.y"
                                                             { yyval = yyvsp[0]; }
-#line 1563 "phase3/Tigger.tab.cpp"
+#line 1561 "phase3/Tigger.tab.cpp"
     break;
 
   case 33:
 #line 59 "phase3/Tigger.y"
                                                             { yyval = yyvsp[0]; }
-#line 1569 "phase3/Tigger.tab.cpp"
+#line 1567 "phase3/Tigger.tab.cpp"
     break;
 
   case 34:
 #line 60 "phase3/Tigger.y"
                                                             { yyval = yyvsp[0]; }
-#line 1575 "phase3/Tigger.tab.cpp"
+#line 1573 "phase3/Tigger.tab.cpp"
     break;
 
   case 35:
 #line 61 "phase3/Tigger.y"
                                                             { yyval = yyvsp[0]; }
-#line 1581 "phase3/Tigger.tab.cpp"
+#line 1579 "phase3/Tigger.tab.cpp"
     break;
 
   case 36:
 #line 62 "phase3/Tigger.y"
                                                             { yyval = yyvsp[0]; }
-#line 1587 "phase3/Tigger.tab.cpp"
+#line 1585 "phase3/Tigger.tab.cpp"
     break;
 
   case 37:
 #line 63 "phase3/Tigger.y"
                                                             { yyval = yyvsp[0]; }
-#line 1593 "phase3/Tigger.tab.cpp"
+#line 1591 "phase3/Tigger.tab.cpp"
     break;
 
   case 38:
 #line 64 "phase3/Tigger.y"
                                                             { yyval = yyvsp[0]; }
-#line 1599 "phase3/Tigger.tab.cpp"
+#line 1597 "phase3/Tigger.tab.cpp"
     break;
 
   case 39:
 #line 65 "phase3/Tigger.y"
                                                             { yyval = yyvsp[0]; }
-#line 1605 "phase3/Tigger.tab.cpp"
+#line 1603 "phase3/Tigger.tab.cpp"
     break;
 
   case 40:
 #line 66 "phase3/Tigger.y"
                                                             { yyval = yyvsp[0]; }
-#line 1611 "phase3/Tigger.tab.cpp"
+#line 1609 "phase3/Tigger.tab.cpp"
     break;
 
   case 41:
 #line 67 "phase3/Tigger.y"
                                                             { yyval = yyvsp[0]; }
-#line 1617 "phase3/Tigger.tab.cpp"
+#line 1615 "phase3/Tigger.tab.cpp"
     break;
 
 
-#line 1621 "phase3/Tigger.tab.cpp"
+#line 1619 "phase3/Tigger.tab.cpp"
 
       default: break;
     }
