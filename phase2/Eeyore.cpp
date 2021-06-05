@@ -181,7 +181,7 @@ std::string CallFunction::emit_tigger(Enviroment &env) {
         code_segment += "store a0 " + env.lookup_table(return_variable) + "\n";
     }
 
-    for (int i = 0; i < env.parameter_id; ++i) {
+    for (int i = 0; i < 8; ++i) {
         code_segment += "load " + std::to_string(i) + " a" + std::to_string(i) + "\n";
     }
     env.parameter_id = 0;
