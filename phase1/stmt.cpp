@@ -112,7 +112,7 @@ std::string generate_array_code(ArrayNode* var_container, ListNode<Expr>* init_l
     std::vector<int>& dims = context.array_dims[var_container->name_key];
 
     int i = pos.size();
-    if (pos[i] == 0) for (; i > current_dim && pos[i - 1] == 0; --i);
+    for (; i > current_dim && pos[i - 1] == 0; --i);
     current_dim = i;
 
     std::vector<int> end_pos = pos;
