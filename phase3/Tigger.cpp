@@ -26,9 +26,24 @@ void emit_function_header(std::string func_name, std::string param_num, std::str
            "  .align  2\n"
            "  .global %s\n"
            "  .type   %s, @function\n"
-           "%s:\n"
-           "  addi    sp, sp, -%d\n"
-           "  sw      ra, %d(sp)\n\n", func_name.substr(2).c_str(), func_name.substr(2).c_str(), func_name.substr(2).c_str(), STK, STK-4);
+           "%s:\n", func_name.substr(2).c_str(), func_name.substr(2).c_str(), func_name.substr(2).c_str());
+    
+    if (-STK >= -2048 && -STK <= 2047) {
+        printf("  addi    sp, sp, %d\n", -STK);
+    }
+    else {
+        printf("  li      t0, %d\n", -STK);
+        printf("  add     sp, sp, t0\n");
+    }
+
+    if (STK-4 >= -2048 && STK-4 <= 2047) {
+        printf("  sw      ra, %d(sp)\n\n", STK-4);
+    }
+    else {
+        printf("  li      t0, %d\n", STK-4);
+        printf(" add      t0, t0, sp\n");
+        printf("  sw      ra, 0(t0)\n\n");
+    }
 }
 
 void emit_function_end(std::string func_name) {
@@ -119,7 +134,8 @@ void emit_array_assignment_reg(std::string array_name, std::string dim, std::str
     }
     else {
         printf("li t0, %d\n", int12);
-        printf("sw %s, t0(%s)\n\n", src.c_str(), array_name.c_str());
+        printf("add t0, t0, %s\n", array_name.c_str());
+        printf("sw %s, 0(t0)\n\n", src.c_str());
     }
 }
 
@@ -134,7 +150,8 @@ void emit_reg_assignment_array(std::string dst, std::string array_name, std::str
     }
     else {
         printf("li t0, %d\n", int12);
-        printf("lw %s, t0(%s)\n\n", dst.c_str(), array_name.c_str());
+        printf("add t0, t0, %s\n", array_name.c_str());
+        printf("lw %s, 0(t0)\n\n", dst.c_str());
     }
 }
 
@@ -166,9 +183,24 @@ void emit_call(std::string func_name) {
 }
 
 void emit_return() {
-    printf("lw ra, %d(sp)\n"
-           "addi sp, sp, %d\n"
-           "ret\n\n", STK-4, STK);
+    if (STK-4 >= -2048 && STK-4 <= 2047) {
+        printf("lw ra, %d(sp)\n", STK-4);
+    }
+    else {
+        printf("li t0, %d\n", STK-4);
+        printf("add t0, t0, sp\n");
+        printf("lw ra, 0(t0)\n");
+    }
+
+    if (STK >= -2048 && STK <= 2047) {
+        printf("addi sp, sp, %d\n", STK);
+    }
+    else {
+        printf("li t0, %d\n", STK);
+        printf("add sp, sp, t0\n");
+    }
+
+    printf("ret\n\n");
 }
 
 void emit_store(std::string reg, std::string offset) {
@@ -180,7 +212,8 @@ void emit_store(std::string reg, std::string offset) {
     }
     else {
         printf("li t0, %d\n", int10*4);
-        printf("sw %s, t0(sp)\n\n", reg.c_str());
+        printf("add t0, t0, sp\n");
+        printf("sw %s, 0(t0)\n\n", reg.c_str());
     }
 }
 
@@ -193,7 +226,8 @@ void emit_load_stack(std::string offset, std::string reg) {
     }
     else {
         printf("li t0, %d\n", int10*4);
-        printf("lw %s, t0(sp)\n\n", reg.c_str());
+        printf("add t0, t0, sp\n");
+        printf("lw %s, 0(t0)\n\n", reg.c_str());
     }
 }
 
