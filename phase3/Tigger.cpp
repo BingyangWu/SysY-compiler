@@ -162,7 +162,7 @@ void emit_label(std::string label) {
 }
 
 void emit_call(std::string func_name) {
-    printf("call %s\n\n", func_name.c_str());
+    printf("call %s\n\n", func_name.substr(2).c_str());
 }
 
 void emit_return() {
