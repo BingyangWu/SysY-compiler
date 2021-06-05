@@ -200,8 +200,8 @@ void emit_load_stack(std::string offset, std::string reg) {
 void emit_load_variable(std::string global_var, std::string reg) {
     reg = get_register_name(reg);
     
-    printf("lui reg, %%hi(%s)\n"
-           "lw reg, %%lo(%s)(%s)\n\n", global_var.c_str(), global_var.c_str(), reg.c_str());
+    printf("lui %s, %%hi(%s)\n"
+           "lw %s, %%lo(%s)(%s)\n\n", reg.c_str(), global_var.c_str(), reg.c_str(), global_var.c_str(), reg.c_str());
 }
 
 void emit_loadaddr_stack(std::string offset, std::string reg) {
