@@ -15,8 +15,8 @@ typedef struct rr_buffer_state * RR_BUFFER_STATE;
 extern RR_BUFFER_STATE rr_scan_string(const char * str);
 
 int main(int argc, char* argv[]) {
-    freopen(argv[3], "r", stdin);
-    freopen(argv[5], "w", stdout);
+    freopen(argv[2], "r", stdin);
+    freopen(argv[4], "w", stdout);
     yyparse();
 
     Context context;

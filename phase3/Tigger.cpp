@@ -28,11 +28,11 @@ void emit_function_header(std::string func_name, std::string param_num, std::str
            "  .type   %s, @function\n"
            "%s:\n"
            "  addi    sp, sp, -%d\n"
-           "  sw      ra, %d-4(sp)\n\n", func_name.c_str(), func_name.c_str(), func_name.c_str(), STK, STK);
+           "  sw      ra, %d(sp)\n\n", func_name.substr(2).c_str(), func_name.substr(2).c_str(), func_name.substr(2).c_str(), STK, STK-4);
 }
 
 void emit_function_end(std::string func_name) {
-    printf("  .size   %s, .-%s\n\n", func_name.c_str(), func_name.c_str());
+    printf("  .size   %s, .-%s\n\n", func_name.substr(2).c_str(), func_name.substr(2).c_str());
 }
 
 std::string get_register_name(std::string name) {
@@ -166,9 +166,9 @@ void emit_call(std::string func_name) {
 }
 
 void emit_return() {
-    printf("lw ra, %d-4(sp)\n"
+    printf("lw ra, %d(sp)\n"
            "addi sp, sp, %d\n"
-           "ret\n\n", STK, STK);
+           "ret\n\n", STK-4, STK);
 }
 
 void emit_store(std::string reg, std::string offset) {
@@ -176,10 +176,10 @@ void emit_store(std::string reg, std::string offset) {
     reg = get_register_name(reg);
 
     if (int10 >= -512 && int10 <= 511) {
-        printf("sw %s, %d*4(sp)\n\n", reg.c_str(), int10);
+        printf("sw %s, %d(sp)\n\n", reg.c_str(), int10*4);
     }
     else {
-        printf("li t0, %d*4\n", int10);
+        printf("li t0, %d\n", int10*4);
         printf("sw %s, t0(sp)\n\n", reg.c_str());
     }
 }
@@ -189,10 +189,10 @@ void emit_load_stack(std::string offset, std::string reg) {
     reg = get_register_name(reg);
 
     if (int10 >= -512 && int10 <= 511) {
-        printf("lw %s, %d*4(sp)\n\n", reg.c_str(), int10);
+        printf("lw %s, %d(sp)\n\n", reg.c_str(), int10*4);
     }
     else {
-        printf("li t0, %d*4\n", int10);
+        printf("li t0, %d\n", int10*4);
         printf("lw %s, t0(sp)\n\n", reg.c_str());
     }
 }
@@ -209,10 +209,10 @@ void emit_loadaddr_stack(std::string offset, std::string reg) {
     reg = get_register_name(reg);
 
     if (int10 >= -512 && int10 <= 511) {
-        printf("addi %s, sp, %d*4\n\n", reg.c_str(), int10);
+        printf("addi %s, sp, %d\n\n", reg.c_str(), int10*4);
     }
     else {
-        printf("li t0, %d*4\n", int10);
+        printf("li t0, %d\n", int10*4);
         printf("add %s, sp, t0\n\n", reg.c_str());
     }
 }
