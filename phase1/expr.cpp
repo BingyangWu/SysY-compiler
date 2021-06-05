@@ -1,6 +1,7 @@
 #include "expr.h"
 #include "type.h"
 #include "context.h"
+#include "globals.h"
 #include <assert.h>
 
 Imm::Imm(DataType dtype, int value) {
@@ -29,6 +30,17 @@ Call::Call(Var func, List<Expr> args) {
     CallNode* data = new CallNode();
     data->func = func;
     data->args = args;
+
+    if (func->name == "starttime") {
+        data->func = Var(kVoid, "_sysy_starttime");
+        data->args = List<Expr>(Imm(kInt, lineno));
+    }
+
+    if (func->name == "stoptime") {
+        data->func = Var(kVoid, "_sysy_stoptime");
+        data->args = List<Expr>(Imm(kInt, lineno));
+    }
+
     data_ = std::move(data);
 }
 

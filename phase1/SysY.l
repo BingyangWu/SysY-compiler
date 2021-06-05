@@ -7,6 +7,7 @@
     #include <cstdlib>
     #include <string>
     #include <iostream>
+    #include <algorithm>
 
     void yyecho() {
         fprintf(stderr, "%s", yytext);
@@ -59,9 +60,9 @@ comment             "//".*|"/*"[^*]*"*"+([^*/][^*]*"*"+)*"/"
 
 {identifier}                        { yyecho(); yylval = new Var(kInt, std::string(yytext)); return ID; }
 
-{comment}                           {  }
+{comment}                           { std::string s = yytext; lineno += std::count(s.begin(), s.end(), '\n'); }
 {whitespace}                        { yyecho(); }
-{newline}                           { yyecho(); }
+{newline}                           { yyecho(); ++lineno; }
 
 [\+\-\*\/\%\=\!\<\>\(\)\[\]\{\}\,\;]    { yyecho(); return yytext[0]; }
 

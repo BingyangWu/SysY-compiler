@@ -23,8 +23,10 @@ int main(int argc, char* argv[]) {
     context.define_func(Var(kInt, "getint"), kInt);
     context.define_func(Var(kInt, "getch"), kInt);
     context.define_func(Var(kInt, "getarray"), kInt);
-    context.define_func(Var(kInt, "putch"), kVoid);
-    context.define_func(Var(kInt, "putarray"), kVoid);
+    context.define_func(Var(kVoid, "putch"), kVoid);
+    context.define_func(Var(kVoid, "putarray"), kVoid);
+    context.define_func(Var(kVoid, "_sysy_starttime"), kVoid);
+    context.define_func(Var(kVoid, "_sysy_stoptime"), kVoid);
 
     std::string text = (*TreeRoot)->generate_eeyore(context);
     text = context.variable_definition_code + text;

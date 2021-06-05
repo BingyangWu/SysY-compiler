@@ -7,4 +7,6 @@
 
 extern ObjectRef* TreeRoot;
 
+extern int lineno;
+
 #endif
