@@ -154,7 +154,7 @@ void emit_conditional_goto(std::string reg1, std::string binop, std::string reg2
 }
 
 void emit_goto(std::string label) {
-    printf("j .%s:\n\n", label.c_str());
+    printf("j .%s\n\n", label.c_str());
 }
 
 void emit_label(std::string label) {
